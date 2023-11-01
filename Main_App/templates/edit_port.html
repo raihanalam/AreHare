@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+{% block title%} {{port.port_title}} {% endblock %}
+
+
+{% block body_block %}
+<div class="container">
+     <div class="card p-5">
+          <h3>Edit Port</h3>
+          <div class="smart-line mb-3"></div>
+          {% if port.port_author == user %}
+          <form class="form-group" method="POST" enctype="multipart/form-data">
+               {{form.media}}
+               {{form | crispy}}
+               {% csrf_token%}
+               <button type="submit" class="btn btn-warning btn-lg mt-4">Upadate</button>
+          </form>
+
+          <ul class="thumb">
+               <li>
+                    <div class=" d-flex flex-row p-4">
+                         {% for i in port.port_bulk_images.all %}
+                         <div class="card ml-3 p-3">
+                              <a href="{{i.image.url}}" class="flot-left" target="#img-container"><span
+                                        style="font-size: 20px;">✕</span></a>
+                              <img src="{{i.image.url}}" style="height: 100px; width:180px;" alt="Port Image">
+                         </div>
+                         {% endfor %}
+                    </div>
+
+               </li>
+
+               
+          </ul>
+
+          <div class="image-upload card p-5">
+               
+               <form action="{% url 'Main_App:port_bulk_image_upload' port_id=port.id %}" method="POST" enctype="multipart/form-data" class="form-group">
+                    {% csrf_token %}
+                    <input type="file" id="bulk-one" name="image_file" class="form-control"> <br>
+                    <button type="submit" class="btn btn-info btn-lg">Upload Image</button>
+               </form>
+          </div>
+
+
+          {% else%}
+          <p>You are not allowed to view this page. Error: 404</p>
+          {% endif %}
+     </div>
+
+</div>
+
+{% endblock %}

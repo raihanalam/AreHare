@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Successfull Deposits {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               <h3>Successfull Deposits</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if all_deposits %}
+
+                         {% for deposit in all_deposits %}
+                              <div class="card p-2 mb-2">
+                                   <h5>Deposit Id: {{deposit.id}}</h5>
+                                   <p>Reference: {{deposit.reference}}</p>
+                                   <h6>Amount: {{deposit.amount}}</h6>
+                                   <p>Method: {{deposit.method}}</p>
+                                   <p>Payment Type: {{deposit.payment_type}}</p>
+                                   <p>Transaction Id: {{deposit.trans_id}}</p>
+                                   <p>Done: {{deposit.success}}</p>
+                              </div>
+                              
+                         {% endfor %}
+
+                    {% else %}
+
+                         <p>No succcessfull deposits found. </p>
+                    {% endif%}
+               </div>
+          </div>
+     </div>
+{% endblock %}

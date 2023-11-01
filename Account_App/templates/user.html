@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load crispy_forms_tags %}
+{% block title %} {{profile.username}}'s Profile {% endblock %}
+
+
+{%block body_block%}
+     <div class="container card p-5">
+          <h2>Profile Information</h2>
+          <div class="smart-line mb-5"></div>
+
+
+          <div class="row">
+               <div class="col-md-4 p-3">
+                    <div class="card flex-center-all p-3">
+                         {% if profile.user_profile.profile_pic %}
+                         <img src='/media/{{profile.user_profile.profile_pic}}' class="rounded-circle" height="100px"
+                              width="100px">
+                         {% else %}
+                         <img src='/media/profile_pics/avatar.png' class="rounded-circle" height="100px" width="100px">
+
+                         {% endif %}
+                         <h4>{{profile.username}}</h4>
+                    </div>
+                    <br>
+     
+                    <table class="table table-striped table-light mt-3 card">
+     
+                         <tbody>
+                              <tr>
+                                   <th scope="row">Verified</th>
+                                   <td>{% if profile.user_profile.verified == True %} <img src="{% static 'images/verified.png'%}" class="img-fluid" height="30px" width="30px"/>{%else %} <img src="{% static 'images/unverified.png'%}" class="img-fluid" height="30px" width="30px"/>{% endif %}</td>
+                              </tr>
+                              <!-- <tr>
+                                   <th scope="row">Role</th>
+                                   <td>{{user.user_profile.role}}</td>
+                              </tr> -->
+                              <tr>
+                                   <th scope="row">Country</th>
+                                   <td>{{profile.user_profile.country}}</td>
+                              </tr>
+     
+     
+     
+                         </tbody>
+                    </table>
+
+               </div>
+               <div class="col-md-8 card">
+                    <div class="m-4 d-flex flex-row justify-content-between">
+                         <div class="card p-4 flex-center-all">
+                              <h5><b>Worked</b></h5>
+                              <hr>
+                              <h5><b>{{total_work}}</b></h5>
+                         </div>
+                         <div class="card p-4 flex-center-all">
+                              <h5><b>Ratings</b></h5>
+                              <hr>
+                              <h5><b>{{rating_average}}</b></h5>
+                         </div>
+                         <div class="card p-4 flex-center-all">
+                              <h5><b>Response</b></h5>
+                              <hr>
+                              <h5><b>25</b><small>minutes</small></h5>
+                              
+                         </div>
+
+                    </div>
+     
+                    <p style="color: rgb(107, 105, 108);">
+                         {{profile.user_profile.bio}}
+                    </p>
+     
+               </div>
+          </div>
+          <div class="row mt-3 p-2">
+
+               <div class="row">
+                    {% for port in profile.port_author.all %}
+               
+                    {% if port.active %}
+                    
+                    <a href="{% url 'Main_App:port_details' slug=port.slug %}" style="text-decoration:none; color: black;">
+                         <div class="card card-port ml-4 mb-4" style="width: 20rem;">
+                              <img class="card-img-top" src="/media/{{port.port_image}}" alt="Card image cap">
+                              <div class="card-body">
+                                   <div class=" mb-2">
+                                        <img src="/media/{{port.port_author.user_profile.profile_pic}}" class="rounded-circle" alt=""
+                                             height="30px" width="30px"><span class="ml-2">{{port.port_author.username}}</span><br>
+                                   </div>
+                                   <h5 class="card-title">{{port.port_title | range_filter | linebreaks}}</h5>
+                                   <div class="action-wrap">
+                                        <div class="price-wrap">
+                                             <span class="price-new">&#2547; {{port.rate_amount | floatformat:2}}</span>
+                                        </div>
+                                   </div>
+                    
+                                   <div class="bottom-wrap">
+                                        <a href="" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i
+                                                  class="fa-solid fa-bookmark"></i>
+                                             Save</a>
+                                        <a href="{% url 'Main_App:port_details' slug=port.slug %}" class="btn btn-sm btn-light"><img
+                                                  src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt="">
+                                             View</a>
+                                   </div>
+                              </div>
+                         </div>
+                    </a>
+                    {% endif %}
+               
+               {% endfor %}
+               </div>
+
+          </div>
+
+          <!-- <div class="row">
+               
+
+               <div class="col-4">
+                    <div class="card p-3">
+                         {% if user_profile.user_profile.profile_pic %}
+                         <img src='/media/{{user_profile.user_profile.profile_pic}}' class="rounded-circle" height="100px"
+                              width="100px">
+               
+                         {% endif %}
+                         <br>
+     
+                         <h5 class="mt-3">{{user_profile.username}}</h5>
+                    </div>
+               </div>
+               <div class="col-8 card">
+                    <h5>Jobe Done: {{user_profile.freelancer_complete_order.count}}</h5>
+               </div>
+          
+          </div> -->
+     </div>
+
+{% endblock %}

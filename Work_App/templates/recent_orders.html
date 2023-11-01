@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Recent Orders{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+<div class="container">
+     <div class="card shadow p-5">
+          <h3>Recent Orders</h3>
+          <div class="smart-line mb-3"></div>
+          {% if recent_orders %}
+               {% for order in recent_orders %}
+                    {% if order.status == 'Placed' %}
+                         <div class="card shadow mb-4">
+                              <div class="card-header py-3">
+                                   {%if not order.canceled %}
+                                        <h6 class="m-0 font-weight-bold badge badge-pill badge-info">Placed Order</h6>
+                                   {% endif %}
+                              </div>
+                              <div class="card-body" style="color: black;">
+                                   <h6>Order ID: {{order.id}}</h6>
+                                   <p>Deadline: {{order.deadline}} </p>
+                                   <p>Status: {{order.status}}</p>
+                                   
+                                   {% if user.user_profile.role == 'freelancer' %}
+                                   <a href="{% url 'Work_App:cancel_order' order_id=order.id %}" class="btn btn-sm btn-warning">Cancel
+                                        Order</a>
+
+                                   <a href="" class="btn btn-success" data-toggle="modal" data-target="#o-{{order.id}}">Accept
+                                        order</a>
+                                   <div class="modal fade" id="o-{{order.id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="e-{{order.id}}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                             <div class="modal-content">
+                                                  <div class="modal-header">
+                                                       <h5 class="modal-title" id="e-{{order.id}}">Start Work</h5>
+                                                       <button type=" button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                       </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                       <form method="POST" action="{% url 'Work_App:start_work' pk=order.id %}">
+                                                            <!-- {{ offer_form.media}} -->
+                                                            {{ run_form|crispy }}
+                                                            {% csrf_token %}
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success btn-sm">Start
+                                                                 Work</button>
+                                                       </form>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                       <button type="button" class="btn btn-secondary btn-sm"
+                                                            data-dismiss="modal">Close</button>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   {% endif %}
+                              </div>
+                         </div>
+                    {% endif %}
+               {% endfor %}
+
+          {% else %}
+          <p>No recent order found.</p>
+          {% endif %}
+
+     </div>
+</div>
+{% endblock %}

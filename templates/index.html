@@ -1,0 +1,455 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+AreHare
+{% endblock title %}
+{% block css %}
+<style>
+.sec{
+    height: 200px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sec img{
+    height: 80px;
+    width: 80px;
+}
+.sec h4{
+    font-size: 20px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background-color: #5e2197;
+  border-radius: 0 4px 0 60px;
+}
+
+.go-arrow {
+  margin-top: -4px;
+  margin-right: -4px;
+  color: white;
+  font-family: courier, sans;
+}
+
+.card1 {
+  display: block;
+  position: relative;
+  /* max-width: 262px; */
+  background-color: #f2f8f9;
+  border-radius: 4px;
+  padding: 32px 24px;
+  /* margin: 12px; */
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.card1:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background: #5e2197;
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.25s ease-out;
+}
+.card1:hover:before {
+  transform: scale(21);
+  
+}
+.card1:hover{
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+    
+}
+
+.card1:hover p {
+  transition: all 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+.card1:hover h4 {
+  transition: all 0.3s ease-out;
+  color: #ffffff;
+}
+
+
+.card-port{
+    width: 500px;
+}
+.card-img-top {
+
+    height: 13rem;
+    width: 100%;
+}
+
+
+
+
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="">
+    <div class="theme-sec">
+        <div class="row flex-center-all" >
+            <div id="th-1" class="flex-center-all card">
+                <h2 style="text-align: center;">Independent marketplace for digital work.                {% if not user.is_authenticated %}
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-md mg-top mr-1">Join As Freelancer</a>
+                    <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-md mg-top ml-1">Join As Customer</a>
+                </div>
+
+                {% endif %}
+                
+            </div>
+    </div>   
+</div>
+<div  class="container-fluid mid-sec flex-center-all" style="height: 180px; width: 100%; background-color: rgb(87, 33, 138);">
+    <h4 style="color: #ffffff;">Have a great idea?</h4>
+    <a href="#" class="btn btn-success btn-lg mt-2">POST YOUR PROJECT</a>
+</div>
+<div id="process" class="container mt-5" style="display:flex; align-items: center; flex-direction: column;">
+    <h2 class="mg-top">Process & Features</h2>
+    <div class="smart-line mb-5"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4 sec card1">
+                
+                <img src="{% static 'images/verified-account.png' %}">
+                <h4>Complete your profile and apply for verification, get a verified profile.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+
+            </div>
+            <div class="card p-4 sec card1">
+                
+                <img src="{% static 'images/post.png' %}">
+                <h4>Post your job and contact with interested freelancer by their bid.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+
+            </div>
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/comments.png' %}" height="20px" width="20px">
+                <h4>Realtime chat using a message app, message to each other asynchronusly.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/roadmap.png' %}">
+                <h4>Track on your work, and countdown with a realtime deadline counter.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="card p-4 sec card1">
+                
+                <img src="{% static 'images/dashboard(1).png' %}">
+                <h4>Monitor your all works and business flow from a analytical dashboard.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4 sec card1">
+                <!-- <img src="{% static 'images/cashless-payment.png' %}"> -->
+                <img src="{% static 'images/wallet.png' %}">
+                <h4>Verify your wallet and deposit money from popular payments methods.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/working.png' %}">
+                <h4>Make port and get order request from customer and bid on your interested job.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/trust.png' %}">
+                <h4>Discuss and make a trust and deal, send offer and place order and confirm payment.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/data-transfer.png' %}">
+                
+                <h4>Complete work and confirm work, payment will be handled automatically.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+            <div class="card p-4 sec card1">
+                <img src="{% static 'images/money-withdrawal.png' %}">
+                <h4>Withdraw money from your selected bank or payment method.</h4>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                      →
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+<div id="business" class="container mt-5">
+    <h2 style="text-align: center;">Marketplace & Services</h2>
+    <div class="smart-line"></div>
+    <div class="row" style="display:flex; align-items: center; justify-content: center; flex-direction: row; mt-4">
+
+        <div class="service-card card">
+            <h3 class="mt-3">Programming Tech</h3>
+            <img src="{% static 'images/ProgrammingTech.png' %}"><br>
+            <ul>
+                <li><i class="fas fa-cog"></i>Web Design</li>
+                <li><i class="fas fa-cog"></i>Web Development</li>
+                <li><i class="fas fa-cog"></i>Software Development</li>
+                <li><i class="fas fa-cog"></i>Mobile App Development</li>
+            </ul>
+        </div>
+
+        <div class="service-card card">
+            <h3 class="mt-3">Digital Marketing</h3>
+            <img src="{% static 'images/DigitalMarketing.png' %}"><br>
+            <ul>
+                <li><i class="fas fa-bullhorn"></i>Search Engine Optimization</li>
+                <li><i class="fas fa-bullhorn"></i>Social Media Marketing</li>
+                <li><i class="fas fa-bullhorn"></i>Email Marketing</li>
+                <li><i class="fas fa-bullhorn"></i>Content Marketing</li>
+            </ul>
+        </div>
+        <div class="service-card card">
+            <h3 class="mt-3">Design & Arts</h3>
+            <img src="{% static 'images/DesignArts.png' %}"><br>
+            <ul>
+                <li><i class="fas fa-paint-brush"></i>UI & UX Design</li>
+                <li><i class="fas fa-paint-brush"></i>Graphics Design</li>
+                <li><i class="fas fa-paint-brush"></i>Video & Animation</li>                
+            </ul>
+        </div>
+        <div class="service-card card">
+                <h3 class="mt-3">Others</h3>
+                <img src="{% static 'images/Others.png' %}"><br>
+                <ul>
+                    <li><i class="fas fa-lightbulb"></i>Content Writing</li>
+                    <li><i class="fas fa-lightbulb"></i>Data Entry</li>
+                    <li><i class="fas fa-lightbulb"></i>IT Consultancy</li>
+                </ul>
+            </div>
+    </div>
+</div>
+<div class="container-fluid top-ports-sec mt-5">
+    <h2 style="text-align: center;">Top Ports</h2>
+    <div class="smart-line"></div>
+
+    <div class="row justify-content-center mt-4">
+        {% for port in ports %}
+            {% if forloop.counter <= 10 %}
+            <a href="{% url 'Main_App:port_details' slug=port.slug %}"
+            style="text-decoration:none; color: black; hover:green;">
+            <div class="card card-port ml-4 mb-4" style="width: 20rem;">
+                <img class="card-img-top" src="/media/{{port.port_image}}" alt="Card image cap">
+                <div class="card-body">
+                    <div class=" mb-2">
+                        <img src="/media/{{port.port_author.user_profile.profile_pic}}" class="rounded-circle" alt=""
+                            height="30px" width="30px"><span class="ml-2">{{port.port_author.username}}</span><br>
+                    </div>
+                    <h5 class="card-title">{{port.port_title | range_filter | linebreaks}}</h5>
+                    <div class="action-wrap">
+                        <div class="price-wrap">
+                            <span class="price-new">&#2547; {{port.rate_amount | floatformat:2}}</span>
+                        </div>
+                    </div>
+
+                    <div class="bottom-wrap">
+                        <a href="" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i
+                                class="fa-solid fa-bookmark"></i>
+                            Save</a>
+                        <a href="{% url 'Main_App:port_details' slug=port.slug %}" class="btn btn-sm btn-light"><img
+                                src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt="">
+                            View</a>
+                    </div>
+                </div>
+            </div>
+            </a>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+   
+</div>
+<div class="container-fluid mt-5">
+    <h2  style="text-align: center;" >Our Partners</h2>
+    <div class="smart-line"></div>
+    <div class="container-fluid">
+        <section id="features" class="blue">
+          <div class="content">
+               <div class="slider responsive">
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card p-5">
+                        </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+    </div>
+</div>
+<div class="container-fluid end-sec mt-5" id="about">
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Services</h4>
+            <ul>
+                <li>Marketplace</li>
+                <li>Inhouse Solution</li>
+                <li>Partnership</li>
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>Partners</h4>
+            <ul>
+                <li>Service Partners</li>
+                <li>Integration Partner</li>
+                <li>Money Withdrawals</li>
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>About Us</h4>
+            <ul>
+                <li>AreHare</li>
+                <li>Fees</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>Help</h4>
+            <ul>
+                <li>Contact Us</li>
+                <li>Customar Care</li>
+                <li>Mail Us</li>
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>Follow Us</h4>
+            <ul>
+                <li>Facebook</li>
+                <li>Twitter</li>
+                <li>Linkedin</li>
+
+            </ul>
+            <a class="scroll-to-top rounded" href="#top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <img src="{% static 'images/SSLCommerz-Pay.png'%}" alt="" width="100%">
+    </div>
+</div>
+
+<div class="footer">
+    <p>All rights reserved by Arehare.com | © Copyright 2023</p>
+</div>
+{% endblock %}
+    

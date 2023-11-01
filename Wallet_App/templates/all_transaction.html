@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Successfull Deposits {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               
+               <h3>Successfull Transactions</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if user.user_wallet.wallet_transaction.all %}
+                         {% for trans in user.user_wallet.wallet_transaction.all %}
+                              <div class="card p-2 mb-2">
+                                   <h5>Transaction Id: {{trans.id}}</h5>
+                                   <p>Type: {{trans.type}}</p>
+                                   <h6>Amount: {{trans.amount}}</h6>
+                                   <p>Success: {{trans.confirms}}</p>
+                              
+                              </div>
+                              
+                         {% endfor %}
+
+
+                    {% else %}
+
+                         <p>No succcessfull transaction found. </p>
+                    {% endif%}
+                    
+          
+               </div>
+          </div>
+     </div>
+{% endblock %}

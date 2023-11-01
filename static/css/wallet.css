@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:300,400");
+.options ul li a{
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+.total-balance {
+  display: inline-block;
+  float: right;
+  font-weight: 600;
+  font-size: 32px;
+  color: #444750;
+}
+
+/* .total-balance::before {
+  content: "$";
+} */
+
+.transactions-wrapper {
+  width: 520px;
+  padding: 50px;
+}
+
+.transactions {
+  margin-top: 60px;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 50px;
+  height: 550px;
+  overflow: scroll;
+}
+
+.transactions.show {
+  animation: fade-in 0.3s 1;
+}
+
+.transactions::-webkit-scrollbar {
+  display: none;
+}
+
+.transaction-item {
+  margin-bottom: 45px;
+}
+
+.transaction-item {
+  padding-left: 40px;
+  position: relative;
+  display: flex;
+}
+
+.transaction-item::before {
+  position: absolute;
+  content: "";
+  border: 2px solid #e1e1e1;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  left: 0px;
+  top: 10px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+  color: #666666;
+}
+
+.transaction-item.credit::before {
+  content: "\002B";
+  font-size: 25px;
+  line-height: 20px;
+  padding: 4px;
+}
+
+.transaction-item.credit .transaction-item_amount .amount,
+.transaction-item.credit .transaction-item_amount span {
+  color: #66cc33;
+}
+
+.transaction-item.debit::before {
+  content: "\2212";
+  font-size: 20px;
+  line-height: 21px;
+  padding: 0px 5px;
+}
+
+.transaction-item.debit .transaction-item_amount .amount,
+.transaction-item.debit .transaction-item_amount span {
+  color: #8393ca;
+}
+
+.transaction-item span.details {
+  font-size: 14px;
+  line-height: 14px;
+  color: #999;
+}
+
+.transaction-item_amount {
+  width: 110px;
+  text-align: right;
+}
+
+.transaction-item_amount span {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 45px;
+}
+
+.transaction-item_amount .amount {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 45px;
+  position: relative;
+  margin: 0px;
+  display: inline-block;
+  text-indent: -15px;
+}
+
+/* Hide + and - */
+.transaction-item_amount .amount::first-letter {
+  color: transparent !important;
+}
+
+.modal-control,
+.modal-close {
+  display: inline-block;
+  float: right;
+  color: #c6cce2;
+  font-size: 45px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: color 0.1s;
+}
+
+.disabled{
+  pointer-events: none;
+  /* user-select: none;  */
+}

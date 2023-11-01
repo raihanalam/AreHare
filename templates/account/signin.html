@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{%block title%} Account Signin {% endblock %}
+{% block css %}
+     <style>
+          /* .sign-in{
+               width: 400px;
+               padding: 30px;
+               background-color: rgb(221, 200, 241);
+               border: 1px solid black;
+          } */
+     </style>
+{% endblock %}
+
+{% block body_block%}
+<center>
+     <div class="container  flex-center-all" style="height: 700px;">
+          <div class="card shadow p-5">
+               <h2>Signin</h2>
+               <div class="smart-line mb-5"></div>
+               <form method="POST">
+                    <div class="form-group">
+                         {{form | crispy}}
+                         {% csrf_token %}
+
+                    </div>
+                    
+                    <br>
+                    <button type="submit" class="btn btn-success btn-sm" style="width: 300px;">Signin</button>
+               </form>
+               <br>
+               <p class="center mt-5">Don't have an account? <a href="{% url 'account:signup' %}">Signup</a></p>
+          </div>
+     </div>
+     
+</center>
+{% endblock %}

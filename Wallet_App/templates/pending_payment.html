@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Successfull Deposits {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               <h3>Pending Payments</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if pending_payments %}
+                         {% for payment in pending_payments %}
+                              <div class="card p-2 mb-2">
+                                   <h5>Payment Id: {{payment.id}}</h5>
+                                   <h6>Order Id: {{payment.order_id.id}}</h6>
+                                   <h6>Amount: {{payment.amount}}</h6>
+                                   <p>Confirmation: {{payment.confirmation}}</p>
+                                   <p>Success: {{payment.success}}</p>
+                              </div>
+                              
+                         {% endfor %}
+                    {% else %}
+                         <p>No pending payments found.</p>
+
+
+                    {% endif %}
+                    
+               </div>
+          </div>
+     </div>
+{% endblock %}

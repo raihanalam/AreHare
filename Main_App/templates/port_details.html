@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title%} {{port.port_title}} {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+     .rate>input {
+          display: none;
+     }
+
+     .rate {
+          display: inline-block;
+          ;
+          border: 0;
+     }
+
+     .rate>label {
+          float: right;
+     }
+
+     /* Showing the stars */
+     .rate>label:before {
+          display: inline-block;
+          font-size: 1.1rem;
+          font-family: FontAwesome;
+          content: "\f005";
+          margin: 0;
+          padding: 0.3rem .2rem;
+          cursor: pointer;
+     }
+
+     /* Half star */
+     .rate .half:before {
+          content: "\f089";
+          position: absolute;
+          padding-right: 0;
+     }
+
+     /* Click and hover */
+     input:checked~label,
+     label:hover~label {
+          color: #ffb503;
+     }
+
+     /* hover hightlight */
+     input:checked+label:hover,
+     input:checked~label:hover,
+     input:checked~label:hover~label,
+     label:hover~input:checked~label {
+          color: #cc9000;
+     }
+
+     .rating-star i {
+          color: #ffb503 !important;
+     }
+
+
+
+     #featured {
+          max-width: 100%;
+          max-height: 600px;
+          object-fit: cover;
+          cursor: pointer;
+          border: 2px solid black;
+     }
+
+
+
+     .thumbnail {
+          object-fit: cover;
+          max-width: 180px;
+          max-height: 100px;
+          cursor: pointer;
+          opacity: 0.5;
+          margin: 5px;
+          border: 2px solid black;
+     }
+
+     .thumbnail:hover {
+          opacity: 1;
+     }
+
+     .active {
+          opacity: 1;
+     }
+
+     #slide-wrapper {
+          max-width: 100%;
+          display: flex;
+          min-height: 100px;
+          align-items: center;
+     }
+
+     #slider {
+          width: 100%;
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: hidden;
+
+     }
+
+     #slider::-webkit-scrollbar {
+          width: 8px;
+
+     }
+
+     #slider::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+     }
+
+     #slider::-webkit-scrollbar-thumb {
+          background-color: #dede2e;
+          outline: 1px solid slategrey;
+          border-radius: 100px;
+
+     }
+
+     #slider::-webkit-scrollbar-thumb:hover {
+          background-color: #18b5ce;
+     }
+
+
+
+     .arrow {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          transition: .3s;
+     }
+
+     .arrow:hover {
+          opacity: .5;
+          width: 35px;
+          height: 35px;
+     }
+
+     .heading {
+          font-size: 25px;
+          margin-right: 25px;
+     }
+
+     .fa {
+          font-size: 25px;
+     }
+
+     .checked {
+          color: orange;
+     }
+
+     /* Three column layout */
+     .side {
+          float: left;
+          width: 15%;
+          margin-top: 10px;
+     }
+
+     .middle {
+          margin-top: 10px;
+          float: left;
+          width: 70%;
+     }
+
+     /* Place text to the right */
+     .right {
+          text-align: right;
+     }
+
+     /* Clear floats after the columns */
+     .row:after {
+          content: "";
+          display: table;
+          clear: both;
+     }
+
+     /* The bar container */
+     .bar-container {
+          width: 100%;
+          background-color: #f1f1f1;
+          text-align: center;
+          color: white;
+     }
+
+     /* Individual bars */
+     .bar-5 {
+          width: 60%;
+          height: 18px;
+          background-color: #04AA6D;
+     }
+
+     .bar-4 {
+          width: 30%;
+          height: 18px;
+          background-color: #2196F3;
+     }
+
+     .bar-3 {
+          width: 10%;
+          height: 18px;
+          background-color: #00bcd4;
+     }
+
+     .bar-2 {
+          width: 4%;
+          height: 18px;
+          background-color: #ff9800;
+     }
+
+     .bar-1 {
+          width: 15%;
+          height: 18px;
+          background-color: #f44336;
+     }
+
+
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="container card p-5">
+     {% if port.active %}
+
+     <div class="row">
+          <div class="col-md-8">
+               <div class="">
+                    <h2 style="font-weight: bold;">{{port.port_title}}</h2>
+                    <h3 class="mt-3 mb-3">Order Rate: &#2547; {{port.rate_amount}}</h3>
+
+                    <div class="card">
+                         <div id="img-container" class="picZoomer" style="cursor: zoom-in;">
+                              <center>
+                                   <img id="featured" src="{{port.port_image.url}}" alt="this slowpoke moves"
+                                        class="img-fluid" height="600px" width="100%">
+                              </center>
+                         </div>
+
+
+                         <div id="slide-wrapper">
+                              <img id="slideLeft" class="arrow" src="{% static 'images/arrow-left.png' %}">
+
+                              <div id="slider">
+                                   <img class="thumbnail" src="{{port.port_image.url}}">
+                                   {% for image in port.port_bulk_images.all %}
+
+                                   <img class="thumbnail" src="{{image.imageURL}}">
+
+                                   {% endfor %}
+
+                              </div>
+
+                              <img id="slideRight" class="arrow" src="{% static 'images/arrow-right.png' %}">
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <div class="col-md-4">
+               {% if user.is_authenticated %}
+
+               {% if  user.user_profile.verified %}
+               {%if user.user_profile.role == 'customer'%}
+
+               <!-- <div class="card mb-3 p-3">
+                    <div class="about-freelancer">
+                         <h4>About Freelancer</h4>
+                         <img src="/media/{{uProfile.profile_pic}}" class="rounded-circle" alt="" height="60px"
+                              width="60px">
+                         <h5><a
+                              href="{% url 'Account_App:user_profile' username=aUser.username %}">{{aUser.username}}</a>
+                              {% if port.active %}
+                              <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
+                              {% else %}
+                              <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                              {%endif %}
+                         </h5>
+                         <h6>{{port.expert}}</h6>
+                         <div class="mb-3">
+
+                         </div>
+                         <a href="{% url 'Message_App:join_chat' f_username=port.port_author %}"
+                              class="btn btn-sm btn-success">Contact to Freelancer</a>
+
+                    </div>
+               </div> -->
+
+                
+               <div class="card mb-3 p-3">
+                    <div class="row">
+                        <div class="col-3 d-flex justify-content-center">
+                            <img src="/media/{{uProfile.profile_pic}}" class="rounded-circle" alt="{{aUser.username}}"
+                                 height="60px" width="60px">
+                        </div>
+                        <div class="col-8">
+                            <h5 class="mb-0">
+                                <a href="{% url 'Account_App:user_profile' username=aUser.username %}">{{aUser.username}}</a>
+                                {% if port.active %}
+                                    <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
+                                {% else %}
+                                    <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                                {% endif %}
+                            </h5>
+                            <h6 class="text-muted mb-1">{{port.expert}}</h6>
+                        </div>
+                    </div>
+                    <div class="mt-3 row d-flex align-items-center justify-content-center">
+                        <a href="{% url 'Message_App:join_chat' f_username=port.port_author %}" class="btn btn-sm btn-success">Contact
+                            Freelancer</a>
+                    </div>
+                </div>
+                
+               <div class="mb-3 card p-3">
+                    {% if posts %}
+                    {% if not hired%}
+                    <form method="POST">
+
+                         <label for="post">Select your post:</label>
+                         <select name="post" id="post" class="form-control mb-3">
+                             <!-- <option>Select Your Post</option> -->
+                             {% for post in posts %}
+                             <!-- <option value="{{post.pk}}">{{post.post_title|safe|slice:30}}</option> -->
+                             <option value="{{post.pk}}">{{post.post_title}}</option>
+                             {% endfor %}
+                         </select>
+                     
+                         <div class="form-group">
+                             <!-- Assuming you are using crispy forms for hire_form -->
+                             {{hire_form|crispy}}
+                         </div>
+                         
+                         {% csrf_token %}
+                         <button type="submit" class="btn btn-primary btn-sm mg-top">Send Hire Request</button>
+                     </form>
+                     
+                    {% else %}
+                    <a href="{% url 'Main_App:cancel_hire' pk=port.pk%}" class="btn btns-sm btn-info">Cancel
+                         Request</i></a>
+                    {% endif%}
+                    {% else %}
+                    <p class="alert alert-warning d-flex align-items-center justify-content-center p-4">Please post your
+                         work first.</p>
+                    {% endif %}
+               </div>
+               {% endif %}
+               {% else %}
+               <p class="alert alert-warning d-flex align-items-center justify-content-center p-5">Your profile isn't
+                    verified, please complete profile and wallet and apply for verification.</p>
+               {% endif %}
+               {% else %}
+               <p class="alert alert-warning d-flex align-items-center justify-content-center p-5">Signin to order or contact to this Freelancer.</p>
+
+
+               {% endif %}
+          </div>
+     </div>
+     <div class="row">
+
+          <div>
+               <h2 class="mt-5 mb-4">About This Port</h2>
+               <hr>
+               <p>
+                    {{port.port_description|safe}}
+               </p>
+          </div>
+     </div>
+     <hr>
+     <header class="section-heading mb-5">
+
+          <h3>Customer Reviews </h3>
+
+          <span class="heading">Rating</span>
+          {% for i in "12345" %}
+               {% if i <= rating_average%}<span class="fa fa-star checked"></span>{%else%}<span class="fa fa-star"></span>{% endif %}
+          {% endfor %}
+          <p>{{rating_average}} average based on {{rating_count}} reviews.</p>
+          <hr style="border:3px solid #f1f1f1">
+                <div class="row p-3">
+                    {% for i, star, width in star_counts %}
+                        <div class="side">
+                            <div>{{ i }} star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-{{ i }}" style="width: {{ width }}%;"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>{{ star }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+
+          
+     </header>
+
+     {% for review in reviews %}
+     <article class="box mb-3 card p-3">
+          <div class="icontext w-100">
+
+               <div class="text">
+                    <span class="date text-muted float-md-right">{{review.updated_at}} </span>
+                    <h6 class="mb-1">{{review.customer.username}} </h6>
+                    {% for i in ratings_points %}
+                         {% if i <= review.rating %}<span class="fa fa-star checked"></span>{%else%}<span class="fa fa-star"></span>{% endif %}
+                    {% endfor %}
+                    <span>{{review.rating}}</span>
+               </div>
+          </div> <!-- icontext.// -->
+          <div class="mt-3">
+               <h6>{{review.subject}}</h6>
+               <p>
+                    {{review.review}}
+               </p>
+          </div>
+     </article>
+     {% endfor %}
+
+
+     {% else %}
+     <p>This port isn't active.</p>
+
+     {% endif %}
+</div>
+<script>
+     /*function zoom(e){
+          var zoomer = e.currentTarget;
+          e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+          e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+          x = offsetX/zoomer.offsetWidth*100
+          y = offsetY/zoomer.offsetHeight*100
+          zoomer.style.backgroundPosition = x + '% ' + y + '%';
+     }*/
+     // document.addEventListener('DOMContentLoaded'
+     document.getElementById("img-container").addEventListener("mouseover", function () {
+          var options1 = {
+               width: 400,
+               zoom: 20,
+               zoomWidth: 500,
+               offset: { vertical: 0, horizontal: 10 }
+          };
+
+          // If the width and height of the image are not known or to adjust the image to the container of it
+          var options2 = {
+               fillContainer: true,
+               offset: { vertical: 0, horizontal: 10 }, "zoomPosition": "original"
+          };
+
+
+          new ImageZoom(document.getElementById("img-container"), options2);
+     });
+
+</script>
+<!-- <script>
+     $('.picZoomer').picZoomer();
+
+     $('.piclist li').on('click',function(event){
+	  var $pic = $(this).find('img');
+	  $('.picZoomer-pic').attr('src',$pic.attr('src'));
+	});
+</script> -->
+
+<script type="text/javascript">
+     let thumbnails = document.getElementsByClassName('thumbnail')
+     let activeImages = document.getElementsByClassName('active')
+     for (var i = 0; i < thumbnails.length; i++) {
+          thumbnails[i].addEventListener('mouseover', function () {
+
+               if (activeImages.length > 0) {
+                    activeImages[0].classList.remove('active')
+               }
+
+               this.classList.add('active')
+               document.getElementById('featured').src = this.src
+          })
+
+
+     }
+
+     const buttonRight = document.getElementById('slideRight');
+     const buttonLeft = document.getElementById('slideLeft');
+
+
+     buttonRight.addEventListener('click', function () {
+          document.getElementById('slider').scrollLeft += 180;
+     })
+
+
+
+     buttonLeft.addEventListener('click', function () {
+          document.getElementById('slider').scrollLeft -= 180;
+     })
+
+</script>
+{% endblock%}

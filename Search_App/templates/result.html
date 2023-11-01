@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block body_block %}
+<div class="container">
+     {% if search or filter %}
+
+        <div class="row card p-3">
+        {% if search %}
+            <h5 class="mb-3 mt-3"> Search for '{{search}}' result {{count}}</h5>
+        {% else %}
+            <h5 class="mb-3 mt-3"> Filter for category '{{filter}}' result {{count}}</h5>
+        {% endif %}
+        {% if user.user_profile.role == 'customer'%}
+        <div class="row p-3">
+            {% for port in result%}
+            <a href="{% url 'Main_App:port_details' slug=port.slug %}"
+            style="text-decoration:none; color: black;">
+            <div class="card card-port ml-4 mb-4" style="width: 20rem;">
+                <img class="card-img-top" src="/media/{{port.port_image}}" alt="Card image cap">
+                <div class="card-body">
+                    <div class=" mb-2">
+                        <img src="/media/{{port.port_author.user_profile.profile_pic}}" class="rounded-circle" alt=""
+                            height="30px" width="30px"><span class="ml-2">{{port.port_author.username}}</span><br>
+                    </div>
+                    <h5 class="card-title">{{port.port_title | range_filter | linebreaks}}</h5>
+                    <div class="action-wrap">
+                        <div class="price-wrap">
+                            <span class="price-new">&#2547; {{port.rate_amount | floatformat:2}}</span>
+                        </div>
+                    </div>
+  
+                    <div class="bottom-wrap">
+                        <a href="" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i
+                                class="fa-solid fa-bookmark"></i>
+                            Save</a>
+                        <a href="{% url 'Main_App:port_details' slug=port.slug %}" class="btn btn-sm btn-light"><img
+                                src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt="">
+                            View</a>
+                    </div>
+                </div>
+            </div>
+            </a>
+                 
+            {% endfor%}
+
+
+        </div>
+
+        {% elif user.user_profile.role == 'freelancer' %}
+
+            {% for post in result%}
+                <a class="post-box mb-4" style="text-decoration:none; color:black;" href="{% url 'Main_App:post_details' slug=post.slug %}">
+                    <div class=" col-12 card p-3" style="width: 70rem;">
+                        <h3>{{post.post_title}}</h3>
+                        <small><i class="fa-regular fa-user"></i> {{post.post_author.username}} <i class="ml-3 mr-1 fa-regular fa-clock"></i>{{post.publish_date}}</small>
+                        <div
+                            style="display:flex; justify-content: space-between; background-color: aliceblue; padding: 5px;">
+                            <h5>&#2547; {{post.budget_amount}}</h5>
+                            <button class="btn btn-sm btn-success">Bid</button>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        
+        
+        {% endif %}
+        </div>
+     
+     {% endif %}
+</div>
+     
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    AreHare | Home
+{% endblock %}
+{% block body_block %}
+    <div class="home-sec">
+        <div class="container">
+            {% if user.is_authenticated %}
+                <p>{{user.user_profile.role}} : {{ user.username }}</p>
+                {%if user.user_profile.role == 'Freelancer'%}
+                    <div class="row dash-menue">
+                        <div class="col-sm-3 ">
+                            <div class="dash-item">
+                                <h3>Your Ports</h3>
+                                <div class="smart-line"></div>
+                                <h4>{{user.port_author.count}}</h4>
+                                <a href="{% url 'Main_App:my_ports'%}" class="btn btn-lg btn-info">See All</a>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="dash-item">
+                                <h3>Running Orders</h3>
+                                <div class="smart-line"></div>
+                                <h4>00</h4>
+                                <a href="#" class="btn btn-lg btn-info">See All</a>
+
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="dash-item">
+                                <h3>Hire Requests</h3>
+                                <div class="smart-line"></div>
+                                <h4>01</h4>
+                                <a href="#" class="btn btn-lg btn-info">See All</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="dash-item">
+                                <h3>Balance</h3>
+                                <div class="smart-line"></div>
+                                <h4>$ 20</h4>
+                                <a href="#" class="btn btn-lg btn-info">Withdraw Money</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="chart-sec flex-center-all mg-top">
+                        <h3>Sales Rate</h3>
+                        <div class="smart-line"></div>
+                        <img src="{% static 'images/sales-rate.png' %}" alt="" height="400px" width="40%">
+                    </div>
+                    
+                {%elif user.user_profile.role == 'Customer' %}
+                <div class="row dash-menue">
+                    <div class="col-sm-3 ">
+                        <div class="dash-item">
+                            <h3>Active Posts</h3>
+                            <div class="smart-line"></div>
+                            <h4>{{user.post_author.count}}</h4>
+                            <a href="{% url 'Main_App:my_posts'%}" class="btn btn-lg btn-info">See All</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <div class="dash-item">
+                            <h3>Running Works</h3>
+                            <div class="smart-line"></div>
+                            <h4>00</h4>
+                            <a href="#" class="btn btn-lg btn-info">See All</a>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="dash-item">
+                            <h3>Post Bids</h3>
+                            <div class="smart-line"></div>
+                            <h4>11</h4>
+                            <a href="{% url 'Dashboard_App:all_bids'%}" class="btn btn-lg btn-info">See All</a>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="dash-item">
+                            <h3>Payment History</h3>
+                            <div class="smart-line"></div>
+                            <h4>02</h4>
+                            <a href="#" class="btn btn-lg btn-info">Check All</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="chart-sec flex-center-all mg-top">
+                    <h3>Response Rate</h3>
+                    <div class="smart-line"></div>
+                    <img src="{% static 'images/response-rate.png' %}" alt="" height="400px" width="40%">
+                </div>
+                {%endif%}
+            {%else%}
+                Please signin first.
+            {%endif%}
+        </div>
+    </div>
+{% endblock %}

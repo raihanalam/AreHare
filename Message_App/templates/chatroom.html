@@ -1,0 +1,432 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ChatBox|{{current_room.name}}{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block body_block %}
+<div class="container card">
+  <div class="row">
+    <div class="col-12">
+      <div class="chat">
+        <div class="head">
+
+          <div class="settings d-flex justify-content-between">
+            <a style="color: white; font-size:20px;" href="{% url 'Message_App:inbox' %}"><i
+                class="fa-solid fa-circle-xmark"></i></a>
+            <div class="chat-name">
+              <i class="fa fa-comment"></i>
+              Message:
+              {% for u in current_room.users.all %}
+              {% if u != user %}
+              {{u.username}}
+              {% endif %}
+              {%endfor%}
+              <!-- {{current_room.name}} -->
+            </div>
+            <div class="btn-group dropleft">
+              <a href="" style="color: white; font-size:20px;" data-toggle="dropdown" ria-haspopup="true"
+                aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></a>
+              <div class="dropdown-menu ">
+                <p class="dropdown-item">Report</p>
+                <a href="" class="dropdown-item">Leave</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="chat-log" style="overflow-y: scroll; height:70vh;margin: 10px;">
+          {% for chat in chats.all %}
+          {% if chat.user.id == request.user.id %}
+            <p class="message sender">{{chat.content}}</p>
+          {% else %}
+          <!-- <p class="message receiver"><span style="color: black;">{{chat.user}}:</span> {{chat.content}}</p> -->
+          <div class="d-flex align-items-center">
+            <img src="/media/{{chat.user.user_profile.profile_pic}}" class="rounded-circle mr-1" alt="" height="40px"
+              width="40px">
+            <p class="message receiver"><span style="color: black;">
+              </span> {{chat.content}}</p>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="footer d-flex justify-content-center">
+
+          <div class="btn-group dropup">
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-square-plus"></i>
+            </button>
+            <div class="dropdown-menu">
+              {%if user.user_profile.role == 'freelancer'%}
+              <a href="" class="dropdown-item" data-toggle="modal" data-target="#newOfferModal">Create New Offer</a>
+              {% elif user.user_profile.role == 'customer'%}
+              <a href="" class="dropdown-item" data-toggle="modal" data-target="#newOrderModal">Place New Order</a>
+
+              {% endif %}
+            </div>
+          </div>
+          <input type="text" id="chat-message-input" placeholder="Your Message">
+          <button id="chat-message-submit"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="col-md-5 card">
+      {% if running_work %}
+      <h4>Running Work</h4>
+      <div class="smart-line mb-2"></div>
+      {% for work in running_work %}
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Work ID: #{{work.id}}</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="small font-weight-bold">Tracker <span class="float-right">{{work.work_track}}%</span></h4>
+          
+          <div class="progress mb-4">
+            <div class="progress-bar {% if work.work_track >= 0 and work.work_track <= 20 %}bg-danger{% elif work.work_track >= 21 and work.work_track <= 40 %} bg-warning {% elif work.work_track >= 41 and work.work_track <= 60 %} bg-secondary {% elif work.work_track >= 61 and work.work_track <= 80 %} bg-info {% elif work.work_track >= 81 and work.work_track <= 100 %} bg-success {% endif %}"  style="width: {{work.work_track}}%"></div>
+         </div>
+          <a href="{% url 'Work_App:running_work' order_id=work.order_id.id %}" class="btn btn-md btn-info">View Running
+            Work History</a>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% endif %}
+
+      {%if user.user_profile.role == 'freelancer'%}
+      <div class="recent-order" style="overflow-y: scroll; height:80vh;margin: 10px;">
+        <h4 class="mt-1">Recent Order</h4>
+        <div class="smart-line mb-2"></div>
+        {%if recent_order %} -->
+        <!-- {% for order in recent_order%}
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">@{{order.customer.username}}</h6>
+          </div>
+          <div class="card-body">
+            <p>Instruction: {{order.instruction}}</p>
+            <p>Deadline: {{order.deadline}}</p>
+            <small>{{order.created}}</small><br>
+            <a href="" class="btn btn-success" data-toggle="modal" data-target="#m-{{order.pk}}">Accept order</a>
+            <div class="modal fade" id="m-{{order.pk}}" tabindex="-1" role="dialog" aria-labelledby="e-{{order.pk}}"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="e-{{order.pk}}">Start Work</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'Work_App:start_work' pk=order.pk %}">
+                      {{ offer_form.media}}
+                      {{ run_form|crispy }}
+                      {% csrf_token %}
+                      <br>
+                      <button type="submit" class="btn btn-success btn-sm">Start Work</button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %} -->
+
+        <!-- {% endif %}
+        <div id="orders">
+
+        </div>
+
+
+      </div>
+
+      {% elif user.user_profile.role == 'customer'%}
+      <div class="recent-offer" style="overflow-y: scroll; height:80vh;margin: 10px;">
+        <h4 class="mt-1">Recent Offer</h4>
+        <div class="smart-line mb-2"></div>
+        {%if recent_offer %}
+
+        {% endif %}
+        <div id="offer">
+
+        </div>
+      </div>
+
+
+      {% endif %}
+
+    </div>
+  </div> -->
+  <div class="modal fade bd-example-modal-md" id="newOfferModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Create New Offer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+          <form method="POST">
+            {{ offer_form|crispy}}
+            {% csrf_token %}
+            <br>
+            <button type="submit" class="btn btn-success btn-sm">Send Offer</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+{{ room_name | json_script:"room-name" }}
+{{ request.user.username | json_script:"user_username"}}
+{{ request.user.id | json_script:"user_id"}}
+{{ f_user.id | json_script:"f_user"}}
+{{ r_user.id | json_script:"r_user"}}
+
+
+<script>
+  const user_username = JSON.parse(document.getElementById('user_username').textContent);
+  const roomName = JSON.parse(document.getElementById('room-name').textContent);
+  const chatLog = document.querySelector('#chat-log')
+
+
+  //Auto srcolling down in a div.
+  const theElement = document.getElementById('chat-log');
+  const scrollToBottom = (node) => {
+    node.scrollTop = node.scrollHeight;
+  }
+  scrollToBottom(theElement);
+
+  //Empty String will show when there is no message
+  if (chatLog.childNodes.length <= 1) {
+
+    const emptyText = document.createElement('h3')
+    emptyText.id = 'emptyText'
+    emptyText.innerText = 'No message'
+    emptyText.className = 'emptyText'
+    chatLog.appendChild(emptyText)
+  }
+
+  const chatSocket = new WebSocket(
+    'ws://' +
+    window.location.host +
+    '/ws/chat/box/' +
+    roomName +
+    '/'
+  );
+
+  chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    const messageElement = document.createElement('p')
+
+    const userId = data['user_id']
+    const loggedInUserId = JSON.parse(document.getElementById('user_id').textContent)
+
+
+    if (userId === loggedInUserId) {
+      messageElement.innerText = data.message
+      messageElement.classList.add('message', 'sender')
+    } else {
+      messageElement.innerHTML = `<span style="color:black;">${data.username}:</span> ${data.message}`
+      messageElement.classList.add('message', 'receiver')
+      scrollToBottom(theElement);
+    }
+
+    chatLog.appendChild(messageElement)
+    scrollToBottom(theElement);
+
+    if (document.querySelector('#emptyText')) {
+      document.querySelector('#emptyText').remove()
+    }
+  }
+  chatSocket.onclose = function (e) {
+    console.error('Chat socket closed unexpectedly');
+  };
+
+  document.querySelector('#chat-message-input').focus();
+  document.querySelector('#chat-message-input').onkeyup = function (e) {
+    if (e.keyCode === 13) {  // enter, return
+      document.querySelector('#chat-message-submit').click();
+    }
+  };
+
+  document.querySelector('#chat-message-submit').onclick = function (e) {
+    const messageInputDom = document.querySelector('#chat-message-input');
+    const message = messageInputDom.value;
+    if (message != ''){
+      chatSocket.send(JSON.stringify({
+        'message': message,
+        'username': user_username,
+      }));
+    }
+    messageInputDom.value = '';
+
+  };
+
+</script>
+<script>
+  const f_user = JSON.parse(document.getElementById('f_user').textContent);
+  const r_user = JSON.parse(document.getElementById('r_user').textContent);
+  $(document).ready(function () {
+
+    setInterval(function () {
+
+      $.ajax({
+        type: 'GET',
+        url: "{% url 'Work_App:get_work_data' %}",
+        data: {
+          "f_user": f_user,
+        },
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          // $('#display').empty();
+          for (var offer in data.offer_data) {
+            var pk = data.offer_data[offer].pk
+            var theDate = new Date(Date.parse(data.offer_data[offer].date_created));
+            var temp =
+              `<div class="card shadow mb-4">
+            <div class="card-header">
+              <p><b>Offer ID:</b> #OF-${data.offer_data[offer].id}</p>
+                
+            </div>
+        
+            <div class="card-body">
+              <div class="text-left">
+                <p><b>Description:</b> ${data.offer_data[offer].description}</p>
+                <p><b>Offer Amount:</b> ${data.offer_data[offer].amount}</p>
+                <p><b>Expected Time:</b> ${data.offer_data[offer].expected_time}</p>
+                <p><b>Support:</b> ${data.offer_data[offer].support}</p>
+
+                <small><b>Time: </b> ${theDate.toLocaleString()} </small><br>
+              </div>
+              <a href="" class="btn btn-success" data-toggle="modal" data-target="#m-${data.offer_data[offer].id}">Place An order</a>
+        
+              <div class="modal fade" id="m-${data.offer_data[offer].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Create New Order</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST" action="{% url 'Work_App:place_order' pk=999 %}" class="form-group">
+                        {{ order_form.media}}
+                        {{ order_form|crispy }}
+                        {% csrf_token %}
+                        <br>
+                        <button type="submit" class="btn btn-success btn-sm">Place Order</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`.replace(999, data.offer_data[offer].id);
+
+
+            var selection = document.querySelector(`#m-${data.offer_data[offer].id}`);
+            if (selection == null) {
+              // $('#offer').append(temp)
+              $('#chat-log').append(temp)
+            }
+
+          }
+          //Adding Order 
+          for (var order in data.order_data) {
+            var pk = data.order_data[order].pk
+            var theDate = new Date(Date.parse(data.order_data[order].created));
+            var deadline = new Date(Date.parse(data.order_data[order].deadline));
+            var temp_order =
+              `<div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Order ID: #${data.order_data[order].id}</h6>
+              </div>
+              <div class="card-body">
+                <p><b>Instruction:</b> ${data.order_data[order].instruction}</p>
+                <p><b>Deadline:</b> ${deadline.toLocaleString()}</p>
+                <p><b>Amount:</b> ${data.order_data[order].amount}</p>
+                <small> ${theDate.toLocaleString()}</small><br>
+                <a href="" class="btn btn-success" data-toggle="modal" data-target="#o-${data.order_data[order].id}">Accept order</a>
+                <div class="modal fade" id="o-${data.order_data[order].id}" tabindex="-1" role="dialog" aria-labelledby="e-${data.order_data[order].id}"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="e-${data.order_data[order].id}"">Start Work</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="POST" action="{% url 'Work_App:start_work' pk=999 %}">
+                          <!-- {{ offer_form.media}} -->
+                          {{ run_form|crispy }}
+                          {% csrf_token %}
+                          <br>
+                          <button type="submit" class="btn btn-success btn-sm">Start Work</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`.replace(999, data.order_data[order].id);
+
+
+            var order_selection = document.querySelector(`#o-${data.order_data[order].id}`);
+            if (order_selection == null) {
+              // $('#orders').append(temp_order)
+              $('#chat-log').append(temp_order)
+
+            }
+
+          }
+
+        },
+        error: function (data) {
+
+
+        }
+      });
+    }, 1000);
+  });
+
+</script>
+
+
+<script>
+          // var temp = `<div class="card-body">
+          //     <p>Description: ${data.offer_data[offer].description}</p>
+          //     <p>Offer Amount: ${data.offer_data[offer].amount}</p>
+          //     <p>Expected Time: ${data.offer_data[offer].expected_time}</p>
+          //     <small>${data.offer_data[offer].date_created}</small></div>`
+</script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Succesfull Orders{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               <h3>Succesfull Orders</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if all_successfull_orders %}
+                         {% for order in all_successfull_orders %}
+
+                              {% if order.status == 'Completed' %}
+                                   <a href="{% url 'Work_App:running_work' order_id=order.id %}" style="text-decoration: none;">
+                                        <div class="card shadow mb-4">
+                                             <div class="card-header py-3">
+                                                  <h6 class="m-0 font-weight-bold badge badge-pill badge-success">Succesfull Order</h6>
+                                             </div>
+                                             <div class="card-body" style="color: black;">
+                                                  <p>Deadline: {{order.deadline}} </p>
+                                                  <p>Status: {{order.status}}</p>
+                                             </div>
+                                        </div>
+                                   
+                                   </a>
+                              
+                              {% endif %}
+
+                                        
+                         {% endfor %}
+                    {% else %}
+                         <p>No succesfull orders.</p>
+                    {% endif %}
+                    
+               </div>
+          </div>
+     </div>
+{% endblock %}

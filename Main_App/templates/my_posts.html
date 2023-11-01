@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title%} {{ user }} {% endblock %}
+
+
+{% block body_block %}
+
+<div class="container">
+     <div class="card p-5">
+          <h3>All Post's</h3>
+          <div class="smart-line mb-5"></div>
+          {% if user.post_author.all %}
+          {% for post in user.post_author.all %}
+          <div class="card shadow mb-4 p-3">
+               <div class="my-item mg-top">
+                    <h3>{{post.post_title}}</h3>
+                    <h5>Active: 
+                         {% if post.active %}
+                         <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
+                         {% else %}
+                              <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                         {%endif %}
+                    </h5>
+                    <h4>Offer: {{post.budget_amount}}</h4>
+                    <h4>Bids: {{post.post_bid.count}} </h4>
+                    <h6>Published:{{post.publish_date}} | Updated On: {{post.update_date}} </h6>
+                    <a class="btn btn-primary btn-sm" href="{% url 'Main_App:post_details' slug=post.slug %}">View
+                         Post</a> <a class="btn btn-sm btn-info ml-2"
+                         href="{% url 'Main_App:edit_post' pk=post.pk %}">Edit Post</a> {% if post.active == True %} <a
+                         class="btn btn-sm btn-warning ml-2"
+                         href="{% url 'Main_App:deactivate_post' pk=post.pk %}">Deactivate</a> {% else %}<a
+                         class="btn btn-sm btn-info ml-2"
+                         href="{% url 'Main_App:activate_post' pk=post.pk %}">Activate</a>{% endif %}<a
+                         class="btn btn-sm btn-danger ml-2"
+                         href="{% url 'Main_App:delete_post' pk=post.pk %}">Delete</a>
+               </div>
+
+          </div>
+          {%endfor%}
+          {% else %}
+
+          <p>No post yet.</p>
+
+          {% endif %}
+     </div>
+
+
+</div>
+{% endblock %}

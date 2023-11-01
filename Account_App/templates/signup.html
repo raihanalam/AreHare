@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{%block title%} Account Signup {% endblock %}
+{% block css %}
+<style>
+          .sign-up ul {
+               list-style-type: none;
+          }
+          .sign-up ul li{
+               color: rgb(60, 59, 59);
+               padding: 8px;
+               height: auto;
+               background-color: rgb(243, 127, 127);
+               margin-bottom: 20px;
+          }
+</style>
+
+{% endblock %}
+
+{% block body_block%}
+     <div class="container flex-center-all mt-5">
+          <div class="card shadow p-5 flex-center-all sign-up">
+               {% if registerd %}
+                    <div class="alert alert-success d-flex align-items-center justify-content-center p-4">
+                         Account Created Successfully! <a href="{% url 'Account_App:signin' %}">Login Here</a>
+                    </div>
+               {% else %}
+                    <h2>Create New Account</h2>
+                    <div class="smart-line mb-5"></div>
+                    <div class="form-group flex-center-all">
+                         <form method="POST" class="form-group">
+                              
+                              <span style="color: gray;">Role</span>
+                              {{form1}}
+                              {{form}}
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-success btn-sm mb-5 mt-5" style="width: 100%;">Signup</button>
+                         </form>
+                    </div>
+                    <br>
+                    <p style="text-align: center;">Already have an account? <a href="{% url 'Account_App:signin' %}">Signin</a></p>
+               {% endif %}
+          </div>
+     </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%} Change Profile {% endblock %}
+
+{% block body_block%}
+<div class="container p-5 card">
+
+     <div class="d-flex">
+          <h3>Profile Verification </h3>
+
+     </div>
+     <div class="smart-line mb-3"></div>
+     {% if user.user_profile.verified %}
+     <p>You got verified <img src="{% static 'images/verified.png'%}" class="img-fluid" height="30px" width="30px" />
+          <span style="font-weight: 5px; color:rgb(44, 195, 67);">Congratulations.</span>
+     </p>
+     {% endif %}
+     {% if user.user_verification.all %}
+     {% for ver in user.user_verification.all %}
+
+     {% if ver.status == 'Rejected' %}
+     <div class="card p-3">
+          <p class="alert alert-danger d-flex align-items-center justify-content-center p-4">Your application rejected,
+               please recheck your information and reapply. Thank you.</p>
+
+          <div class="card p-3">
+               <h4><b>Subject:</b> {{ver.subject}}</h4>
+               <p><b>Application:</b><br> {{ver.application}}</p>
+          </div>
+     </div>
+
+
+     {% elif not ver.status == 'Rejected' and not ver.status == 'Verified' %}
+     <div class="card p-3">
+          <p class="alert alert-info d-flex align-items-center justify-content-center p-4">Your application is pending,
+               please wait for while.</p>
+          <br>
+          <div class="card p-3">
+               <h4><b>Subject:</b> {{ver.subject}}</h4>
+               <p><b>Application:</b><br> {{ver.application}}</p>
+          </div>
+     </div>
+
+     {% elif ver.verified and not ver.rejected %}
+
+     <div class="card p-3">
+          <p class="alert alert-success d-flex align-items-center justify-content-center p-4">Your application is
+               verified.</p>
+          <div class="card p-3">
+               <h4><b>Subject:</b> {{ver.subject}}</h4>
+               <p><b>Application:</b><br> {{ver.application}}</p>
+          </div>
+     </div>
+
+     {%endif %}
+
+
+     {% endfor %}
+
+     {% endif %}
+
+     {% if user.user_profile.verified == False %}
+     <div class="">
+
+          <form method="POST">
+               {{form | crispy}}
+               {% csrf_token %}
+               <br>
+               <button type="submit" class="btn btn-success btn-lg">Apply</button>
+          </form>
+
+     </div>
+
+
+     {% endif %}
+</div>
+{% endblock %}

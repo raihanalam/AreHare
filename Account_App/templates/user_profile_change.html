@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Profile {% endblock %}
+
+
+{%block body_block%}
+<div class="container card p-5"> 
+
+     <div class="row">
+          <h3>Profile Information</h3>
+          <div class="smart-line mb-5"></div>
+
+    
+               <form action="" method="post" class="form-group">
+                    {{form|crispy}}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info btn-md mt-4">Update</button>
+               </form>
+          
+     </div>
+</div>
+
+{%endblock%}
+

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{%block title%} Change Profile {% endblock %}
+
+{% block body_block%}
+<div class="container p-3 card">
+     <h3>Personal Info</h3>
+     <div class="smart-line mb-5"></div>
+     <form method="POST" class="form-group">
+          {{form | crispy}}
+          {% csrf_token %}
+          <br>
+          <button type="submit" class="btn btn-danger btn-sm">Submit Change</button>
+     </form>
+
+</div>
+{% endblock %}

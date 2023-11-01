@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title%} {{ user.username }} | Ports {% endblock %}
+
+
+{% block body_block %}
+
+<div class="container">
+     <div class="card p-5">
+          <h2>{{type}} Port's</h2>
+          <div class="smart-line mb-5"></div>
+
+          {% if all_port %}
+          {% for port in all_port %}
+          <div class="card shadow mb-4 p-3">
+               <div class="my-item mg-top">
+                    <h3>{{port.port_title}}</h3>
+                    <h5>Active: 
+                         {% if port.active %}
+                         <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
+                         {% else %}
+                              <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                         {%endif %}
+                    </h5>
+                    <h4>Hourly Rate: {{port.rate_amount}}</h4>
+                    <h4>Hire: {{port.port_hire.count}} </h4>
+                    <h6>Published:{{port.publish_date}} | Updated On: {{port.update_date}} </h6>
+                    <a class="btn btn-primary btn-sm" href="{% url 'Main_App:port_details' slug=port.slug %}">View Port</a> <a class="btn btn-sm btn-info ml-2" href="{% url 'Main_App:edit_port' pk=port.pk %}">Edit Port</a> {% if port.active == True %} <a class="btn btn-sm btn-warning ml-2" href="{% url 'Main_App:deactivate_port' pk=port.pk %}">Deactivate</a> {% else %}<a class="btn btn-sm btn-info ml-2" href="{% url 'Main_App:activate_port' pk=port.pk %}">Activate</a>{% endif %}<a class="btn btn-sm btn-danger ml-2" href="{% url 'Main_App:delete_port' pk=port.pk %}">Delete</a>
+               </div>
+               
+          </div>
+          {%endfor%}
+          {% else %}
+
+          <p>No {{type}} ports.</p>
+
+          {% endif %}
+     </div>
+          
+    
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title%} {{post.post_title}} {% endblock %}
+
+{% block body_block %}
+<div class="container p-3">
+     {% if post.active %}
+
+     <div class="row">
+          <div class="col-md-8 card p-3">
+               <h2 style="font-weight: bold;">{{post.post_title}}</h2>
+               <h3>Budget: &#2547; {{post.budget_amount}}</h3>
+               <h3>Deadline: {{post.deadline}}</h3>
+               <h6><i class="fa-solid fa-bolt"></i> {{post.required_skills}}</h6>
+               <h6><i class="fa-regular fa-clock"></i> {{post.publish_date}}</h6>
+               
+               <p>
+                    {{post.post_description | safe}}
+               </p>
+               <a href="/media/{{post.post_image}}">Attachments</a>
+
+               <hr>
+               <div class="row">
+                    <div class="col-12">
+                         <h3>Bids:</h3>
+                         {% for bid in post.post_bid.all%}
+                              <div class="card p-3 mt-3">
+                                   <h4><img src="/media/{{bid.user.user_profile.profile_pic}}" class="rounded-circle" alt="" height="30px" width="30px"></i> <a href="#">{{bid.user.username}}</a>
+                                        <h4>
+                                             <h5>&#2547; {{bid.bid_amount}}</h5>
+                                             <p>{{bid.bid_note}}</p>
+                                             <h6>{{bid.bid_date}}</h6>
+                                             {% if user.user_profile.role == 'customer' %}
+                                             <a href="{% url 'Message_App:join_chat' f_username=bid.user %}"
+                                                  class="btn btn-sm btn-success">Contact to Freelancer</a>
+                                             {% endif %}
+                              </div>
+                         {% endfor %}
+                    </div>
+               </div>
+
+          </div>
+          <div class="col-md-4">
+               {% if user.is_authenticated and user.user_profile.verified %}
+               {%if user.user_profile.role == 'freelancer'%}
+               <div class="card p-3">
+                    <h4>About Client</h4>
+                    <img src="/media/{{uProfile.profile_pic}}" class="rounded-circle" alt="" height="60px" width="60px">
+                    <h5 class="mt-2">{{aUser.username}}
+                         {% if post.active %}
+                         <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
+                         {% else %}
+                         <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                         {%endif %}
+                    </h5>
+               </div>
+               <hr>
+               <div class="card p-3">
+                    {% if not bidden%}
+                    {% if ports %}
+                    <form method="POST">
+                         <select name="port" id="port">
+                              {% for port in ports %}
+                              <option value={{port.pk}}>{{port.port_title|safe|slice:30}}</option>
+                              {% endfor %}
+                         </select>
+                         {{bid_form | crispy}}
+                         {% csrf_token %}
+                         <button type="submit" class="btn btn-primary btn-sm mg-top">Bid This Job</buuton>
+                    </form>
+                    {% else %}
+                    <p class="alert alert-warning d-flex align-items-center justify-content-center p-4">You don't have any active port to bid this.</p>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'Main_App:unbid_post' pk=post.pk%}" class="btn btns-sm btn-info">Unbid This
+                         Job</i></a>
+                    {% endif%}
+               </div>
+               {% endif %}
+
+               {% else %}
+               <p class="alert alert-warning d-flex align-items-center justify-content-center p-4">Your profile isn't verified, please complete profile and wallet and apply for verification.</p>
+               {% endif %}
+          </div>
+     </div>
+
+
+
+     {% else %}
+
+     <p>This post isn't active.</p>
+
+     {% endif %}
+</div>
+{% endblock%}

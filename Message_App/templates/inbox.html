@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ChatBox {% endblock %}
+{% block css %}
+<style>
+
+
+</style>
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+     <div class="row card shadow p-5">
+          <h3>Chatbox</h3>
+          <div class="smart-line mb-3 "></div>
+          <div class="">
+               {% if my_rooms %}
+               {% for room in my_rooms %}
+               <a class="mb-3" href="{% url 'Message_App:room' room_name=room.name %}"
+                    style="text-decoration: none; color: black;">
+                    <div id="msg" class="card p-2 mb-3">
+                         <h4>
+                              {% if room.users %}
+                              {% for u in room.users.all %}
+                              {% if u != user %}
+                              <div class="d-flex align-items-center">
+                                   <img src="/media/{{u.user_profile.profile_pic}}" class="rounded-circle mr-2" alt=""
+                                        height="30px" width="30px">
+                                   <h5>{{u.username}}</h5>
+                              </div>
+                              {% endif %}
+                              {%endfor%}
+                              {% else %}
+                              <h5>No chat yet!</h5>
+
+                              {% endif %}
+                         </h4>
+                    </div>
+               </a>
+               {% endfor %}
+               {% else %}
+                    <p>Your chatbox is empty.</p>
+               {% endif %}
+          </div>
+     </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Running Order{% endblock %}
+{% load crispy_forms_tags %}
+{% block css %}
+     <style>
+          .display-box{
+               height: 300px;
+               width: 400px;
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+
+               }
+               #timer{
+               background-color: black;
+               color: white;
+               font-size: 30px;
+               padding: 15px;
+               box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+               }
+               .btn-box{
+               margin-top: 20px;
+               }
+               .btn-box button{
+               height: 35px;
+               background-color: white;
+               width: 100px;
+               border: 2px solid black;
+               font-size: 16px;
+               cursor: pointer;
+               }
+               .btn-box button:hover{
+               border: none;
+               background-color: black;
+               color: white;
+
+               }
+     </style>
+
+{% endblock%}
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               <h3>Running Work</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if running_work %}
+                    
+                    <div class="row">
+                         <div class="col-md-4">
+                              <div class="card shadow mb-4">
+                                   <div class="card-body">
+                                        <p><b>ON: Order-{{running_order.id}}</b></p>
+                                        <h6>Freelancer: {{running_work.freelancer.username}}</h6>
+                                        <h6>Customer: {{running_work.customer.username}}</h6>
+                                        <!-- <h6>Payment Verification: {{running_order.payment_confirm}}</h6>     -->
+                                   </div>
+                              </div>
+                              <div class="card shadow mb-4">
+                                   <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Work History</h6>
+                                   </div>
+                                   <div class="card-body">
+                                        <p>Running: {{running_work.running}}</p>
+                                        <p>Track: {{running_work.work_track}}</p>
+                                        <p>Status:{{running_work.st}}</p>
+                                        <p>Work Started: {{running_work.date_created}}</p>
+                                   </div>
+                              </div>
+                              <div class="card shadow mb-4">
+                                   <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Order History</h6>
+                                   </div>
+                                   <div class="card-body">
+                                        <p>Instruction: {{running_order.instruction}}</p>
+                                        <p>Deadline: {{running_order.deadline}}</p>
+                                        <p>Amount: {{running_order.amount}}</p>
+                                   </div>
+                              </div>
+                              <div class="card shadow mb-4">
+                                   <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Offer History</h6>
+                                   </div>
+                                   <div class="card-body">
+                                        <p>Description: {{running_offer.description}}</p>
+                                        <p>Expected Time: {{running_offer.expected_time}}</p>
+                                        <p>Support: {{running_offer.support}}</p>
+                    
+                                   </div>
+                              </div>
+                    
+                         </div>
+                         <div class="col-md-8">
+                              <div class="card shadow mb-4">
+                                   <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Work Status</h6>
+                                   </div>
+                                   <div class="card-body">
+                                        <div class="card clock-app mb-4 p-3">
+                                             <center>
+                                                  <div class="card p-3 m-5">
+                                                       
+                                                       {% if not running_work.completed %}
+                                                       <h5> Deadline is : </h5>
+                                                       <div id="event-box">{{running_order.deadline | date:"M d, Y H:m:s"}}</div>
+                                                       <h5>Time left:</h5>
+                                                       <div id="countdown-box" class="text-center mt-3 h4">
+                                                            <div id="spinner-border" role="status"></div>
+                                                       </div>
+                                                       {% else %}
+
+                                                       <h4>The work is completed.</h4>
+                                                       {% endif %}
+                                                  </div>
+
+                                                   <h4 class="small font-weight-bold">Tracker <span
+                                                       class="float-right">{{running_work.work_track}}%</span></h4>
+                                                  <div class="progress mb-4">
+                                                       <!-- <div class="progress-bar {% if running_work.work_track >= 0 and running_work.work_track <= 10 %}bg-danger {% elif running_work.work_track >= 11 and running_work.work_track >= 20 %}bg-warning {% elif running_work.work_track >= 21 and running_work.work_track >= 30 %}bg-secondary {% elif running_work.work_track >= 31 and running_work.work_track >= 40 %}bg-info {%endif %}" role="progressbar" style="width: 20%;"
+                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div> -->
+                                                            <div class="progress-bar {% if running_work.work_track >= 0 and running_work.work_track <= 20 %}bg-danger{% elif running_work.work_track >= 21 and running_work.work_track <= 40 %} bg-warning {% elif running_work.work_track >= 41 and running_work.work_track <= 60 %} bg-secondary {% elif running_work.work_track >= 61 and running_work.work_track <= 80 %} bg-info {% elif running_work.work_track >= 81 and running_work.work_track <= 100 %} bg-success {% endif %}"  style="width: {{running_work.work_track}}%"></div>
+                                                  </div>
+                                                  {%if user.user_profile.role == 'freelancer'%}
+                                                  <div class="btn-box">
+                                                       
+                                                       <a href="{% url 'Work_App:work_pop' work_id=running_work.id %}" class="btn btn-md btn-outline-dark">Pop</a>
+                                                       <a href="{% url 'Work_App:work_push' work_id=running_work.id %}" class="btn btn-md btn-outline-success">Push</a>
+                                                       
+                                                  </div>
+                                                  {% endif %}
+                                                   <br>
+                                             </center>
+                                         </div>
+
+                                         <div class="card p-3 mb-3 mt-3">
+                                             <form method="POST" action="{% url 'Work_App:send_file' work_id=running_work.id %}" enctype="multipart/form-data">
+                                                  <!-- <label for="myfile">Select a file:</label><br> -->
+                                                  <!-- <input type="file" id="work_file" name="work_file"><br> -->
+                                                  {% csrf_token %}
+                                                  {{file_form}}
+                                                  <br>
+                                                  <button class="mt-3 btn btn-sm btn-info">Send</button>
+                                             </form>
+                                        </div>
+                                        
+                                   {%if user.user_profile.role == 'freelancer'%}
+                                        
+
+                                        {% if running_work.complete_work.freelancer_confirmation != True %}
+
+                                             <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#w-{{running_work.pk}}" class="btn btn-lg btn-success">Complete Work</a>
+                                             <button class="btn btn-md btn-warning">Cancel Work</button>
+        
+                                             <div class="modal fade" id="w-{{running_work.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                  aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                       <h5 class="modal-title" id="exampleModalLongTitle">Complete Work</h5>
+                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                       </button>
+                                                       </div>
+                                                       <div class="modal-body">
+                                                            <center>
+                                                                 <h6>Are you sure your work is completely done?</h6>
+                                                            
+                                                                 <a href="{% url 'Work_App:complete_work' pk=running_work.pk %}" class="btn btn-sm btn-success">Complete Work</a>
+                                                            </center>
+                                                       
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                                       </div>
+                                                  </div>
+                                                  </div>
+                                             </div>
+                                        {% else %}
+                                             <a href="" class="btn btn-lg btn-primary">Give Feedback</a>
+                                             
+                                        {% endif %}
+                                   
+                                   {% elif user.user_profile.role == 'customer' %}
+                                        {% if running_work.complete_work.freelancer_confirmation == True  and running_work.complete_work.completed == False %}
+                                             <a href="{% url 'Work_App:complete_work' pk=running_work.pk %}" class="btn btn-lg btn-success m-2">Confirm Work is Done</a>
+                                        {% elif running_work.complete_work.completed == True %}
+                                             <a href="" class="btn btn-lg btn-success m-2" data-toggle="modal" data-target="#newReviewModal">Give A Review</a>
+                                             <div class="modal fade bd-example-modal-md" id="newReviewModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                             <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLongTitle">Write Your Review</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                     <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                 </div>
+                                                 <div class="modal-body ">
+                                                  <form action="{% url 'Main_App:submit_review' running_work.freelancer.id %}" method="POST">
+                                                       {% csrf_token %}
+                                                       
+                              
+                                                       <div>
+                                                            <!-- Rating stars -->
+                                                            <label>How do you rate this work?</label>
+                                                            <br>
+                                                            <div class="rate">
+                                                                 <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+                                                                 <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5" class="half"></label>
+                                                                 <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+                                                                 <input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5" class="half"></label>
+                                                                 <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+                                                                 <input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5" class="half"></label>
+                                                                 <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+                                                                 <input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5" class="half"></label>
+                                                                 <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+                                                                 <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5" class="half"></label>
+                                                            </div>
+                                                            <br>
+                                                            Review:
+                                                            <textarea name="review" rows="4" class="form-control"></textarea>
+                                                            <br>
+                                                            <input type="submit" value="Submit Review" class="btn btn-primary">
+                              
+                                                       </div>
+                                                  </form>
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                         
+                                                 </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                             
+                                             
+                                        {% endif %}
+
+                                   
+                                       
+                                        
+                                   {% endif %}
+                                   <a href="" class="btn btn-md btn-danger m-2" data-toggle="modal" data-target="#rep-{{running_work.pk}}">Report Bad Experience</a>
+                                        <div class="modal fade" id="rep-{{running_work.pk}}" tabindex="-1" role="dialog"
+                                             aria-labelledby="example-{{running_work.pk}}" aria-hidden="true">
+                                             <div class="modal-dialog modal-dialog-centered" role="document">
+                                                  <div class="modal-content">
+                                                       <div class="modal-header">
+                                                            <h5 class="modal-title" id="example-{{running_work.pk}}">Report Bad Experience</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                 <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                       </div>
+                                                       <div class="modal-body">
+                                                            <center>
+                                                                 <form action="{% url 'Work_App:give_report' work_id=running_work.pk %}" method="POST" class="form-group">
+                                                                      {% csrf_token %}
+                                                                      {{report_form | crispy}}
+                                                                      <button type="submit" class="btn btn-md btn-danger">Submit Report</button>
+                                                                 </form>
+                                        
+                                                                 
+                                                            </center>
+                                        
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   
+                                   
+                                             
+                                             
+                                             </div>
+                              </div>
+                              <div class="card">
+                                   <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Work Files</h6>
+                                   </div>
+                                   <div class="p-3">
+                                        <!-- {% if work_file in running_work.work_files %}
+                                             
+                                        {% else %}
+
+                                        <p>No files send yet.</p>
+
+                                        {% endif %} -->
+                                        {% for work_file in running_work.work_files.all %}
+
+                                             <div class="card p-2 mb-2">
+                                                  <h5>{{work_file.user.username}}</h5> <br><br>
+                                                  <small><i class="fa-regular fa-clock"></i> {{work_file.date_created}}</small>
+                                                  <h6 class="mt-4">{{work_file.file_name}}</h6>
+
+                                                  <a class="btn btn-outline-dark btn-sm mt-2" href="{{work_file.file.url}}" download="{{work_file.file}}">Download</a>
+                                             </div>
+                                        {% endfor %}
+                                   </div>
+                              </div>
+                    
+                         </div>
+                    
+                    </div>
+                    {% endif %}
+               </div>
+          </div>
+     </div>
+     <script>
+          const eventBox = document.getElementById('event-box')
+          const countdownBox = document.getElementById('countdown-box')
+
+          // console.log(eventBox.textContent)
+          const eventDate = Date.parse(eventBox.textContent)
+          // console.log(eventDate)
+
+          const deadlineCountdown= setInterval(()=>{
+               const now = new Date().getTime()
+               // console.log(now)
+
+               const diff = eventDate - now
+               // console.log(diff)
+
+
+               const d = Math.floor(eventDate / (1000 * 60 * 60 * 24) - (now / (1000 * 60 * 60 * 24)))
+               const h = Math.floor((eventDate / (1000 * 60 * 60) - (now / (1000 * 60 * 60)))%24)
+               const m = Math.floor((eventDate / (1000 * 60) - (now / (1000 * 60)))%60)
+               const s = Math.floor((eventDate / (1000 ) - (now / (1000))) % 60) 
+               // console.log(s) 
+
+
+               if (diff>0){
+                    countdownBox.innerHTML = d + " days, " + h + " hours, " + m + " minutes, " + s + " seconds"
+               } else{
+                    clearInterval(deadlineCountdown)
+                    countdownBox.innerHTML = "Deadline is over."
+
+               }
+               }, 1000)
+
+
+     </script>
+     <script></script>
+{% endblock %}

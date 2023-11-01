@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load crispy_forms_tags %}
+
+{% block title%} {{ user }} {% endblock %}
+
+
+{% block body_block %}
+
+<div class="container">
+     <div class="card p-5">
+          <h3>Recent Hire Requests</h3>
+          <div class="smart-line mb-5"></div>
+          {% if all_hires %}
+               {% for hire in all_hires %}
+                    <div class="card shadow mb-4 p-3">
+                         
+                         <div class="row">
+                              <div class="col-md-4">
+                                   
+                                   <img src="/media/{{hire.user.user_profile.profile_pic}}" class="rounded-circle" alt="" height="60px" width="60px"><br>
+                                   <h4 class="mt-3 mb-3" >{{hire.user.username}}</h4>
+                                   
+                              </div>
+                              <div class="col-md-8 ">
+                                   <p>Post: <a href="{% url 'Main_App:post_details' slug=hire.post.slug %}">{{hire.post}}</a></p>
+                                   <p>Note: {{hire.hire_message}}</p>
+                                   <p>Amount: {{hire.hire_amount}}</p>
+                                   <a href="" class=" btn btn-sm btn-success" data-toggle="modal" data-target="#newOfferModal">Send Offer</a>
+                                   <!-- <a href="{% url 'Work_App:send_offer' receiver=hire.port.port_author %}" class="btn btn-sm btn-success">Send Offer</a> <a href="" class="btn btn-sm btn-danger">Reject</a> -->
+                              </div>
+                         </div>
+                         
+                    </div>
+                    <div class="modal fade bd-example-modal-md" id="newOfferModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Create New Offer</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body ">
+                          <form action="{% url 'Work_App:send_offer' receiver=hire.post.post_author.id %}" method="POST" >
+                              
+                            {{ offer_form|crispy}}
+                            {% csrf_token %}
+                            <br>
+                            <button type="submit" class="btn btn-success btn-sm">Send Offer</button>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+               {%endfor%}
+          {% else %}
+
+               <p>No recent hire requests.</p>
+
+          {% endif %}
+     </div>
+          
+    
+</div>
+{% endblock %}

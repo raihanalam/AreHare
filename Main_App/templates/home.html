@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+
+{% block title %}
+AreHare | Home
+{% endblock %}
+{% block css %}
+
+<style>
+
+</style>
+{% endblock %}
+
+
+{% block body_block %}
+
+<div class="container">
+    {% if user.is_authenticated %}
+    <div class="row mb-4 mt-2">
+        <div class="col-md-3">
+
+            <form method="GET" action="{% url 'Search_App:filter' %}">
+                <select name="category" id="" style="width: 100%; height: 40px;">
+                    <option value="null"> All Categories </option>
+                    {% for category_item in categories_list %}
+                    <option value="{{category_item.id}}">{{category_item.title}}</option>
+                    {% endfor %}
+                </select><br>
+                <button type="submit" style="width: 100%; height: 40px;"
+                    class="my-2 btn btn-md btn-light">Filter</button>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{% static 'images/work-from-home.jpg' %}" alt="First slide"
+                            style="height:300px;">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{% static 'images/home-network.jpeg' %}" alt="Second slide"
+                            style="height:300px;">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{% static 'images/boy-1.jpg' %}" alt="Third slide"
+                            style="height:300px;">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    {%if user.user_profile.role == 'freelancer'%}
+    <div class="row flex-center-all post-wrapper">
+        {% for post in posts %}
+        <a class="post-box mb-4" style="text-decoration:none; color:black; width: 60%;"
+            href="{% url 'Main_App:post_details' slug=post.slug %}">
+            <div class=" col-12 card p-3">
+                <h3>{{post.post_title}}</h3>
+                <p><span style="font-size: 18px; color:gray;"><i class="fa-solid fa-bolt"></i></span>
+                    {{post.required_skills}}</p>
+                <p>Deadline: {{post.deadline}}</p>
+
+                <div class="mt-2 mb-2"
+                    style="display:flex; justify-content: space-between; background-color: aliceblue; padding: 5px;">
+                    <h5>Budget: &#2547; {{post.budget_amount}}</h5>
+                    <button class="btn btn-sm btn-success" style="width: 8rem;">Bid</button>
+                </div>
+                <small><i class="fa-regular fa-user"></i> {{post.post_author.username}} <i
+                        class="ml-3 mr-1 fa-regular fa-clock"></i>{{post.publish_date}}</small>
+            </div>
+        </a>
+        {% endfor %}
+
+        <br>
+    </div>
+    <div class="row d-flex justify-content-center mb-5">
+        <nav aria-label="Page navigation example ">
+            {% if posts.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                {% if posts.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li class="page-item"><a href="?page={{ i }}">{{ i }}</a></li>
+
+                {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            {% endif %}
+        </nav>
+
+    </div>
+    {% elif user.user_profile.role == 'customer' %}
+    <div class="row justify-content-center">
+        {% for port in ports %}
+            <a href="{% url 'Main_App:port_details' slug=port.slug %}" style="text-decoration:none; color: black;">
+                <div class="card card-port ml-4 mb-4" style="width: 20rem;">
+                    <img class="card-img-top" src="/media/{{port.port_image}}" alt="Card image cap">
+                    <div class="card-body">
+                        <div class=" mb-2">
+                            <img src="/media/{{port.port_author.user_profile.profile_pic}}" class="rounded-circle" alt=""
+                                height="30px" width="30px"><span class="ml-2">{{port.port_author.username}}</span><br>
+                        </div>
+                        <h5 class="card-title">{{port.port_title | range_filter | linebreaks}}</h5>
+                        <div class="action-wrap">
+                            <div class="price-wrap">
+                                <span class="price-new">&#2547; {{port.rate_amount | floatformat:2}}</span>
+                            </div>
+                        </div>
+    
+                        <div class="bottom-wrap">
+                            <a href="" class="btn btn-sm btn-light" style="margin-right: 5px;"> <i
+                                    class="fa-solid fa-bookmark"></i>
+                                Save</a>
+                            <a href="{% url 'Main_App:port_details' slug=port.slug %}" class="btn btn-sm btn-light"><img
+                                    src="{% static 'images/view.png'%}" class="img-fluid" height="20px" width="20px" alt="">
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center mb-5">
+        <nav aria-label="Page navigation example ">
+            {% if ports.has_other_pages %}
+
+            <ul class="pagination justify-content-center">
+                {% if ports.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ ports.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in ports.paginator.page_range %}
+                {% if ports.number == i %}
+                <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li class="page-item"><a href="?page={{ i }}">{{ i }}</a></li>
+
+                {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ ports.next_page_number }}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            {% endif %}
+        </nav>
+    </div>
+    {% elif user.user_profile.role == 'admin' %}
+        <h3>Profile Verification for admin.</h3>
+    {%endif%}
+    {%else%}
+    Please signin first.
+    {%endif%}
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_block %}
+<body>
+     <div class="container card">
+          <!-- <center>
+               <h1>Search Tracker</h1>
+               <form action="" method="POST">
+                    <input type="text" name="keyword" required>
+                    {% csrf_token %}
+                    <button type="submit">Search</button>
+               </form>
+               <br>
+          </center> -->
+          {% if user.superuser %}
+          <h3>Search Analytics</h3>
+          <div class="smart-line mb-5"></div>
+          <div class="row">
+               <div class="col-md-4">
+     
+                    <h4>All Keywords</h4>
+                    {% for keyword in all_keywords %}
+                    <h6 style="text-align: left;"></h6>
+                    <input type="checkbox" id="{{keyword.key}}" class="keyword" name="keyword" value="{{keyword.key}}">
+                    <label for="{{keyword.key}}">{{keyword.key}} &nbsp;({{keyword.count}} times found)</label><br>
+                    {% endfor %}
+                    <br>
+                    <h3>All Users</h3>
+                    {% for user in all_users %}
+                    <input type="checkbox" id="{{user.username}}}}" class="user" name="user" value="{{user.username}}">
+                    <label for="{{user.username}}">{{user.username}}</label><br>
+                    {% endfor %}
+                    <br>
+                    <h3>Time Range:</h3>
+                    <input type="checkbox" id="1" class="time" name="time" value="1">
+                    <label for="1">See data from yesterday</label><br>
+                    <input type="checkbox" id="7" class="time" name="time" value="7">
+                    <label for="7">See data from last week</label><br>
+                    <input type="checkbox" id="30" class="time" name="time" value="30">
+                    <label for="30">See data from last month</label><br>
+     
+                    <br>
+                    <h3>Select Date:</h3>
+                    <input type="datetime" id="start-date" name="start-date" placeholder="Start Date">
+                    <input type="datetime" id="end-date" name="end-date" placeholder="End Date">
+                    <br>
+                    <br>
+                    <button onclick="myfilter()">Filter</button>
+                    <br>
+                    <br>
+               </div>
+               <div class="col-md-8">
+                    <div id="filter-out">
+     
+                    </div>
+               </div>
+          </div>
+          {% else %}
+     
+          <p>You are not able to see this.</p>
+     
+          { endif %}
+     
+     </div>
+     <script>
+
+          function myfilter(){
+
+               var keyword = Array.prototype.slice.call(document.querySelectorAll('.keyword:checked')).map(function(el){
+               return el.value;
+               }).join(',');
+               var user = Array.prototype.slice.call(document.querySelectorAll('.user:checked')).map(function(el){
+               return el.value;
+               }).join(',');
+               var time_range = Array.prototype.slice.call(document.querySelectorAll('.time:checked')).map(function(el){
+               return el.value;
+               }).join(',');
+
+               var start_date = document.getElementById('start-date').value;
+               var end_date = document.getElementById('end-date').value;
+
+
+               $.ajax({
+                    type: "GET",
+                    url: "{% url 'Search_App:search_analytics' %}",
+                    data: {
+                         "keyword": keyword,
+                         "users": user,
+                         "times": time_range,
+                    },
+                    dataType: "json",
+                    success: function (data){
+                    
+                    var data = data.all_search_data
+                    var div = document.getElementById('filter-out');
+                    div.innerHTML = "Found ("+data.length+') filterd results';
+                    for(var i=0; i< data.length; i++){
+                         
+                         div.innerHTML = div.innerHTML + "<p class='inner' id="+i+">User: "+data[i].fields.user +"<br> Keyword: "+ data[i].fields.keyword + "<br>Ip: "+ data[i].fields.ip+ "<br>Browser: " + data[i].fields.browser +"<br> Date: "+ data[i].fields.time + "<br>" + "</p>" + "<br><br>";
+                    }
+                    
+                    },
+                    failure: function () {
+                         alert("failure");
+                    }
+               });
+          }
+     </script>
+     
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+</body>
+</html>

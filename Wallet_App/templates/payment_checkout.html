@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block body_block %}
+
+<div class="container card p-5">
+     <h2 class="mb-3">
+         Order > <span class="text-muted">Checkout</span>
+     </h2>
+     <div class="smart-line mb-5"></div>
+     <div class="row">
+          <div class="col-md-8">
+               <div class="card mb-5" style="height: auto;">
+                    <div class="card-body">
+                         <h4>Order ID: {{offer_details.id}}{{order_details.id}}</h4>
+                         <h5>Freelancer: {{order_details.freelancer.username}}</h5>
+                         <h5>Offer Description: {{offer_details.description}}</h5>
+                         <h5>Customer Instruction: {{order_details.instruction}}</h5>
+                         <h5>Amount: {{order_details.amount}}</h5>
+                         <h5>Deadline: {{order_details.deadline}}</h5>                   
+                    </div>
+               </div>
+          </div>
+          <div class="col-md-4">
+               <div class="card" style="height: auto;">
+                    <div class="card-body">
+                         <ul class="list-group list-group-flush">
+                              <span>Order No:</span>
+                              {{offer_details.id}}{{order_details.id}}
+                         </ul>
+                    </div>
+                    <div class="card-footer">
+                         <span class="float-left"><b>Payment Total = </b></span>
+                         <span class="float-right"><b> &#2547 {{order_details.amount | floatformat:2}}</b></span>
+                    </div>
+               </div>
+               <div class="payment my-3 m">
+                    <center>
+                         <a href="{% url 'Wallet_App:confirm_payment' order_id=order_details.id %}" class="btn btn-lg btn-warning">Confirm Checkout</a>
+                    </center>
+
+               </div>
+               
+          </div>
+     </div>
+
+
+</div>
+{% endblock %}

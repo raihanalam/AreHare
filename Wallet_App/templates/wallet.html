@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+{% load static %}
+{% block title%} {{ user.username}}'s Wallet {% endblock %}
+
+{% block css%}
+{% endblock %}
+
+
+{% block body_block %}
+
+<div class="container">
+  <div class="card p-5">
+    <div class="row">
+      <div class="col-6 p-4 {% if not wallet or not user.user_profile.verified %}disabled{%endif%}" style="background-color: #f2f2f2;">
+        <aside class="wallet">
+          <h2>AreHare-Wallet</h2>
+          <div class="modal-control mt-5">+</div>
+          <div class="cards"></div>
+        </aside>
+        
+        {% if user.user_profile.role == 'freelancer' %}
+          <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
+        {% elif user.user_profile.role == 'customer'%}
+          <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
+        {% endif%}
+        
+        <div class="options mt-5">
+          <ul style="list-style-type: none;">
+            <li><a href="{% url 'Wallet_App:all_transactions' %}" class="card mb-3 p-3">Transaction</a></li>
+            {% if user.user_profile.role == 'customer' %}
+            <li><a href="{% url 'Wallet_App:unsuccess_checkouts' %}" class="card mb-3 p-3">Checkouts</a></li>
+            <li><a href="{% url 'Wallet_App:all_deposits' %}" class="card mb-3 p-3">Deposits</a> </li>
+            <li><a href="{% url 'Wallet_App:pending_payments' %}" class="card mb-3 p-3">Pending Payments</a></li>
+            <li><a href="{% url 'Wallet_App:all_payments' %}" class="card mb-3 p-3">Payments</a></li>
+            {% elif user.user_profile.role == 'freelancer'%}
+              <li><a href="{% url 'Wallet_App:all_withdraw' %}" class="card mb-3 p-3">All Withdraws</a></li>
+            {% endif%}
+ 
+            <li><a href="" class="card mb-3 p-3">Security Settings</a></li>
+          </ul>
+
+        </div>
+        <div class="d-flex justify-content-center align-items-center p-5">
+          <small><strong>Supported by</strong></small>
+          <img src="{% static 'images/ssl_footer_logo.png' %}" class="ml-3" alt="" height="20px" width="20%">
+          <!-- <img src="{% static 'images/paypal_footer_logo.png' %}" class="ml-3" alt="" height="15px" width="15%"> -->
+          <!-- <img src="{% static 'images/visa_footer_logo.png' %}" alt="" height="15px" width="15%">
+          <img src="{% static 'images/mastercard_footer_logo.png' %}" alt="" height="30px" width="10%"> -->
+        </div>
+
+      </div>
+      <div class="col-6">
+      {% if user.is_authenticated %}
+        {% if not wallet %}
+          <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your wallet isn't active you can't interact with those options, please fill the form properly and activate your wallet.</p>
+        {%endif%}
+        {% if not user.user_profile.verified %}
+        <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your profile isn't verified, please verify profile first.</p>
+
+        {% endif %}
+
+        {% if forms %}
+          <div class="card p-3">
+            <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{forms|crispy}}
+              <br>
+              <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
+          </form>
+          </div>
+        {% else %}
+      
+        <content class="transactions-wrapper">
+          <h2>
+            Current Balance
+            <img src="{%static 'images/crypto.png'%}" alt="" height="20px" width="20px"><span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
+          </h2>
+          <div class="transactions show">
+
+            {% for trans in user.user_wallet.wallet_transaction.all %}
+                {% if trans.type == 'deposit' %}
+                  <div class="transaction-item credit">
+                    <div class="transaction-item_details">
+                      <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
+                    </div>
+                    <div class="transaction-item_amount"><span>&#2547;</span>
+                      <p class="amount">+ {{trans.amount}}</p>
+                    </div>
+                  </div>
+        
+                {% else %}
+                  <div class="transaction-item debit">
+                    <div class="transaction-item_details">
+                      <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
+                    </div>
+                    <div class="transaction-item_amount"><span>&#2547;</span>
+                      <p class="amount">- {{trans.amount}}</p>
+                    </div>
+                  </div>
+                {% endif %}              
+            {% endfor %}
+            
+
+          </div>
+      </div>
+      {%endif%}
+      {% endif %}
+
+    </div>
+  </div>
+  {% endblock %}

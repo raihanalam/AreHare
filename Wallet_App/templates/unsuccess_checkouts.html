@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Incomplete Orders {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+     <div class="container">
+          <div class="card shadow p-5">
+               <h3>Incomplete Order</h3>
+               <div class="smart-line mb-5"></div>
+               <div class="">
+                    {% if unsuccess_checkouts %}
+                         {% for order in unsuccess_checkouts %}
+                         <div class="card" style="height: auto;">
+                              <div class="card-body">
+                                   <h4><b>Order ID:</b> {{order.id}}</h4>
+                                   <h4><b>Amount:</b> &#2547; {{order.amount}}</h4>
+                                   <p><i class="fa-regular fa-clock"></i> {{order.created}}</p>
+                              </div>
+                              <div class="card-footer">
+                                   <a href="{% url 'Wallet_App:payment_checkout' order_id=order.id %}" class="btn btn-sm btn-primary">Complete Payement</a>
+                                   <a href="" class="btn btn-sm btn-warning">Cancel Order</a>
+                              </div>
+                         </div>
+
+                         {% endfor %}
+                         <!-- <div class="card p-3">
+                              <div class="clearfix">
+                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                                   <ul class="pagination">
+                                        <li class="page-item disabled"><a href="#">Previous</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                                   </ul>
+                              </div>
+                              
+                         </div> -->
+                    {% else %}
+                         <p>No incomplete order. </p>
+                    {% endif %}
+                    
+          
+               </div>
+          </div>
+     </div>
+{% endblock %}

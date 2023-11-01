@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Offers{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+<div class="container">
+  <div class="card shadow p-5">
+    <h3>All Offers</h3>
+    <div class="smart-line mb-5"></div>
+    {% if all_offers %}
+      {% for offer in all_offers %}
+        <div class="card shadow mb-4">
+          <div class="card-header">
+            {% if offer.status == 'Accepted' %}
+              <h3 class="badge badge-pill badge-success">Accepted</h3>
+            {% elif offer.status == 'Pending'  %}
+              <h3 class="badge badge-pill badge-warning">Pending</h3>
+            {% elif offer.status == 'Rejected'%}
+              <h3 class="badge badge-pill badge-danger">Rejected</h3>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <div class="text-left">
+              <p><b>Description:</b> {{offer.description}}</p>
+              <p><b>Offer Amount:</b> {{offer.amount}}</p>
+              <p><b>Expected Time:</b> {{offer.expected_time}}</p>
+              <p><b>Support:</b> {{offer.support}}</p>
+        
+              <small><b>Time: </b> {{offer.date_created}} </small><br>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No offer found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

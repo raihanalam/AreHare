@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title%} Notifications {% endblock %}
+{% load static %}
+
+{% block body_block %}
+{% load notifications_tags %}
+<div class="container">
+     
+     {% notifications_unread as unread_count %}
+     
+     
+     <div class="card p-5">
+          <h3>Notification's</h3>
+          <div class="smart-line mb-3"></div>
+
+          {% if unread_count %}
+          <div class="row">
+               <div class="col-md-10">
+                    <p>You have <strong>{% live_notify_badge %}</strong> unread notifications.</p>
+               </div>
+               <div class="col-md-2">
+                    <a href="{% url 'Notification_App:mark_all_read' %}" class="btn btn-sm btn-success">Mark All Read</a>
+
+               </div>
+          </div>
+              
+              <!-- {% live_notify_list %}
+              {{live_notify_list | safe}} -->
+              
+              
+          {% endif %}
+          {% if user.notifications.unread %}
+               
+          
+          
+
+               {% for i in user.notifications.unread %}
+                    <!-- {{i.actor}}
+                    {{i.verb}} -->
+                    <div class="card p-2 mb-2"><p>{{i.verb | safe}} {{i.timestamp}}</p></div>
+                    
+               {% endfor %}
+          {% else %}
+               <p>No new notifications.</p>
+          {% endif %}
+     
+     </div>
+
+</div>
+
+{% endblock %}
