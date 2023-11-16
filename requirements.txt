@@ -25,7 +25,6 @@ django-bootstrap4==22.2
 django-ckeditor==6.2.0
 django-cleanup==5.2.0
 django-colorfield==0.7.2
--e git://github.com/maraujop/django-crispy-forms.git@db00d2fc4766ac445d4fd74ceba2cb564c0eb7d6#egg=django_crispy_forms
 django-datetime-widget-fa==0.10.0
 django-datetime-widget2==0.9.5
 django-flat-responsive==2.0
