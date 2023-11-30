@@ -15,7 +15,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = 'django-insecure-86!##us@n-5it1_qwf1n*3iyz0%1asj4j*ds01gb7+mrnaf32a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
 
@@ -256,12 +256,12 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
+#STATICFILES_DIRS = [
+ #   STATIC_DIR,
+#]
 
 # Add the following line to set STATIC_ROOT
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = '/home/ubuntu/AreHare/AreHare/static_root/'
 
 
 MEDIA_URL = 'media/'

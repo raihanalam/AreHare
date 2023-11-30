@@ -8,7 +8,7 @@ from . import views
 from django.views.static import serve
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('arehare-super-admin/', admin.site.urls),
     path('',views.index,name='index'),
     # path('account/',include('account.urls')),
     #path('home/',include('home.urls')),
