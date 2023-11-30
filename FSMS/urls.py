@@ -22,8 +22,6 @@ urlpatterns = [
     path('search/',include('Search_App.urls')),
     path('inbox/notifications/',include('notifications.urls', namespace='notifications')),
     path('custom-admin/', include('Admin_App.urls')),
-
-    path("", include("allauth.urls")), #most important
     
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-86!##us@n-5it1_qwf1n*3iyz0%1asj4j*ds01gb7+mrnaf32a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
 
 
 # Application definition
@@ -50,20 +50,21 @@ INSTALLED_APPS = [
     'captcha',
 
     #Social Auth
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    #'django.contrib.sites',
+    #'allauth',
+    #'allauth.account',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.google',
     
 ]
 
 
 #Social Auth
-SITE_ID = 1
-SOCIALACCOUNT_LOGIN_ON_GET=True
+#SITE_ID = 1
+#SOCIALACCOUNT_LOGIN_ON_GET=True
 
 #We can use bootstrap, bootstrap3, bootstrap4, uni-form
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_TEMPLATE_FORMS = 'bootstrap4'
 AUTH_USER_MODEL = 'Account_App.User'
 
@@ -126,8 +127,8 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FSMS',
-        'USER': 'postgres',
+        'NAME': 'fsms',
+        'USER': 'raihan',
         'PASSWORD': '161189',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -217,7 +218,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    #'allauth.account.auth_backends.AuthenticationBackend',
    
 ]
 # SOCIALACCOUNT_PROVIDERS = {
@@ -258,6 +259,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+# Add the following line to set STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 
 MEDIA_URL = 'media/'
