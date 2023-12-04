@@ -6,4 +6,4 @@ admin.site.register(User)
 admin.site.register(UserProfile)
 admin.site.register(Verification)
 
-admin.site.site_header = 'amarKaz Administration'
+admin.site.site_header = 'Arehare Administration'

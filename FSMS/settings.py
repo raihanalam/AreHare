@@ -15,7 +15,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = 'django-insecure-86!##us@n-5it1_qwf1n*3iyz0%1asj4j*ds01gb7+mrnaf32a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'ckeditor',
     'bootstrap4',
+    'crispy_bootstrap4',
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'captcha',
@@ -66,6 +67,8 @@ INSTALLED_APPS = [
 #We can use bootstrap, bootstrap3, bootstrap4, uni-form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_TEMPLATE_FORMS = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
+
 AUTH_USER_MODEL = 'Account_App.User'
 
 MIDDLEWARE = [
@@ -265,7 +268,8 @@ STATIC_ROOT = '/home/ubuntu/AreHare/AreHare/static_root/'
 
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_ROOT = '/home/ubuntu/AreHare/AreHare/media/'
 
 #Unauthorized Access
 LOGIN_REDIRECT_URL = '/'

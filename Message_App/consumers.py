@@ -1,6 +1,8 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
+import django
+django.setup()
 from .models import ChatRoom, Chat
 class ChatRoomConsumer(AsyncWebsocketConsumer):
      async def connect(self):
