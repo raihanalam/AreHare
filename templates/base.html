@@ -19,35 +19,31 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
-
+    
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <link rel="stylesheet" href="{% static 'css/wallet.css' %}">
 
 
-
+    
     <!-- {% load static %} -->
     {% load notifications_tags %}
     <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="{% static 'js/script.js'%}"></script>
 
@@ -83,14 +79,13 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
                             <!-- Counter - Alerts -->
-
-                            {% if unread_count %}
-                            {% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge,
-                            my_special_notification_callback' %}
-                            <span class="badge badge-counter bg-danger">{% live_notify_badge %}</span>
-
-                            {% endif %}
-
+                            
+                                {% if unread_count %}
+                                {% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge, my_special_notification_callback' %}
+                                    <span class="badge badge-counter bg-danger">{% live_notify_badge %}</span>
+                                    
+                                {% endif %}
+                            
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -98,24 +93,22 @@
                             <h6 class="dropdown-header">
                                 Alerts Center
                             </h6>
-                            <a href="{% url 'Notification_App:mark_all_read' %}" style="text-decoration: none;"
-                                class="float-right mr-2">Mark All Read</a>
-
+                            <a href="{% url 'Notification_App:mark_all_read' %}" style="text-decoration: none;" class="float-right mr-2">Mark All Read</a>
+                            
                             {% notifications_unread as unread_count %}
                             {% if unread_count %}
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div>
-
-                                    <!-- {% register_notify_callbacks menu_class='list-group' callbacks='fill_notification_list, fill_notification_list_custom' %} -->
-                                    {% live_notify_list list_class='live_notify_list' %}
-
-                                    <div class="small text-gray-500"></div>
-                                </div>
-                            </a>
-
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div>
+                                           
+                                            <!-- {% register_notify_callbacks menu_class='list-group' callbacks='fill_notification_list, fill_notification_list_custom' %} -->
+                                            {% live_notify_list list_class='live_notify_list' %}
+                                            
+                                            <div class="small text-gray-500"></div>
+                                        </div>
+                                    </a>
+                               
                             {% endif %}
-                            <a class="dropdown-item text-center small text-gray-500"
-                                href="{% url 'Notification_App:notification' %}">Show All Alerts</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="{% url 'Notification_App:notification' %}">Show All Alerts</a>
 
                         </div>
                     </li>
@@ -136,154 +129,156 @@
                             </h6>
 
                             {% for chat in user.user_inbox.all %}
-                            {%if forloop.counter0 < 5%} {% for u in chat.users.all %} {% if u !=user %} <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="{% url 'Message_App:room' room_name=chat.name %}">
-                                <div class="dropdown-list-image mr-3">
-                                    <img src="/media/{{u.user_profile.profile_pic}}" class="rounded-circle mr-2" alt=""
-                                        height="30px" width="30px">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div class="font-weight-bold">
-                                    {% for mes in chat.room_message.all reversed %}
-                                    {% if forloop.counter0 < 1 %} <div class="text-truncate">
-                                        {{mes.content|safe|slice:15}}</div>
+                                {%if forloop.counter0 < 5%}
+
+                                    {% for u in chat.users.all %}
+                                            {% if u != user %}
+                                                
+                                                <a class="dropdown-item d-flex align-items-center" href="{% url 'Message_App:room' room_name=chat.name %}">
+                                                    <div class="dropdown-list-image mr-3">
+                                                        <img src="/media/{{u.user_profile.profile_pic}}" class="rounded-circle mr-2" alt="" height="30px" width="30px">
+                                                        <div class="status-indicator bg-success"></div>
+                                                    </div>
+                                                    <div class="font-weight-bold">
+                                                        {% for mes in chat.room_message.all reversed %}
+                                                            {% if forloop.counter0 < 1 %}
+                                                                <div class="text-truncate">{{mes.content|safe|slice:15}}</div>
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                        
+                                                        <div class="small text-gray-500">{{u.username}} ·</div>
+                                                    </div>
+                                                </a>
+                                            {% endif %}
+                                    {%endfor%}
+                                    
                                 {% endif %}
-                                {% endfor %}
-
-
-                                <div class="small text-gray-500">{{u.username}} ·</div>
-                        </div>
-                        </a>
-                        {% endif %}
-                        {%endfor%}
-
-                        {% endif %}
-                        {% endfor %}
-
-
-                        <a class="dropdown-item text-center small text-gray-500"
-                            href="{% url 'Message_App:inbox' %}">Read More Messages</a>
-            </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'Dashboard_App:dashboard' %}"><i class="fas fa-chart-line"></i></a>
-            </li>
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i style="font-size: 30px;" class="fas fa-search fa-fw"></i>
-                </a>
-
-                <!-- Dropdown - Messages -->
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                    aria-labelledby="searchDropdown">
-                    <form action="{% url 'Search_App:search' %}" method="GET"
-                        class="form-inline mr-auto w-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" name="search"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
-            </ul>
-            <form action="{% url 'Search_App:search' %}" method="GET"
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" name="search"
-                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            {% else %}
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#process">Process</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#business">Business</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
-                </li>
-            </ul>
-            {% endif %}
-
-            <div class="nav-right">
-
-                {% if user.is_authenticated %}
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
-
-                            {% if user.user_profile.profile_pic %}
-                            <img src="/media/{{user.user_profile.profile_pic}}" alt="" style="height: 30px; width:30px;"
-                                class="img-profile rounded-circle">
-                            {% else %}
-                            <img class="img-profile rounded-circle" src="{% static 'img/undraw_profile.svg'%}"
-                                style="height: 30px; width:30px;">
-                            {% endif %}
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{% url 'Account_App:profile'%}">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            {%if user.user_profile.role == 'freelancer'%}
-                            <a class="dropdown-item" href="{% url 'Main_App:create_port' %}">
-                                <i class="fa-solid fa-pen-to-square mr-2 text-gray-400"></i>
-                                Make Port</a>
-                            <a class="dropdown-item" href="{% url 'Main_App:my_ports' %}">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                All Port</a>
-                            {%elif user.user_profile.role == 'customer' %}
-                            <a class="dropdown-item" href="{% url 'Main_App:create_post' %}">
-                                <i class="fa-solid fa-pen-to-square mr-2 text-gray-400"></i>
-                                Post Job</a>
-                            <a class="dropdown-item" href="{% url 'Main_App:my_posts' %}"><i
-                                    class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>All Post</a>
-                            {% endif %}
-
-                            <a class="dropdown-item" href="{% url 'Account_App:settings' %}">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'Account_App:signout'%}">
-                                <!--data-toggle="modal"
-                                data-target="#logoutModal"-->
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
+                            {% endfor %}
+                            
+                            
+                            <a class="dropdown-item text-center small text-gray-500"
+                                href="{% url 'Message_App:inbox' %}">Read More Messages</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Dashboard_App:dashboard' %}"><i
+                                class="fas fa-chart-line"></i></a>
+                    </li>
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i style="font-size: 30px;" class="fas fa-search fa-fw"></i>
+                        </a>
+
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown">
+                            <form action="{% url 'Search_App:search' %}" method="GET" class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small" name="search"
+                                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
                 </ul>
+                <form action="{% url 'Search_App:search' %}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..."
+                            aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 {% else %}
-                <div class="ml-auto"><a href="{% url 'Account_App:signin' %}" class="btn btn-primary btn-sm">Signin</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#process">Process</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#business">Business</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+                {% endif %}
+
+                <div class="nav-right">
+
+                    {% if user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
+
+                                {% if user.user_profile.profile_pic %}
+                                <img src="/media/{{user.user_profile.profile_pic}}" alt=""
+                                    style="height: 30px; width:30px;" class="img-profile rounded-circle">
+                                {% else %}
+                                <img class="img-profile rounded-circle" src="{% static 'img/undraw_profile.svg'%}"
+                                    style="height: 30px; width:30px;">
+                                {% endif %}
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{% url 'Account_App:profile'%}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                {%if user.user_profile.role == 'freelancer'%}
+                                <a class="dropdown-item" href="{% url 'Main_App:create_port' %}">
+                                    <i class="fa-solid fa-pen-to-square mr-2 text-gray-400"></i>
+                                    Make Port</a>
+                                <a class="dropdown-item" href="{% url 'Main_App:my_ports' %}">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    All Port</a>
+                                {%elif user.user_profile.role == 'customer' %}
+                                <a class="dropdown-item" href="{% url 'Main_App:create_post' %}">
+                                    <i class="fa-solid fa-pen-to-square mr-2 text-gray-400"></i>
+                                    Post Job</a>
+                                <a class="dropdown-item" href="{% url 'Main_App:my_posts' %}"><i
+                                        class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>All Post</a>
+                                {% endif %}
+
+                                <a class="dropdown-item" href="{% url 'Account_App:settings' %}">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'Account_App:signout'%}">
+                                    <!--data-toggle="modal"
+                                data-target="#logoutModal"-->
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <div class="ml-auto">
+                        <a href="{% url 'Account_App:signin' %}" class="btn btn-primary btn-sm">Signin</a>
                     <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-sm">Signup</a>
+                    </div>
+                    {% endif%}
                 </div>
-                {% endif%}
             </div>
-        </div>
 
         </div>
 
@@ -301,37 +296,29 @@
             {% endfor %}
             {% endif %} -->
             {% if messages %}
-            {% for message in messages %}
-            {% if message.tags == 'success' %}
-            <div style="height: auto;"
-                class="alert alert-success alert-dismissible d-flex align-items-center justify-content-center p-3"
-                role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p>{{ message|safe|escape }}</p>
-            </div>
-            {% elif message.tags == 'error' %}
-            <div style="height: auto;"
-                class="alert alert-danger alert-dismissible d-flex align-items-center justify-content-center p-3"
-                role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p>{{ message|safe|escape }}</p>
-            </div>
-            {% elif message.tags == 'info' %}
-            <div style="height: auto;"
-                class="alert alert-info alert-dismissible d-flex align-items-center justify-content-center p-3"
-                role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p>{{ message|safe|escape }}</p>
-            </div>
-            {% elif message.tags == 'warning' %}
-            <div style="height: auto;"
-                class="alert alert-warning alert-dismissible d-flex align-items-center justify-content-center p-3"
-                role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p>{{ message|safe|escape }}</p>
-            </div>
-            {% endif %}
-            {% endfor %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div style="height: auto;" class="alert alert-success alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p>{{ message|safe|escape }}</p>
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div style="height: auto;" class="alert alert-danger alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p>{{ message|safe|escape }}</p>
+                        </div>
+                    {% elif message.tags == 'info' %}
+                        <div style="height: auto;" class="alert alert-info alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p>{{ message|safe|escape }}</p>
+                        </div>
+                    {% elif message.tags == 'warning' %}
+                        <div style="height: auto;" class="alert alert-warning alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p>{{ message|safe|escape }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         </div>
     </div>
@@ -342,27 +329,25 @@
     {% endblock %}
     <!-- Bootstrap core JavaScript-->
 
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <!-- Slick Carousel-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script> <!-- Slick Carousel-->
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="{% static 'js/slider-script.js' %} "></script>
-    <script src="{% static 'js/new_slider.js'%}"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+     <script src="{% static 'js/slider-script.js' %} "></script>
+     <script src="{% static 'js/new_slider.js'%}"></script>
+				
 
-
-    <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
+     <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script> 
+     <script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
 
 
     <!-- Custom scripts for all pages-->
