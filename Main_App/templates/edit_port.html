@@ -19,15 +19,13 @@
           <ul class="thumb">
                <li>
                     <div class=" d-flex flex-row p-4">
-                         {% if port.port_bulk_images.count != 0 %}
                          {% for i in port.port_bulk_images.all %}
                          <div class="card ml-3 p-3">
-                              <a href="{{i.image.url}}" class="flot-left" target="#img-container"><span
+                              <a href="{% url 'Main_App: delete_port_gallery_image' img_id=i.id %}" class="flot-left" target="#img-container"><span
                                         style="font-size: 20px;">✕</span></a>
                               <img src="{{i.image.url}}" style="height: 100px; width:180px;" alt="Port Image">
                          </div>
                          {% endfor %}
-                         {% endif %}
                     </div>
 
                </li>
