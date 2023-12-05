@@ -13,11 +13,10 @@
   <div class="card p-5">
     <div class="row">
       <!-- Add a toggle button for mobile devices -->
-      <a class="btn btn-primary d-md-none mb-2" onclick="toggleWalletColumn()"><img src="{% static 'images/crypto.png' %}" alt="" height="15px" width="15px"></a><span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
       <div class="col-12 col-md-6 p-4 {% if not wallet or not user.user_profile.verified %}disabled{% endif %}" style="background-color: #f2f2f2;" id="wallet-column">
-        
+        <!-- <button class="btn btn-primary d-md-none mb-2" onclick="toggleWalletColumn()"></button> -->
         <aside class="wallet">
-          <h2>Hare-Wallet</h2>
+          <h2>AreHare-Wallet</h2>
         </aside>
         
         {% if user.user_profile.role == 'freelancer' %}
@@ -48,7 +47,7 @@
       </div>
 
       <!-- The second column will be displayed on larger screens -->
-      <div class="col-6 d-none d-md-block wallet-crypto">
+      <div class="col-6 d-none d-md-block">
         {% if user.is_authenticated %}
           {% if not wallet %}
             <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your wallet isn't active you can't interact with those options, please fill the form properly and activate your wallet.</p>
@@ -105,9 +104,7 @@
 <script>
   function toggleWalletColumn() {
     const walletColumn = document.getElementById('wallet-column');
-    const walletCrypto = document.getElementById('wallet-crypto');
-    walletCrypto.classList.toggle('d-none');
-    walletCrypto.classList.remove('d-none');
+    walletColumn.classList.toggle('d-none');
   }
 </script>
 
