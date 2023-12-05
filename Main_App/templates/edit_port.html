@@ -21,8 +21,8 @@
                     <div class=" d-flex flex-row p-4">
                          {% for i in port.port_bulk_images.all %}
                          <div class="card ml-3 p-3">
-                              <a href="{% url 'Main_App: delete_port_gallery_image' img_id=i.id %}" class="flot-left" target="#img-container"><span
-                                        style="font-size: 20px;">✕</span></a>
+                              <a href="#"
+                                   class="flot-left"><span style="font-size: 20px;">✕</span></a>
                               <img src="{{i.image.url}}" style="height: 100px; width:180px;" alt="Port Image">
                          </div>
                          {% endfor %}
@@ -30,12 +30,13 @@
 
                </li>
 
-               
+
           </ul>
 
           <div class="image-upload card p-5">
-               
-               <form action="{% url 'Main_App:port_bulk_image_upload' port_id=port.id %}" method="POST" enctype="multipart/form-data" class="form-group">
+
+               <form action="{% url 'Main_App:port_bulk_image_upload' port_id=port.id %}" method="POST"
+                    enctype="multipart/form-data" class="form-group">
                     {% csrf_token %}
                     <input type="file" id="bulk-one" name="image_file" class="form-control"> <br>
                     <button type="submit" class="btn btn-info btn-lg">Upload Image</button>
