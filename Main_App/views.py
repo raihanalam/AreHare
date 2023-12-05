@@ -502,7 +502,7 @@ def delete_port_gallery_image(request,port_id, img_id):
      if  request.user.user_profile.role == 'freelancer':
           img.delete()
 
-     messages.success('Image removed from port gallery.')
+     messages.success(request, 'Image removed from port gallery.')
      return HttpResponseRedirect(reverse('Main_App:edit_port', kwargs={'pk':port_id}))
      
      # return HttpResponseRedirect(reverse_lazy('Main_App:my_ports'))
