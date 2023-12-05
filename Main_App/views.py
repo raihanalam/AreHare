@@ -492,3 +492,17 @@ def save_port(request, port_id):
      new_save = SavedPort(port_id=port,user=request.user)
      return HttpResponseRedirect('')
 
+
+#Deleting port bulk image
+@login_required
+def delete_port_gallery_image(request, pk):
+
+     img = PortImageGallery.objects.get(id=pk)
+
+     if  request.user.user_profile.role == 'freelancer':
+          img.delete()
+     
+     return HttpResponseRedirect('')
+     
+     # return HttpResponseRedirect(reverse_lazy('Main_App:my_ports'))
+
