@@ -39,5 +39,5 @@ urlpatterns = [
     path('load-more',views.load_more,name='load-more'),
     path('quick-quize', views.quick_quize, name='quick_quize'),
     path('port-bulk-image-upload/<port_id>',views.port_bulk_image_upload, name='port_bulk_image_upload'),
-    path('port-gallery-image-delete/<img_id>', views.delete_port_gallery_image, name='delete_port_gallery_image'),
+    path('port-gallery-image-delete/<port_id>/<img_id>', views.delete_port_gallery_image, name='delete_port_gallery_image'),
 ]
