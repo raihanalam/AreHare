@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+
+  {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load custom_filters %}
 {% load static %}
@@ -14,7 +15,7 @@
     <div class="row">
       <!-- Add a toggle button for mobile devices -->
       <div class="col-12 col-md-6 p-4 {% if not wallet or not user.user_profile.verified %}disabled{% endif %}" style="background-color: #f2f2f2;" id="wallet-column">
-        <!-- <button class="btn btn-primary d-md-none mb-2" onclick="toggleWalletColumn()"></button> -->
+        <!-- <button class="btn btn-primary d-md-none mb-2" onclick="toggleWalletColumn()">Toggle Wallet Column</button> -->
         <aside class="wallet">
           <h2>AreHare-Wallet</h2>
         </aside>
