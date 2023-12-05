@@ -138,7 +138,7 @@ a:hover{
     width: 250px;
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     align-items: center;
     height: 400px;
     padding: 10px;
