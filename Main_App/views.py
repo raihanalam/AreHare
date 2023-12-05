@@ -495,9 +495,9 @@ def save_port(request, port_id):
 
 #Deleting port bulk image
 @login_required
-def delete_port_gallery_image(request, pk):
+def delete_port_gallery_image(request, img_id):
 
-     img = PortImageGallery.objects.get(id=pk)
+     img = PortImageGallery.objects.get(id=img_id)
 
      if  request.user.user_profile.role == 'freelancer':
           img.delete()
