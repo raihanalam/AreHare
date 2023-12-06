@@ -71,6 +71,11 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 
 AUTH_USER_MODEL = 'Account_App.User'
 
+
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['http://arehare.com', 'https://arehare.com']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
