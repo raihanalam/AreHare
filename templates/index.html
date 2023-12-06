@@ -112,16 +112,17 @@ AreHare
 {% block body_block %}
 <div class="">
     <div class="theme-sec">
-        <div class="row flex-center-all" >
+        <div class="d-flex flex-center-all" >
             <div id="th-1" class="flex-center-all card">
-                <h2 style="text-align: center;">Independent marketplace for digital work.                {% if not user.is_authenticated %}
+                <h2 style="text-align: center;">Independent marketplace for digital work.</h2>
+            {% if not user.is_authenticated %}
 
                 <div class="d-flex justify-content-center align-items-center">
                     <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-md mg-top mr-1">Join As Freelancer</a>
                     <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-md mg-top ml-1">Join As Customer</a>
                 </div>
 
-                {% endif %}
+            {% endif %}
                 
             </div>
     </div>   
