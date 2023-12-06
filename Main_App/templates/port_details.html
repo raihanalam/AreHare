@@ -260,32 +260,8 @@
 
                {% if  user.user_profile.verified %}
                {%if user.user_profile.role == 'customer'%}
-
-               <!-- <div class="card mb-3 p-3">
-                    <div class="about-freelancer">
-                         <h4>About Freelancer</h4>
-                         <img src="/media/{{uProfile.profile_pic}}" class="rounded-circle" alt="" height="60px"
-                              width="60px">
-                         <h5><a
-                              href="{% url 'Account_App:user_profile' username=aUser.username %}">{{aUser.username}}</a>
-                              {% if port.active %}
-                              <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
-                              {% else %}
-                              <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
-                              {%endif %}
-                         </h5>
-                         <h6>{{port.expert}}</h6>
-                         <div class="mb-3">
-
-                         </div>
-                         <a href="{% url 'Message_App:join_chat' f_username=port.port_author %}"
-                              class="btn btn-sm btn-success">Contact to Freelancer</a>
-
-                    </div>
-               </div> -->
-
                 
-               <div class="card mb-3 p-3">
+               <div class="card mb-3 mt-3 p-3">
                     <div class="row">
                         <div class="col-3 d-flex justify-content-center">
                             <img src="/media/{{uProfile.profile_pic}}" class="rounded-circle" alt="{{aUser.username}}"
