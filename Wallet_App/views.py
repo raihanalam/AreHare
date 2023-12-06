@@ -19,10 +19,6 @@ from .forms import DepositForm, PendingPaymentForm, UserWalletForm, WithdrawRequ
 #For canceling CSRF Checking
 from django.views.decorators.csrf import csrf_exempt
 
-import socket
-
-# For API
-import requests
 
 #Payment
 from sslcommerz_python.payment import SSLCSession
@@ -158,7 +154,9 @@ def deposit_complete(request):
                messages.warning(request,f'OOPS! You canceled your deposit, Please try again.')
                return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
 
-     return render(request,'Wallet_App/deposit_complete.html',context={})
+     return render(request,'deposit_complete.html',context={})
+     # return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
+
 
 
 @login_required
