@@ -153,6 +153,8 @@ def deposit_complete(request):
           elif status == 'CANCELLED':
                messages.warning(request,f'OOPS! You canceled your deposit, Please try again.')
                return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
+          else:
+               messages.warning(request, 'There is an error with this payment. Try again later.')
 
      return render(request,'deposit_complete.html',context={})
      # return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
