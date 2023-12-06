@@ -1,30 +1,30 @@
-
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load custom_filters %}
 {% load static %}
-{% block title%} {{ user.username }}'s Wallet {% endblock %}
+{% block title%} {{ user.username}}'s Wallet {% endblock %}
 
-{% block css %}
+{% block css%}
 {% endblock %}
+
 
 {% block body_block %}
 
-<div class="container">
-  <div class="card p-5">
-    <div class="row">
-      <!-- Add a toggle button for mobile devices -->
-      <div class="col-12 col-md-6 p-4 {% if not wallet or not user.user_profile.verified %}disabled{% endif %}" style="background-color: #f2f2f2;" id="wallet-column">
-        <!-- <button class="btn btn-primary d-md-none mb-2" onclick="toggleWalletColumn()">Toggle Wallet Column</button> -->
-        <aside class="wallet">
-          <h2>AreHare-Wallet</h2>
-        </aside>
+<div class="container card">
+  <div class="p-5" style="background-color: #f2f2f2;">
+    <!-- <a class="btn btn- d-md-none mb-2" onclick="toggleWalletColumn()"><div class="modal-control mt-5">+-</div></a> -->
+    <div class="wallet d-flex justify-content-between mb-2">
+      <h2>Wallet</h2>
+      <button class="btn btn-light d-md-none" onclick="toggleWalletColumn()">+<br>-</button>
+    </div>
+    <div class="d-flex flex-wrap" >
+      <div id="wallet-column" class="pr-5 flex-fill {% if not wallet or not user.user_profile.verified %}disabled{%endif%}" >
         
         {% if user.user_profile.role == 'freelancer' %}
           <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
-        {% elif user.user_profile.role == 'customer' %}
+        {% elif user.user_profile.role == 'customer'%}
           <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
-        {% endif %}
+        {% endif%}
         
         <div class="options mt-5">
           <ul style="list-style-type: none;">
@@ -40,73 +40,94 @@
  
             <li><a href="" class="card mb-3 p-3">Security Settings</a></li>
           </ul>
+
         </div>
         <div class="d-flex justify-content-center align-items-center p-5">
           <small><strong>Supported by</strong></small>
           <img src="{% static 'images/ssl_footer_logo.png' %}" class="ml-3" alt="" height="20px" width="20%">
+          <!-- <img src="{% static 'images/paypal_footer_logo.png' %}" class="ml-3" alt="" height="15px" width="15%"> -->
+          <!-- <img src="{% static 'images/visa_footer_logo.png' %}" alt="" height="15px" width="15%">
+          <img src="{% static 'images/mastercard_footer_logo.png' %}" alt="" height="30px" width="10%"> -->
         </div>
-      </div>
 
-      <!-- The second column will be displayed on larger screens -->
-      <div class="col-6 d-none d-md-block">
-        {% if user.is_authenticated %}
-          {% if not wallet %}
-            <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your wallet isn't active you can't interact with those options, please fill the form properly and activate your wallet.</p>
-          {% endif %}
-          {% if not user.user_profile.verified %}
-            <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your profile isn't verified, please verify profile first.</p>
-          {% endif %}
-          {% if forms %}
-            <div class="card p-3">
-              <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{forms|crispy}}
-                <br>
-                <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
-              </form>
-            </div>
-          {% else %}
-            <content class="transactions-wrapper">
-              <h2>
-                Current Balance
-                <img src="{% static 'images/crypto.png' %}" alt="" height="20px" width="20px"><span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
-              </h2>
-              <div class="transactions show">
-                {% for trans in user.user_wallet.wallet_transaction.all %}
-                  {% if trans.type == 'deposit' %}
-                    <div class="transaction-item credit">
-                      <div class="transaction-item_details">
-                        <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
-                      </div>
-                      <div class="transaction-item_amount"><span>&#2547;</span>
-                        <p class="amount">+ {{trans.amount}}</p>
-                      </div>
-                    </div>
-                  {% else %}
-                    <div class="transaction-item debit">
-                      <div class="transaction-item_details">
-                        <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
-                      </div>
-                      <div class="transaction-item_amount"><span>&#2547;</span>
-                        <p class="amount">- {{trans.amount}}</p>
-                      </div>
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </content>
-          {% endif %}
-        {% endif %}
       </div>
+      <div class="d-none d-md-block p-5 flex-fill" id="transaction-column" style="background-color: #ffffff;">
+      {% if user.is_authenticated %}
+        {% if not wallet %}
+          <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your wallet isn't active you can't interact with those options, please fill the form properly and activate your wallet.</p>
+        {%endif%}
+        {% if not user.user_profile.verified %}
+        <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your profile isn't verified, please verify profile first.</p>
+
+        {% endif %}
+
+        {% if forms %}
+          <div class="card p-3">
+            <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{forms|crispy}}
+              <br>
+              <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
+          </form>
+          </div>
+        {% else %}
+      
+        <content class="transactions-wrapper">
+          <h2>
+            Current Balance
+            <img src="{%static 'images/crypto.png'%}" alt="" height="20px" width="20px"><span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
+          </h2>
+          <div class="transactions show">
+
+            {% for trans in user.user_wallet.wallet_transaction.all %}
+                {% if trans.type == 'deposit' %}
+                  <div class="transaction-item credit">
+                    <div class="transaction-item_details">
+                      <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
+                    </div>
+                    <div class="transaction-item_amount"><span>&#2547;</span>
+                      <p class="amount">+ {{trans.amount}}</p>
+                    </div>
+                  </div>
+        
+                {% else %}
+                  <div class="transaction-item debit">
+                    <div class="transaction-item_details">
+                      <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
+                    </div>
+                    <div class="transaction-item_amount"><span>&#2547;</span>
+                      <p class="amount">- {{trans.amount}}</p>
+                    </div>
+                  </div>
+                {% endif %}              
+            {% endfor %}
+            
+
+          </div>
+      </div>
+      {%endif%}
+      {% endif %}
+
     </div>
   </div>
-</div>
+  <script>
+    function toggleWalletColumn() {
+      const walletColumn = document.getElementById('wallet-column');
+      const transColumn = document.getElementById('transaction-column');
+      const isHidden = walletColumn.classList.contains('d-none');
+      if (isHidden) {
+        walletColumn.classList.remove('d-none');
+        transColumn.classList.add('d-none');
+      } else {
+        
+        walletColumn.classList.add('d-none');
+        walletColumn.classList.add('d-md-block');
+        transColumn.classList.remove('d-none');
+        transColumn.classList.remove('d-md-bloc');
 
-<script>
-  function toggleWalletColumn() {
-    const walletColumn = document.getElementById('wallet-column');
-    walletColumn.classList.toggle('d-none');
-  }
-</script>
-
-{% endblock %}
+        
+      }
+    }
+  </script>
+  
+  {% endblock %}
