@@ -155,9 +155,11 @@ def deposit_complete(request):
                return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
           else:
                messages.warning(request, 'There is an error with this payment. Try again later.')
+     else:
+          messages.warning(request, 'The payment is not succeed. Try again later.')
 
-     return render(request,'deposit_complete.html',context={})
-     # return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
+     # return render(request,'deposit_complete.html',context={})
+     return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
 
 
 
