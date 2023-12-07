@@ -20,7 +20,7 @@
 
                     <a href="{% url 'Account_App:change_pro_pic'%}" class="btn btn-dark btn-sm mt-3">Change Picture</a>
                     {% else %}
-                    <img src='/media/profile_pics/avatar.png' class="rounded-circle" height="100px" width="100px">
+                    <img src="{% static '/images/avatar.png' %}" class="rounded-circle" height="100px" width="100px">
                     <br>
                     <br>
                     <a href="{% url 'Account_App:add_pro_pic'%}" class="btn btn-dark btn-sm">Add Picture</a>
