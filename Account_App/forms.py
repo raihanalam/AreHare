@@ -70,7 +70,7 @@ class DateInput(forms.DateInput):
           return super().get_context(name, value, attrs)
 
 class UserDetailsInfoChange(forms.ModelForm):
-     full_name = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Full Name', 'style':'margin:15px 0; width: 60rem;', 'class': 'form-control'}))
+     full_name = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Full Name', 'style':'margin:15px 0;', 'class': 'form-control'}))
      bio = forms.CharField(label="",widget=forms.Textarea(attrs={'placeholder':'About yourself...', 'style':'margin:15px 0;', 'class': 'form-control'}))
      address_1 = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Address', 'style':'margin:15px 0;', 'class': 'form-control'}))
      zipcode = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Zipcode', 'style':'margin:15px 0;', 'class': 'form-control'}))

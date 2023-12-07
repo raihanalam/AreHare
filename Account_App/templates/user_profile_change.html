@@ -3,23 +3,22 @@
 {% load crispy_forms_tags %}
 {% block title %} Profile {% endblock %}
 
-
-{%block body_block%}
+{% block body_block %}
 <div class="container card p-5"> 
-
      <div class="row">
-          <h3>Profile Information</h3>
-          <div class="smart-line mb-5"></div>
-
-    
+          <div class="col-12">
+               <h3>Profile Information</h3>
+               <div class="smart-line mb-5"></div>
                <form action="" method="post" class="form-group">
-                    {{form|crispy}}
+                    {{ form|crispy }}
                     {% csrf_token %}
                     <button type="submit" class="btn btn-info btn-md mt-4">Update</button>
                </form>
-          
+          </div>
      </div>
 </div>
-
-{%endblock%}
-
+<script>
+     const country = document.getElementById('id_country');
+     country.classList.add('form-control')
+</script>
+{% endblock %}
