@@ -1,7 +1,7 @@
 from attr import attr
 from django import forms
 from django.forms.widgets import ChoiceWidget
-from .models import Bid, Hire, Port, ReviewRating, Category, Post
+from .models import Bid, Hire, Port, ReviewRating, Category, Post, PublicPost
 from ckeditor.widgets import CKEditorWidget
 # from datetime import datetime
 from django.utils.timezone import datetime
