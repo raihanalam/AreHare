@@ -507,3 +507,15 @@ def delete_port_gallery_image(request,port_id, img_id):
      
      # return HttpResponseRedirect(reverse_lazy('Main_App:my_ports'))
 
+def public_post(request):
+     if request.method == 'POST':
+          form = PublicPostForm(request.POST, request.FILES)
+          if form.is_valid():
+               form.save()
+               messages.success(request, 'Thank you for submitting your idea. Our team of expertise will analyze your project. We will contact you soon.')
+          else:
+            # Form is not valid, show errors
+            messages.error(request, 'There was an error in your submission. Please correct the errors below.')
+     else:
+        form = PublicPostForm()
+     return HttpResponseRedirect('/')

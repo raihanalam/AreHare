@@ -169,3 +169,14 @@ class PostEditForm(forms.ModelForm):
         model = Post
         fields = ('post_category', 'post_title', 'required_skills',
                   'post_description', 'post_image', 'budget_amount', 'keywords')
+
+
+class PublicPostForm(forms.ModelForm):
+
+    class Meta:
+        model = PublicPost
+        fields = ('full_name', 'email', 'phone' , 'category','title', 'description', 'files')
+
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 5, 'cols': 25}),
+        }

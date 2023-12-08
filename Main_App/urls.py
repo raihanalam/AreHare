@@ -40,4 +40,6 @@ urlpatterns = [
     path('quick-quize', views.quick_quize, name='quick_quize'),
     path('port-bulk-image-upload/<port_id>',views.port_bulk_image_upload, name='port_bulk_image_upload'),
     path('port-gallery-image-delete/<port_id>/<img_id>', views.delete_port_gallery_image, name='delete_port_gallery_image'),
+    path('public-post', views.public_post, name='public_post'),
+
 ]

@@ -163,3 +163,20 @@ class PortImageGallery(models.Model):
 class SavedPort(models.Model):
      port_id = models.ForeignKey(Port, on_delete=models.CASCADE)
      user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+
+class PublicPost(models.Model):
+     category = models.ForeignKey(Category, related_name='category_public_post', on_delete=models.CASCADE, blank=True, null=True)
+     full_name = models.CharField(verbose_name='Full Name', max_length=30)
+
+     email = models.CharField(verbose_name='Email', max_length=64)
+     phone = models.CharField(verbose_name='Phone', max_length=20)
+
+     title = models.CharField(verbose_name='Title', max_length=164)
+     description = models.TextField(verbose_name='Description', max_length=500)
+
+     files = models.FileField(
+          verbose_name='Attachment', upload_to='work_files',
+
+          null=True, blank= True
+     )
