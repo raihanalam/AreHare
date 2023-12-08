@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, PortImageGallery, Post,Port,Bid,Hire, ReviewRating, SavedPort
 from Account_App.models import UserProfile
 from django.contrib.auth.models import User
-from .forms import BidForm, HireForm, PortForm, ReviewForm, PortEditForm, PostForm, PostEditForm
+from .forms import BidForm, HireForm, PortForm, ReviewForm, PortEditForm, PostForm, PostEditForm, PublicPostForm
 from Work_App.forms import NewOfferForm
 import uuid
 from django import forms
