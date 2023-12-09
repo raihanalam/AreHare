@@ -4,7 +4,6 @@
 
 {% block title%} {{ user }} {% endblock %}
 
-
 {% block body_block %}
 
 <div class="container">
@@ -18,39 +17,49 @@
           <div class="card shadow p-3 mb-4">
                <div class="my-item mg-top">
                     <h3>{{port.port_title}}</h3>
-                    <h5>Active: 
+                    <h5>Active:
                          {% if port.active %}
                          <i style="color: rgb(104, 218, 104);" class="fa-solid fa-circle"></i>
                          {% else %}
-                              <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
+                         <i style="color: rgb(235, 90, 90);" class="fa-solid fa-circle"></i>
                          {%endif %}
                     </h5>
-                    <h4>Hourly Rate: {{port.rate_amount}}</h4>
-                    <h4>Hire Requests: {{port.port_hire.count}}</h4>
-                    <h6>Published: {{port.publish_date}} | Updated On: {{port.update_date}} </h6>
-                    <a class="btn btn-primary btn-sm" href="{% url 'Main_App:port_details' slug=port.slug %}">View
-                         Port</a> <a class="btn btn-sm btn-info ml-2"
-                         href="{% url 'Main_App:edit_port' pk=port.pk %}">Edit Port</a>
-                    {% if port.active == True %}
-                    <a class="btn btn-sm btn-warning ml-2"
-                         href="{% url 'Main_App:deactivate_port' pk=port.pk %}">Deactivate</a>
-                    {% else %}<a class="btn btn-sm btn-info ml-2"
-                         href="{% url 'Main_App:activate_port' pk=port.pk %}">Activate</a>{% endif %}<a
-                         class="btn btn-sm btn-danger ml-2"
-                         href="{% url 'Main_App:delete_port' pk=port.pk %}">Delete</a>
+                    <h5>Hour Rate: {{port.rate_amount}}</h5>
+                    <h5>Hire:</b> {{port.port_hire.count}}</h5>
+                    <div>
+                         <i class="fa-solid fa-calendar-alt"></i> Published: {{port.publish_date}}<br/>
+                         <i class="fa-solid fa-history"></i> Updated On: {{port.update_date}}
+                    </div>
+                    <div class="actions d-flex justify-content-start flex-wrap">
+                         <a class="btn btn-primary btn-sm mt-2" href="{% url 'Main_App:port_details' slug=port.slug %}">
+                              <i class="fa-solid fa-eye"></i> View Port
+                         </a>
+                         <a class="btn btn-sm btn-info ml-2 mt-2" href="{% url 'Main_App:edit_port' pk=port.pk %}">
+                              <i class="fa-solid fa-edit"></i> Edit Port
+                         </a>
+                         {% if port.active == True %}
+                         <a class="btn btn-sm btn-warning ml-2 mt-2"
+                              href="{% url 'Main_App:deactivate_port' pk=port.pk %}">
+                              <i class="fa-solid fa-toggle-off"></i> Deactivate
+                         </a>
+                         {% else %}
+                         <a class="btn btn-sm btn-info ml-2 mt-2" href="{% url 'Main_App:activate_port' pk=port.pk %}">
+                              <i class="fa-solid fa-toggle-on"></i> Activate
+                         </a>
+                         {% endif %}
+                         <a class="btn btn-sm btn-danger ml-2 mt-2" href="{% url 'Main_App:delete_port' pk=port.pk %}">
+                              <i class="fa-solid fa-trash-alt"></i> Delete
+                         </a>
+                    </div>
                </div>
           </div>
-          {%endfor%}
-
-
+          {% endfor %}
 
           {% else %}
-
           <p>No port yet.</p>
           {% endif %}
 
-
      </div>
-
 </div>
+
 {% endblock %}
