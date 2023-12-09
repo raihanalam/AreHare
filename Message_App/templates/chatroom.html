@@ -5,8 +5,8 @@
 
 
 {% block body_block %}
-<div class="container card chat">
-      <div class="">
+<div class="container">
+      <div class="card chat">
         <div class="head">
 
           <div class="settings d-flex justify-content-between">
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div id="chat-log" style="overflow-y: scroll; height:70vh;margin: 10px;">
+        <div id="chat-log" style="overflow-y: scroll; height:80vh; margin: 10px;">
           {% for chat in chats.all %}
           {% if chat.user.id == request.user.id %}
             <p class="message sender">{{chat.content}}</p>

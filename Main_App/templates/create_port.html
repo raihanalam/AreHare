@@ -2,16 +2,14 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}
-     Create Port
+Create New Port
 {% endblock %}
 {% block css %}
 
 <style>
-     .django-ckeditor-widget{
+     .django-ckeditor-widget {
           width: 100%;
      }
-
-
 </style>
 {% endblock %}
 {% block body_block %}
@@ -26,18 +24,19 @@
                {{ form | crispy }}
                {% csrf_token %}
                <br>
-               
+
                {% if user.user_profile.verified %}
-                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">Create Port</button>
+               <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">Create Port</button>
                {% else%}
 
-                    <p class="alert alert-warning d-flex align-items-center justify-content-center p-4">Please verify your profile first. Then you can make your port.</p>
+               <p class="alert alert-warning d-flex align-items-center justify-content-center p-4">Please verify your
+                    profile first. Then you can make your port.</p>
 
                {% endif %}
           </form>
 
      </div>
-     
+
 </div>
-    
+
 {% endblock %}

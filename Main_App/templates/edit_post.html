@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags%}
-{% block title%} {{post.post_title}} {% endblock %}
+{% block title%} Edit | {{post.post_title}} {% endblock %}
 
+{% block css %}
 
+<style>
+     .django-ckeditor-widget {
+          width: 100%;
+     }
+</style>
+{% endblock %}
 {% block body_block %}
 <div class="container">
      <div class="card p-5">

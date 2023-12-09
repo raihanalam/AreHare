@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags%}
-{% block title%} {{port.port_title}} {% endblock %}
+{% block title%} Edit | {{port.port_title}} {% endblock %}
 
+{% block css %}
 
+<style>
+     .django-ckeditor-widget {
+          width: 100%;
+     }
+</style>
+{% endblock %}
 {% block body_block %}
 <div class="container">
      <div class="card p-5">
@@ -45,7 +52,7 @@
 
 
           {% else%}
-          <p>You are not allowed to view this page. Error: 404</p>
+          <p>You are not allowed to view this page.</p>
           {% endif %}
      </div>
 
