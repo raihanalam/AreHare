@@ -219,7 +219,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, "Activation link is invalid!")
 
-    return redirect('Account_App:index')
+    return redirect('Account_App:signin')
 
 
 def profile_verification(request):
