@@ -298,22 +298,22 @@
             {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'success' %}
-                        <div style="height: auto;" class="alert alert-success alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                        <div class="alert alert-success alert-dismissible h-auto d-flex align-items-center justify-content-center p-4" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p>{{ message|safe|escape }}</p>
                         </div>
                     {% elif message.tags == 'error' %}
-                        <div style="height: auto;" class="alert alert-danger alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                        <div class="alert alert-danger alert-dismissible h-auto d-flex align-items-center justify-content-center p-4" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p>{{ message|safe|escape }}</p>
                         </div>
                     {% elif message.tags == 'info' %}
-                        <div style="height: auto;" class="alert alert-info alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                        <div class="alert alert-info alert-dismissible h-auto d-flex align-items-center justify-content-center p-4" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p>{{ message|safe|escape }}</p>
                         </div>
                     {% elif message.tags == 'warning' %}
-                        <div style="height: auto;" class="alert alert-warning alert-dismissible d-flex align-items-center justify-content-center p-3" role="alert">
+                        <div class="alert alert-warning h-auto alert-dismissible d-flex align-items-center justify-content-center p-4" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p>{{ message|safe|escape }}</p>
                         </div>
