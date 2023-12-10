@@ -34,7 +34,7 @@
 
      {% elif not ver.status == 'Rejected' and not ver.status == 'Verified' %}
      <div class="card p-3">
-          <p class="alert alert-info d-flex align-items-center justify-content-center p-4">Your application is pending,
+          <p class="alert h-auto alert-info d-flex align-items-center justify-content-center p-4">Your application is pending,
                please wait for while.</p>
           <br>
           <div class="card p-3">
@@ -46,7 +46,7 @@
      {% elif ver.verified and not ver.rejected %}
 
      <div class="card p-3">
-          <p class="alert alert-success d-flex align-items-center justify-content-center p-4">Your application is
+          <p class="h-auto alert alert-success d-flex align-items-center justify-content-center p-4">Your application is
                verified.</p>
           <div class="card p-3">
                <h4><b>Subject:</b> {{ver.subject}}</h4>
