@@ -17,15 +17,38 @@
       <h2>Wallet</h2>
       <button class="btn btn-light d-md-none" onclick="toggleWalletColumn()">+<br>-</button>
     </div>
-    <div class="d-flex flex-wrap" >
-      <div id="wallet-column" class="pr-5 flex-fill {% if not wallet or not user.user_profile.verified %}disabled{%endif%}" >
+    <d class="p-2">
+      {% if not user.user_profile.verified %}
+        <p class="alert alert-warning p-4 text-left">Your profile isn't verified, please verify profile first.</p>
+
+        {% endif %}
+        {% if not wallet %}
+        <p class="alert alert-warning p-4 text-left">Your wallet isn't active please fill up the form properly and
+          activate your wallet.</p>
+        {%endif%}
+        {% if forms %}
+        <div class="card p-3">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{forms|crispy}}
+            <br>
+            <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
+          </form>
+        </div>
+        {% else %}
+    </d>
+    <div class="d-flex flex-wrap">
+      <div id="wallet-column"
+        class="pr-5 flex-fill {% if not wallet or not user.user_profile.verified %}disabled{%endif%}">
+
         
+
         {% if user.user_profile.role == 'freelancer' %}
-          <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
+        <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
         {% elif user.user_profile.role == 'customer'%}
-          <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
+        <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
         {% endif%}
-        
+
         <div class="options mt-5">
           <ul style="list-style-type: none;">
             <li><a href="{% url 'Wallet_App:all_transactions' %}" class="card mb-3 p-3">Transaction</a></li>
@@ -35,9 +58,9 @@
             <li><a href="{% url 'Wallet_App:pending_payments' %}" class="card mb-3 p-3">Pending Payments</a></li>
             <li><a href="{% url 'Wallet_App:all_payments' %}" class="card mb-3 p-3">Payments</a></li>
             {% elif user.user_profile.role == 'freelancer'%}
-              <li><a href="{% url 'Wallet_App:all_withdraw' %}" class="card mb-3 p-3">All Withdraws</a></li>
+            <li><a href="{% url 'Wallet_App:all_withdraw' %}" class="card mb-3 p-3">All Withdraws</a></li>
             {% endif%}
- 
+
             <li><a href="" class="card mb-3 p-3">Security Settings</a></li>
           </ul>
 
@@ -52,26 +75,9 @@
 
       </div>
       <div class="d-none d-md-block p-5 flex-fill" id="transaction-column" style="background-color: #ffffff;">
-      {% if user.is_authenticated %}
-        {% if not wallet %}
-          <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your wallet isn't active you can't interact with those options, please fill the form properly and activate your wallet.</p>
-        {%endif%}
-        {% if not user.user_profile.verified %}
-        <p class="alert alert-warning d-flex align-items-center justify-content-center p-5 text-left">Your profile isn't verified, please verify profile first.</p>
+        {% if user.is_authenticated %}
 
-        {% endif %}
 
-        {% if forms %}
-          <div class="card p-3">
-            <form action="" method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              {{forms|crispy}}
-              <br>
-              <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
-          </form>
-          </div>
-        {% else %}
-      
         <content class="transactions-wrapper">
           <div class="d-flex justify-content-between">
             <h2><img src="{%static 'images/crypto.png'%}" class="ml-2" alt="" height="20px" width="20px">Balance </h2>
@@ -80,28 +86,30 @@
           <div class="transactions show">
 
             {% for trans in user.user_wallet.wallet_transaction.all %}
-                {% if trans.type == 'deposit' %}
-                  <div class="transaction-item credit">
-                    <div class="transaction-item_details">
-                      <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
-                    </div>
-                    <div class="transaction-item_amount"><span>&#2547;</span>
-                      <p class="amount">+ {{trans.amount}}</p>
-                    </div>
-                  </div>
-        
-                {% else %}
-                  <div class="transaction-item debit">
-                    <div class="transaction-item_details">
-                      <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} - {{trans.created_date}}</span>
-                    </div>
-                    <div class="transaction-item_amount"><span>&#2547;</span>
-                      <p class="amount">- {{trans.amount}}</p>
-                    </div>
-                  </div>
-                {% endif %}              
+            {% if trans.type == 'deposit' %}
+            <div class="transaction-item credit">
+              <div class="transaction-item_details">
+                <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} -
+                  {{trans.created_date}}</span>
+              </div>
+              <div class="transaction-item_amount"><span>&#2547;</span>
+                <p class="amount">+ {{trans.amount}}</p>
+              </div>
+            </div>
+
+            {% else %}
+            <div class="transaction-item debit">
+              <div class="transaction-item_details">
+                <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} -
+                  {{trans.created_date}}</span>
+              </div>
+              <div class="transaction-item_amount"><span>&#2547;</span>
+                <p class="amount">- {{trans.amount}}</p>
+              </div>
+            </div>
+            {% endif %}
             {% endfor %}
-            
+
 
           </div>
       </div>
@@ -119,15 +127,15 @@
         walletColumn.classList.remove('d-none');
         transColumn.classList.add('d-none');
       } else {
-        
+
         walletColumn.classList.add('d-none');
         walletColumn.classList.add('d-md-block');
         transColumn.classList.remove('d-none');
         transColumn.classList.remove('d-md-bloc');
 
-        
+
       }
     }
   </script>
-  
+
   {% endblock %}

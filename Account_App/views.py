@@ -195,7 +195,7 @@ def activateEmaill(request, user, to_email):
 
     if email.send():
         messages.success(
-            request, f'Dear {user.username}, please check your email {to_email} inbox and click on received activation link to confirm and complete the registration. Note: Check your spam folder.')
+            request, f'Dear {user.username}, please check your email {to_email} inbox and click on activation link to confirm and complete the registration. \n Note: Check your spam folder.')
     else:
         messages.error(
             request, f'Problem sending email to {to_email}, check if you typed it correctly.')
