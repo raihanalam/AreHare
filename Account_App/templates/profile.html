@@ -63,7 +63,7 @@
           <div class="col-md-8 card">
                {% if user.user_profile.verified == False %}
                {% if user.user_profile.is_fully_filled %}
-               <div class="alert alert-success d-flex align-items-center justify-content-center p-4">
+               <div class="alert alert-success h-auto p-4">
                     Alright your profile is ready! &nbsp;
                     {% if user.user_main_wallet.is_fully_filled %}
                     <a href="{% url 'Account_App:profile_verification' %}"> Verify Profile Here</a>
@@ -74,7 +74,7 @@
                     {% endif %}
                </div>
                {% else %}
-               <div class="alert alert-warning d-flex align-items-center justify-content-center p-4">
+               <div class="alert alert-warning h-auto p-4">
                     Your profile is not set. <a href="{% url 'Account_App:user_profile_chnage' %}" class="ml-2">Complete
                          Profile Here</a>
                </div>
