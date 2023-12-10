@@ -111,10 +111,7 @@ class ProfilePic(forms.ModelForm):
 
 class VerificationForm(forms.ModelForm):
      subject = forms.CharField(required=True,label="Subject",widget=forms.TextInput(attrs={'value':'Applying for profile verification', 'style':'margin:15px 0;', 'class': 'form-control'}))
-     application = forms.CharField(required=True,label="Body",widget=forms.Textarea(attrs={'rows':10, 'cols':30, 'value':'Hello,\n\
-                                                                                       I am writing an application to verfy my given information to AreHare.\n\
-                                                                                       Warm regards,\n\
-                                                                                       [Your Name] ', 'style':'margin:15px 0;', 'class': 'form-control'}))
+     application = forms.CharField(required=True,label="Body",widget=forms.Textarea(attrs={'rows':10, 'cols':30, 'value':'Hello, I am writing an application to verfy my given information to AreHare.', 'style':'margin:15px 0;', 'class': 'form-control'}))
 
      class Meta:
           model = Verification
