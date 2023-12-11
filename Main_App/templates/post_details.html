@@ -60,9 +60,9 @@
                     {% if not bidden%}
                     {% if ports %}
                     <form method="POST">
-                         <select name="port" id="port">
+                         <select name="port" id="port" class="form-control">
                               {% for port in ports %}
-                              <option value={{port.pk}}>{{port.port_title|safe|slice:30}}</option>
+                              <option value={{port.pk}}>{{port.port_title|safe|slice:50}}</option>
                               {% endfor %}
                          </select>
                          {{bid_form | crispy}}

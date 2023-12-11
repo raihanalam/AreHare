@@ -78,10 +78,10 @@ class PostForm(forms.ModelForm):
         attrs={'placeholder': 'Description', 'style': 'margin:15px 0; width:100%;', 'class': 'form-control'}))
     deadline = forms.DateField(widget=DateInput(
         attrs={'style': 'margin:15px 0; width:50%;', 'class': 'form-control'}))
-    post_image = forms.ImageField(required=True, label="Upload Image File", widget=forms.FileInput(
+    post_image = forms.ImageField(required=False, label="Upload Image File", widget=forms.FileInput(
         attrs={'placeholder': 'Upload Image', 'style': 'width:50%;', 'class': 'form-control'}))
     # budget_amount = forms.IntegerField(required=True,label="",widget=forms.NumberInput(attrs={'placeholder':'৳ Budget', 'style':'margin:15px 0; width: 50%;', 'class': 'form-control'}))
-    keywords = forms.CharField(required=True, label="", widget=forms.TextInput(
+    keywords = forms.CharField(required=False, label="", widget=forms.TextInput(
         attrs={'placeholder': 'Keywords', 'style': 'margin-bottom:15px; width:50%;', 'class': 'form-control'}))
 
     class Meta:
