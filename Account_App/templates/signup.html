@@ -43,4 +43,14 @@
                {% endif %}
           </div>
      </div>
+     <script>
+          const password1 = document.getElementById('id_password1')
+          const passwordHelper = document.createElement('div');
+          passwordHelper.style.fontSize = '12px';
+          passwordHelper.style.color = '#888';
+          passwordHelper.innerHTML = '<span>Your password must contain at least 8 characters,<br>including uppercase, lowercase, and digits.<br>Examples: [Password123, SecurePwd2022]</span>';
+
+          // Append the helper text span after the password input
+          password1.insertAdjacentElement('afterend', passwordHelper);
+    </script>
 {% endblock %}
