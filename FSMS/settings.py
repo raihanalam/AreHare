@@ -108,21 +108,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'FSMS.wsgi.application'
 ASGI_APPLICATION = 'FSMS.asgi.application'
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             "hosts":[os.environ.get('REDIS_URL','redis://loacalhost:6379')],
-#             "hosts":[('127.0.0.1', 6379)],
-    
-#         },
-#     },
-# }
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts":[os.environ.get('REDIS_URL','redis://loacalhost:6379')],
+            "hosts":[('127.0.0.1', 6379)],
+    
+        },
     },
 }
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels.layers.InMemoryChannelLayer',
+#     },
+# }
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
