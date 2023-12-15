@@ -60,7 +60,7 @@
                     {% if not bidden%}
                     {% if ports %}
                     <form method="POST">
-                         <label for="port">Select your ort:</label>
+                         <label for="port">Select your port:</label>
                          <select name="port" id="port" class="form-control">
                               {% for port in ports %}
                               <option value={{port.pk}}>{{port.port_title|safe|slice:50}}</option>
