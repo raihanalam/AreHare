@@ -261,14 +261,14 @@ def password_reset_request(request):
                 if email.send():
                     messages.success(request,
                                      """
-                            We've emailed you instructions for setting your password, if an account exists with the email you entered. 
-                            You should receive them shortly. If you don't receive an email, please make sure you've entered the address 
-                            you registered with, and check your spam folder.
+                            We've emailed you instructions for setting your new password. 
+                            If you entered a valid email, you should receive it shortly. If you don't receive an email, please ensure you've entered the address you registered with.
+                            Note: Check your spam folder as well.
                         """
                                      )
                 else:
                     messages.error(
-                        request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
+                        request, "Problem sending reset password email'")
 
             return redirect('index')
 
@@ -302,7 +302,7 @@ def passwordResetConfirm(request, uidb64, token):
                 form.save()
                 messages.success(
                     request, "Your password has been set. You may go ahead and <b>log in </b> now.")
-                return redirect('signin')
+                return redirect('Account_App:signin')
             else:
                 for error in list(form.errors.values()):
                     messages.error(request, error)
