@@ -2,11 +2,49 @@
 {% load static %}
 {% block title %} ChatBox|{{current_room.name}}{% endblock %}
 {% load crispy_forms_tags %}
+{% block css %}
+<style>
 
+.textInput {
+	border: none;
+	border-bottom: 2px solid #ddd;
+	line-height: 1.2rem;
+	transition: 0.3s;
+	margin-bottom: 40px;
+	width: 70%;
+}
+
+.textInput:focus {
+	outline: none;
+	border-bottom: 2px solid #333;
+	transition: 0.3s;
+}
+
+.message-submit {
+	background-color: #ffffff;
+	color: rgb(87, 33, 138);
+	border: 0.16em solid rgb(87, 33, 138);;
+	border-radius: 2em;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.3s;
+	width: 50%;
+}
+
+.message-submit:hover {
+	background-color: rgb(87, 33, 138);
+	color: #ffffff;
+	transition: 0.3s;
+}
+</style>
 
 {% block body_block %}
-<div class="container card chat">
-      <div class="">
+<div class="container card">
+      <div class="chat">
         <div class="head">
 
           <div class="settings d-flex justify-content-between">
@@ -50,7 +88,7 @@
           {% endfor %}
         </div>
 
-        <div class="footer d-flex justify-content-center">
+        <!-- <div class="footer d-flex justify-content-center">
 
           <div class="btn-group dropup">
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,7 +106,21 @@
           <input type="text" id="chat-message-input" placeholder="Your Message">
           <button id="chat-message-submit"><i class="fa fa-paper-plane"></i></button>
         </div>
-      </div>
+      </div> -->
+      <center>
+        <input class="textInput p-2 message-input" id="chat-message-input" type="text" placeholder="Write your message here..." ><br>
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="mr-3">
+            {%if user.user_profile.role == 'freelancer'%}
+            <a href="" data-toggle="modal" data-target="#newOfferModal"><i class="fa-solid  fa-paper-plane" style="font-size: 30px; color: rgb(178, 176, 176)208, 201, 201);"></i></a>
+            {% elif user.user_profile.role == 'customer'%}
+            <a href="" data-toggle="modal" data-target="#newOrderModal"><i class="fa-solid  fa-paper-plane" style="font-size: 30px; color: rgb(178, 176, 176)208, 201, 201);"></i></a>
+            {% endif %}
+          </div>
+          <input class="button message-submit" id="chat-message-submit" type="button" value="Send">
+  
+        </div>
+      </center>
 
     </div>
     <!-- <div class="col-md-5 card">
