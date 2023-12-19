@@ -101,9 +101,9 @@ def confirm_deposit(request):
           return redirect('Account_App:profile')
 
      #SSLCommerz Store ID
-     store_id = 'amark62b60041417d8'
+     store_id = 'areha6581f2f97971c'
      #API key
-     store_pass = 'amark62b60041417d8@ssl'
+     store_pass = 'areha6581f2f97971c@ssl'
      
      status_url = request.build_absolute_uri(reverse("Wallet_App:deposit_complete"))
 
