@@ -350,10 +350,6 @@
             var theDate = new Date(Date.parse(data.offer_data[offer].date_created));
             var temp =
               `<div class="card shadow mb-4">
-            <div class="card-header">
-              <p><b>Offer ID:</b> #OF-${data.offer_data[offer].id}</p>
-                
-            </div>
         
             <div class="card-body">
               <div class="text-left">
@@ -409,9 +405,6 @@
             var deadline = new Date(Date.parse(data.order_data[order].deadline));
             var temp_order =
               `<div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Order ID: #${data.order_data[order].id}</h6>
-              </div>
               <div class="card-body">
                 <p><b>Instruction:</b> ${data.order_data[order].instruction}</p>
                 <p><b>Deadline:</b> ${deadline.toLocaleString()}</p>
