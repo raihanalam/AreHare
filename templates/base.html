@@ -77,14 +77,15 @@
                     <li class="nav-item dropdown no-arrow mx-1">
                         {% notifications_unread as unread_count %}
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 50px;">
                             <i class="fas fa-bell"></i>
                             <!-- Counter - Alerts -->
                             
                                 {% if unread_count %}
                                 {% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge, my_special_notification_callback' %}
                                     <span class="badge badge-counter bg-danger">{% live_notify_badge %}</span>
-                                    
+                                {% else %}
+                                    <p class="p-2">No new notification.</p>   
                                 {% endif %}
                             
                         </a>
@@ -92,7 +93,7 @@
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
-                                Alerts Center
+                                Notification Center
                             </h6>
                             <a href="{% url 'Notification_App:mark_all_read' %}" style="text-decoration: none;" class="float-right mr-2">Mark All Read</a>
                             
@@ -117,7 +118,7 @@
                     <!-- Nav Item - Messages -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 50px;">
                             <i class="fas fa-envelope"></i>
                             <!-- Counter - Messages -->
                             <span class="badge badge-danger badge-counter">{{user.user_inbox.count}}</span>
