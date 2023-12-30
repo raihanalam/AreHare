@@ -337,13 +337,14 @@ i:hover {
   overflow: hidden;
   /* border-radius: 10px; */
   position: relative;
-  padding-top: 35px;
+  padding-top: 20px;
   padding-bottom: 65px;
-}
 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
 .chat .head {
   line-height: 45px;
-  background: rgba(180, 176, 187, 0.919);
+  background: rgb(87, 33, 138);
   padding: 0 15px;
   position: absolute;
   top: 0;
