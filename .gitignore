@@ -1,4 +1,8 @@
 env/
 media/
 .env/
+<<<<<<< HEAD
 .env
+=======
+.env
+>>>>>>> 3624cef5024c322a07fd7a3c6d0334094a390ecb
