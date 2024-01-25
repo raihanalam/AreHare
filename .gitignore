@@ -2,3 +2,5 @@ env/
 media/
 .env/
 .env
+venv/
+venv
