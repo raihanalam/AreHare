@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 from channels.routing import ProtocolTypeRouter
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,12 +13,14 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-86!##us@n-5it1_qwf1n*3iyz0%1asj4j*ds01gb7+mrnaf32a'
+# SECRET_KEY = 'django-insecure-86!##us@n-5it1_qwf1n*3iyz0%1asj4j*ds01gb7+mrnaf32a'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
+# ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
+ALLOWED_HOSTS = list(config('ALLOWED_HOSTS').split(','))
 
 
 # Application definition
@@ -130,14 +133,24 @@ CHANNEL_LAYERS = {
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'fsms',
+#         'USER': 'raihan',
+#         'PASSWORD': '161189',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fsms',
-        'USER': 'raihan',
-        'PASSWORD': '161189',
-        'HOST': 'localhost',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USERNAME"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
     }
 }
 
@@ -262,17 +275,23 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [
- #   STATIC_DIR,
-#]
+
 
 # Add the following line to set STATIC_ROOT
-STATIC_ROOT = '/home/ubuntu/AreHare/AreHare/static_root/'
+if config('DEBUG'):
+    STATICFILES_DIRS = [
+        STATIC_DIR,
+    ]
+else:
+    STATIC_ROOT = '/home/ubuntu/AreHare/AreHare/static_root/'
 
 
 MEDIA_URL = 'media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
-MEDIA_ROOT = '/home/ubuntu/AreHare/AreHare/media/'
+
+if config('DEBUG'):
+    MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+else:
+    MEDIA_ROOT = '/home/ubuntu/AreHare/AreHare/media/'
 
 #Unauthorized Access
 LOGIN_REDIRECT_URL = '/'

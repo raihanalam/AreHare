@@ -23,7 +23,7 @@ a:hover {
 }
 
 .smart-line {
-  height: 3px;
+  height: 4px;
   width: 100%;
   background: linear-gradient(to right, #e6b2e6, #6e226e, #e6b2e6);
   margin-bottom: 10px;
@@ -123,16 +123,17 @@ a:hover {
   color: white;
 }
 
-.theme-sec {
+.theme-sec{
   height: 720px;
-  width: 100vw;
+  /* width: 100vw; */
   opacity: 100%;
   background-size: cover;
-  background-color: #cccccc;
+  background-color: #000000a1;
   background-position: center center;
   background-image: url('desk.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-blend-mode: overlay ;
 }
 
 .theme-sec {
@@ -288,22 +289,7 @@ i:hover {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-/*
-.textInput {
-	border: none;
-	border-bottom: 2px solid #ddd;
-	line-height: 1.2rem;
-	transition: 0.3s;
-	margin-bottom: 40px;
-	width: 50%;
-}
 
-.textInput:focus {
-	outline: none;
-	border-bottom: 2px solid #333;
-	transition: 0.3s;
-}
-*/
 
 .emptyText {
   font-family: 'Work Sans', sans-serif;
@@ -337,8 +323,8 @@ i:hover {
   overflow: hidden;
   /* border-radius: 10px; */
   position: relative;
-  /* padding-top: 30px;
-  padding-bottom: 65px; */
+  padding-top: 30px;
+  padding-bottom: 65px;
 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
@@ -360,64 +346,6 @@ i:hover {
   margin-right: 10px;
 }
 
-/* 
-  .chat .footer {
-    height: 60px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #34495e;
-    text-align: center;
-    padding: 10px 15px;
-    border-radius: 0 0 10px 10px;
-  }
-  .chat .footer input[type=text] {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 5px;
-    vertical-align: middle;
-    border: 0;
-    height: 40px;
-    padding: 0 15px;
-    margin: 0 5px;
-    width: 100%;
-    max-width: 250px;
-    outline: none;
-    transition: all 0.1s linear;
-    color: gray;
-  }
-  .chat .footer input[type=text]::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .chat .footer input[type=text]::-moz-placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .chat .footer input[type=text]:-ms-input-placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .chat .footer input[type=text]:-moz-placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .chat .footer input[type=text]:focus {
-    background: #fff;
-  }
-  .chat .footer button {
-    background: #3498db;
-    border: 0;
-    display: inline-block;
-    vertical-align: middle;
-    color: rgba(255, 255, 255, 0.6);
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.2s linear;
-    outline: none;
-  }
-  .chat .footer button:hover {
-    background: #196090;
-  } */
 
 
 /* Data Table CSS */
@@ -584,178 +512,6 @@ table.table .avatar {
 }
 
 
-
-/* New Slider */
-
-/* #slider-text {
-    padding-top: 40px;
-    display: block;
-  }
-  #slider-text .col-md-6 {
-    overflow: hidden;
-  }
-  
-  #slider-text h2 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
-    font-size: 30px;
-    letter-spacing: 3px;
-    margin: 30px auto;
-    padding-left: 40px;
-  }
-  #slider-text h2::after {
-    border-top: 2px solid #c7c7c7;
-    content: "";
-    position: absolute;
-    bottom: 35px;
-    width: 100%;
-  }
-  
-  #itemslider h4 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    margin: 10px auto 3px;
-  }
-  #itemslider h5 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: bold;
-    font-size: 12px;
-    margin: 3px auto 2px;
-  }
-  #itemslider h6 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    margin: 2px auto 5px;
-  }
-  .badge {
-    background: #b20c0c;
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    line-height: 31px;
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #b20c0c;
-    top: 5px;
-    right: 25%;
-  }
-  #slider-control img {
-    padding-top: 60%;
-    margin: 0 auto;
-  }
-  @media screen and (max-width: 992px) {
-    #slider-control img {
-      padding-top: 70px;
-      margin: 0 auto;
-    }
-  }
-  
-  .carousel-showmanymoveone .carousel-control {
-    width: 4%;
-    background-image: none;
-  }
-  .carousel-showmanymoveone .carousel-control.left {
-    margin-left: 5px;
-  }
-  .carousel-showmanymoveone .carousel-control.right {
-    margin-right: 5px;
-  }
-  .carousel-showmanymoveone .cloneditem-1,
-  .carousel-showmanymoveone .cloneditem-2,
-  .carousel-showmanymoveone .cloneditem-3,
-  .carousel-showmanymoveone .cloneditem-4,
-  .carousel-showmanymoveone .cloneditem-5 {
-    display: none;
-  }
-  @media all and (min-width: 768px) {
-    .carousel-showmanymoveone .carousel-inner > .active.left,
-    .carousel-showmanymoveone .carousel-inner > .prev {
-      left: -50%;
-    }
-    .carousel-showmanymoveone .carousel-inner > .active.right,
-    .carousel-showmanymoveone .carousel-inner > .next {
-      left: 50%;
-    }
-    .carousel-showmanymoveone .carousel-inner > .left,
-    .carousel-showmanymoveone .carousel-inner > .prev.right,
-    .carousel-showmanymoveone .carousel-inner > .active {
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner .cloneditem-1 {
-      display: block;
-    }
-  }
-  @media all and (min-width: 768px) and (transform-3d),
-    all and (min-width: 768px) and (-webkit-transform-3d) {
-    .carousel-showmanymoveone .carousel-inner > .item.active.right,
-    .carousel-showmanymoveone .carousel-inner > .item.next {
-      -webkit-transform: translate3d(50%, 0, 0);
-      transform: translate3d(50%, 0, 0);
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner > .item.active.left,
-    .carousel-showmanymoveone .carousel-inner > .item.prev {
-      -webkit-transform: translate3d(-50%, 0, 0);
-      transform: translate3d(-50%, 0, 0);
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner > .item.left,
-    .carousel-showmanymoveone .carousel-inner > .item.prev.right,
-    .carousel-showmanymoveone .carousel-inner > .item.active {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      left: 0;
-    }
-  }
-  @media all and (min-width: 992px) {
-    .carousel-showmanymoveone .carousel-inner > .active.left,
-    .carousel-showmanymoveone .carousel-inner > .prev {
-      left: -16.666%;
-    }
-    .carousel-showmanymoveone .carousel-inner > .active.right,
-    .carousel-showmanymoveone .carousel-inner > .next {
-      left: 16.666%;
-    }
-    .carousel-showmanymoveone .carousel-inner > .left,
-    .carousel-showmanymoveone .carousel-inner > .prev.right,
-    .carousel-showmanymoveone .carousel-inner > .active {
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner .cloneditem-2,
-    .carousel-showmanymoveone .carousel-inner .cloneditem-3,
-    .carousel-showmanymoveone .carousel-inner .cloneditem-4,
-    .carousel-showmanymoveone .carousel-inner .cloneditem-5,
-    .carousel-showmanymoveone .carousel-inner .cloneditem-6 {
-      display: block;
-    }
-  }
-  @media all and (min-width: 992px) and (transform-3d),
-    all and (min-width: 992px) and (-webkit-transform-3d) {
-    .carousel-showmanymoveone .carousel-inner > .item.active.right,
-    .carousel-showmanymoveone .carousel-inner > .item.next {
-      -webkit-transform: translate3d(16.666%, 0, 0);
-      transform: translate3d(16.666%, 0, 0);
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner > .item.active.left,
-    .carousel-showmanymoveone .carousel-inner > .item.prev {
-      -webkit-transform: translate3d(-16.666%, 0, 0);
-      transform: translate3d(-16.666%, 0, 0);
-      left: 0;
-    }
-    .carousel-showmanymoveone .carousel-inner > .item.left,
-    .carousel-showmanymoveone .carousel-inner > .item.prev.right,
-    .carousel-showmanymoveone .carousel-inner > .item.active {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      left: 0;
-    }
-  } */
 
 .label-rating {
   margin-left: 7px;
