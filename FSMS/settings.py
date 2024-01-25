@@ -282,6 +282,7 @@ if config('DEBUG'):
     STATICFILES_DIRS = [
         STATIC_DIR,
     ]
+    STATIC_ROOT = os.path.join(BASE_DIR,'static_root/')
 else:
     STATIC_ROOT = '/home/ubuntu/AreHare/AreHare/static_root/'
 
