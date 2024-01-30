@@ -6,8 +6,18 @@ from django.contrib import admin
 from django.urls import path,include
 from . import views
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import PortSitemap
+
+sitemaps = {
+    'port': PortSitemap,
+    # Add more sitemaps if needed
+}
+
 
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
     path('arehare-super-admin/', admin.site.urls),
     path('',views.index,name='index'),
     # path('account/',include('account.urls')),

@@ -5,6 +5,8 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from pkg_resources import require
 from datetime import datetime
+from django.urls import reverse
+from django.utils.text import slugify
 
 #Getting custom base User model
 # from django.contrib.auth import get_user_model
@@ -69,6 +71,11 @@ class Port(models.Model):
      
      def __str__(self):
          return self.port_title
+     
+
+     def get_absolute_url(self):
+        # Assuming you have a 'port_detail' view for the 'Port' model
+          return reverse('Main_App:port_details', kwargs={'slug': self.slug})
 
 
      
@@ -180,3 +187,10 @@ class PublicPost(models.Model):
 
           null=True, blank= True
      )
+
+class Partners(models.Model):
+     name = models.CharField(max_length=255, verbose_name = 'Name')
+     logo = models.ImageField(upload_to='partners')
+     
+     # category = models.ForeignKey(Category, related_name = 'partner_category', on_delete = models.CASCADE, blank=True, null=True)
+     address = models.CharField(max_length=255, verbose_name = 'Address', blank=True, null=True)

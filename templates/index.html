@@ -381,56 +381,28 @@ AreHare
         <h2 style="text-align: center;">Our Partners</h2>
         <div class="smart-line"></div>
         <div class="container-fluid">
+           
             <section id="features" class="blue">
+                
                 <div class="content">
-                    <div class="slider responsive">
-                        <div>
-                            <div class="card p-5">
+                    
+                        <div class="slider responsive">
+                            {% for partner in partners %}
+                        {% if forloop.counter <= 10 %}
+                            <div>
+                                <div class="p-2">
+                                    <img src="/media/{{partner.logo}}" alt="partner_logo" height="200px" width="200px">
+                                </div>
                             </div>
+                            {% endif %}
+                            {% endfor %}
+                                
                         </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card p-5">
-                            </div>
-                        </div>
-                    </div>
+                       
                 </div>
+                
             </section>
+           
         </div>
     </div>
     <div class="container-fluid end-sec mt-5" id="about">

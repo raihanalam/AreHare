@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, PortImageGallery ,Post,Port,Bid,Hire, ReviewRating
+from .models import Category, PortImageGallery ,Post,Port,Bid,Hire, ReviewRating, Partners
 
 # Register your models here.
 admin.site.register(Category)
@@ -9,4 +9,4 @@ admin.site.register(PortImageGallery)
 admin.site.register(Bid),
 admin.site.register(Hire)
 admin.site.register(ReviewRating)
-
+admin.site.register(Partners)
