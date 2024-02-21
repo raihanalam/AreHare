@@ -17,7 +17,15 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 DEBUG = True
+=======
+if config('DEBUG') == 'True' or config('DEBUG') == True:
+    DEBUG = True
+else:
+    DEBUG = False
+
+>>>>>>> 739707c08e4722818b10ffe44e2783fee5cf9a8b
 
 # ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
 ALLOWED_HOSTS = list(config('ALLOWED_HOSTS').split(','))
