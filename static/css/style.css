@@ -124,38 +124,28 @@ a:hover {
 }
 
 .theme-sec{
-  height: 720px;
-  /* width: 100vw; */
+  height: 90vh;
   opacity: 100%;
+  width: 100%;
   background-size: cover;
-  background-color: #00000075;
+  background-color: #00000090;
   background-position: center center;
-  background-image: url('desk-2.jpg');
+  /* background-image: url('desk-2.jpg'); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-blend-mode: overlay ;
 }
 
-.theme-sec {
+
+/* .theme-sec {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 #th-1 {
-  width: 80%;
   background-color: rgba(37, 35, 39, 0.459);
-  padding: 40px;
-  color: rgb(255, 255, 255);
-}
-
-#th-left {
-  width: 80%;
-
-  background-color: rgba(37, 35, 39, 0.459);
-  padding: 30px;
-  /*border-top-right-radius: 80px;
-    border-bottom-left-radius: 80px;*/
+  padding: 60px;
   color: rgb(255, 255, 255);
 }
 
