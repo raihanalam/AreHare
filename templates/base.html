@@ -13,6 +13,12 @@
         {% endblock title %}
     </title>
     {% block css %}
+    <style>
+            nav {
+      z-index: 1000;
+      /* Ensure the navbar is above other elements */
+    }
+    </style>
 
     {% endblock css%}
 
@@ -56,10 +62,10 @@
 </head>
 
 <body>
-    <nav id="top" class="navbar navbar-expand-lg navbar-light topbar" style="background-color: rgb(87, 33, 138);">
+    <nav id="top" class="navbar navbar-expand-lg navbar-light topbar fixed-top" style="background-color: rgb(87, 33, 138); height: 10vh;">
         <div class="container">
             <a style="font-size: 30px; color:white; font-weight: bold;" class="navbar-brand"
-                href="{% url 'index' %}">Arehare</a>
+                href="{% url 'index' %}">AreHare</a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars" style="color: white;"></i>
@@ -275,8 +281,8 @@
                     </ul>
                     {% else %}
                     <div class="p-2">
-                        <a href="{% url 'Account_App:signin' %}" class="btn btn-primary btn-sm">Signin</a>
-                    <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-sm">Signup</a>
+                        <a href="{% url 'Account_App:signin' %}" class="btn btn-primary btn-md">Signin</a>
+                    <a href="{% url 'Account_App:signup' %}" class="btn btn-success btn-md">Signup</a>
                     </div>
                     {% endif%}
                 </div>
@@ -285,18 +291,10 @@
         </div>
 
     </nav>
+    <div style="margin-bottom: 10vh;"></div>
 
     <div class="container">
         <div class="messages" style="position: absolute; z-index: 20;">
-            <!-- {% if messages %}
-            {% for message in messages %}
-            <div {% if message.tags %} class="alert alert-{{message.tags}} {% endif %} d-flex align-items-center justify-content-center p-4" role="alert">
-                {{message|safe}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-            {% endfor %}
-            {% endif %} -->
             {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'success' %}
@@ -326,6 +324,7 @@
     </div>
 
     {% block body_block %}
+
 
 
     {% endblock %}

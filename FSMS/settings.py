@@ -18,13 +18,19 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEBUG = True
 =======
+=======
+>>>>>>> 739707c08e4722818b10ffe44e2783fee5cf9a8b
 if config('DEBUG') == 'True' or config('DEBUG') == True:
     DEBUG = True
 else:
     DEBUG = False
 
+<<<<<<< HEAD
+>>>>>>> 739707c08e4722818b10ffe44e2783fee5cf9a8b
+=======
 >>>>>>> 739707c08e4722818b10ffe44e2783fee5cf9a8b
 
 # ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
