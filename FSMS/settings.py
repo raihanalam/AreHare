@@ -17,7 +17,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = True
 
 # ALLOWED_HOSTS = ['arehare.com', 'www.arehare.com']
 ALLOWED_HOSTS = list(config('ALLOWED_HOSTS').split(','))
@@ -211,9 +211,9 @@ DATE_INPUT_FORMATS = ("%d/%m/%Y",)
 # Emailing settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'raihanhridoybd@gmail.com'
-EMAIL_HOST_USER = 'raihanhridoybd@gmail.com'
-EMAIL_HOST_PASSWORD = 'pduthzzzcdqcbuof'
+EMAIL_FROM = 'arehare.inc@gmail.com'
+EMAIL_HOST_USER = 'arehare.inc@gmail.com'
+EMAIL_HOST_PASSWORD = 'owfw kfnl spzh pnys'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
