@@ -5,6 +5,8 @@ media/
 venv/
 venv
 __pycache__
+__pycache__/
+*/templatetags/__pycache__/
 */migrations/__pycache__
 static
 */migrations
