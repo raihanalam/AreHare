@@ -189,7 +189,7 @@ AreHare
             </div>
         </div>
 
-        <video id="backgroundVideo" loop muted autoplay  class="position-absolute top-0 left-0 w-100 h-100">
+        <video id="backgroundVideo" loop muted autoplay playsinline  class="position-absolute top-0 left-0 w-100 h-100">
             <source src="{% static 'video/bg_video.mp4' %}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -249,11 +249,8 @@ AreHare
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="id_category">Category</label>
-                                    <select name="category" class="form-control" id="id_category">
-                                        <option value="" selected disabled>---------</option>
-                                        <option value="15">Digital Marketing</option>
-                                        <!-- Add other options here -->
-                                    </select>
+                                    {{ public_post_form.category }}
+
                                 </div>
                             </div>
                         </div>
