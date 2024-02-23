@@ -286,15 +286,3 @@
      margin: auto;
 }
 
-.blue .card {
-     background: rgb(233, 223, 223);
-     color: #000000;
-     height: 200px;
-     line-height: 100px;
-     margin: 10px;
-     padding: 2%;
-     position: relative;
-     text-align: center;
-     border: 1px solid #999;
-     margin-bottom: 50px;
-}

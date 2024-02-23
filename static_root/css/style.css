@@ -130,11 +130,16 @@ a:hover {
   background-size: cover;
   background-color: #00000090;
   background-position: center center;
-  background-image: url('desk-2.jpg');
+  background-image: url('digital_work.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-blend-mode: overlay ;
   z-index: 1;
+}
+.them-layer{
+  background-color: #00000090;
+  background-blend-mode: overlay ;
+
 }
 
 
