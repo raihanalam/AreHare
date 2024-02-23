@@ -169,47 +169,20 @@ AreHare
 
 
     /*Achivement section*/
-    .padding-global {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
-    }
-
-    .container-large,
-    .container-medium,
-    .container-small {
-        margin-right: auto !important;
-        margin-left: auto !important;
-    }
-
-    .achivments_component {
-        justify-content: space-between;
-        align-items: center;
-        display: flex;
-    }
 
     .achivments_grid {
         width: 59.938rem;
-        height: 16.875rem;
         background-color: rgb(242, 241, 243);
         border-radius: .75rem;
-        grid-template-rows: auto auto;
-        grid-template-columns: auto auto auto auto;
-        grid-auto-columns: 1fr;
-        align-content: space-between;
-        justify-content: space-between;
-        align-self: stretch;
-        align-items: center;
-        justify-items: center;
         padding: 3.75rem 2.625rem 3.75rem 4.375rem;
-        display: grid;
     }
 
-    .achivments_numbers_items {
+    /* .achivments_numbers_items {
         grid-row-gap: 1rem;
         flex-direction: column;
         align-items: flex-start;
         display: flex;
-    }
+    } */
 
     .achivments_numbers_heading {
         color: rgb(72, 29, 118);
@@ -220,12 +193,12 @@ AreHare
         line-height: 3.5rem;
     }
 
-    .achivments_numbers {
+    /* .achivments_numbers {
         grid-row-gap: 1.25rem;
         flex-direction: column;
         align-items: flex-start;
         display: flex;
-    }
+    } */
 </style>
 
 {% endblock %}
@@ -505,7 +478,7 @@ AreHare
     </div>
 
     <div class="container-fluid mt-5 mb-5">
-        <h2 style="text-align: center;">How we works?</h2>
+        <h2 style="text-align: center;">How it works?</h2>
 
         <section id="features" class="mt-3">
 
@@ -513,7 +486,6 @@ AreHare
 
                 <div class="slider responsive">
                     <div class="card p-4 sec card1">
-
                         <img src="{% static 'images/verified-account.png' %}">
                         <h4 class="mt-4 text-left">Complete your profile and apply for verification, get a verified
                             profile.</h4>
@@ -522,10 +494,8 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
                     <div class="card p-4 sec card1">
-
                         <img src="{% static 'images/post.png' %}">
                         <h4 class="mt-4 text-left">Post your job and get in touch with expert freelancers through their
                             bids.</h4>
@@ -534,7 +504,6 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/comments.png' %}" height="20px" width="20px">
@@ -546,7 +515,6 @@ AreHare
                             </div>
                         </div>
                     </div>
-
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/roadmap.png' %}">
                         <h4 class="mt-4 text-left">Track your work and countdown with a real-time deadline counter.</h4>
@@ -555,11 +523,8 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
-
                     <div class="card p-4 sec card1">
-
                         <img src="{% static 'images/dashboard(1).png' %}">
                         <h4 class="mt-4 text-left">Monitor all your work and business from an analytical dashboard.</h4>
                         <div class="go-corner" href="#">
@@ -567,7 +532,6 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/wallet.png' %}">
@@ -578,9 +542,7 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
-
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/working.png' %}">
                         <h4 class="mt-4 text-left">Create port, get hire requests from customers, and showcase your
@@ -602,11 +564,8 @@ AreHare
                             </div>
                         </div>
                     </div>
-
-
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/data-transfer.png' %}">
-
                         <h4 class="mt-4 text-left">Complete and confirm your work, payment will be handled
                             automatically.</h4>
                         <div class="go-corner" href="#">
@@ -614,11 +573,7 @@ AreHare
                                 →
                             </div>
                         </div>
-
                     </div>
-
-
-
                     <div class="card p-4 sec card1">
                         <img src="{% static 'images/money-withdrawal.png' %}">
                         <h4 class="mt-4 text-left">Withdraw money from your chosen bank or preferred payment method.
@@ -629,83 +584,50 @@ AreHare
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
-
             </div>
         </section>
 
     </div>
-    <div class="container mt-5 mb-5 pt-5">
-        <div class="container-large">
-            <div>
-                <div class="achivments_component d-flex justify-content-between flex-wrap">
-                    <div class="achivments_numbers d-flex flex-direction-col flex-wrap">
-                        <div class="achivments_numbers_items">
-                            <h2 id="animNumber1" class="achivments_numbers_heading">150+</h2>
-                            <div class="text-size-regular">Job Completed</div>
-                        </div>
-                        <div class="achivments_numbers_items">
-                            <h2 id="animNumber2" class="achivments_numbers_heading">30+</h2>
-                            <div class="text-size-regular">Customers Served</div>
-                        </div>
-                    </div>
-                    <div class="achivments_grid">
-                        <img src="https://mizzle.webestica.com/assets/images/client/02.svg"
-                            loading="eager" width="170" height="30" alt="Teachable logo"
-                            class="achivments_logo logo1">
-                        <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/64b7bf1a18bead3d787ad73a_Buffer.svg"
-                            loading="eager" width="140" height="30" alt=""
-                            class="achivments_logo logo2">
-                        <img src="https://mizzle.webestica.com/assets/images/client/04.svg"
-                            loading="eager" width="140" height="60" alt="European Investment Bank logo"
-                            class="achivments_logo logo3">
-                        <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/6474dbc6b4c871d6c49188e7_Group%204809.svg"
-                            loading="eager" height="60" width="140" alt="Decathlon logo"
-                            class="achivments_logo logo4">
-                        <img src="https://mizzle.webestica.com/assets/images/client/01.svg"
-                            loading="eager" width="120" height="50" alt="Sleek logo"
-                            class="achivments_logo logo5">
-                        <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/6474dbc6cfec71cb21b0e3d3_Group%204808.svg"
-                            loading="eager" width="150" height="40" alt="Carousell logo"
-                            class="achivments_logo logo6">
-                        <img src="https://mizzle.webestica.com/assets/images/client/05.svg"
-                            loading="eager" width="100" height="50" alt="" class="achivments_logo logo7">
-                        <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/64b7bf1a18bead3d787ad76a_Dynamite%20Jobs.svg"
-                            loading="eager" width="120" height="40" alt="" class="achivments_logo logo8">
-                    </div>
+    <div class="container pt-5 mb-5" >
+        <h2 class="text-center mb-3">What we have done?</h2>
+        <div class="row justify-content-between align-items-center flex-wrap">
+            <div class="col-md-2 d-flex flex-column justify-content-center">
+                <div class="achivments_numbers_items">
+                    <h2 id="animNumber1" class="achivments_numbers_heading">100+</h2>
+                    <div class="text-size-regular">Job Completed</div>
+                </div>
+                <div class="achivments_numbers_items">
+                    <h2 id="animNumber2" class="achivments_numbers_heading">20+</h2>
+                    <div class="text-size-regular">Customers Served</div>
+                </div>
+            </div>
+
+            <div class="achivments_grid col-md-10">
+                <div class="d-flex flex-wrap justify-content-around">
+                    <img src="https://mizzle.webestica.com/assets/images/client/02.svg" loading="eager" width="170"
+                        height="30" class="mt-3">
+                    <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/64b7bf1a18bead3d787ad73a_Buffer.svg"
+                        loading="eager" width="170" height="30" class="mt-3">
+                    <img src="https://mizzle.webestica.com/assets/images/client/04.svg" loading="eager" width="170"
+                        height="30" class="mt-3">
+                    <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/6474dbc6b4c871d6c49188e7_Group%204809.svg"
+                        loading="eager" width="170" height="30" class="mt-3">
+                </div>
+                <div class="d-flex flex-wrap  justify-content-around align-items-center mt-3">
+                    <img src="https://mizzle.webestica.com/assets/images/client/01.svg" loading="eager" width="170"
+                        height="30" class="mt-3">
+                    <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/6474dbc6cfec71cb21b0e3d3_Group%204808.svg"
+                        loading="eager" width="170" height="30" class="mt-3">
+                    <img src="https://mizzle.webestica.com/assets/images/client/05.svg" loading="eager" width="170"
+                        height="30" class="mt-3">
+                    <img src="https://assets-global.website-files.com/63a9cb71c629474d4ae334b9/64b7bf1a18bead3d787ad76a_Dynamite%20Jobs.svg"
+                        loading="eager" width="170" height="30" class="mt-3">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- <div class="container-fluid mt-5">
-        <h2 style="text-align: center;">Our Partners</h2>
-        <div class="smart-line"></div>
-        <div class="container-fluid">
-
-            <section id="features" class="blue">
-
-                <div class="content">
-
-                    <div class="slider responsive">
-                        {% for partner in partners %}
-                        {% if forloop.counter <= 10 %} <div>
-                            <div class="p-2">
-                                <img src="/media/{{partner.logo}}" alt="partner_logo" height="200px" width="200px">
-                            </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-
-        </div>
-
-        </section>
-
-    </div> -->
 </div>
 <div class="container-fluid end-sec mt-5" id="about">
     <div class="row pt-5">
@@ -744,10 +666,12 @@ AreHare
         <div class="col-md-2">
             <h4>Follow Us</h4>
             <ul>
-                <li><a href="https://facebook.com/arehare.inc" style="text-decoration: none;"><i
+                <li><a href="https://facebook.com/arehare.inc" style="text-decoration: none;  color: rgb(243, 200, 200);
+                    "><i
                             class="fab fa-facebook mr-2"></i>Facebook</a></li>
-                <li><i class="fab fa-twitter mr-2"></i>Twitter</li>
-                <li><i class="fab fa-linkedin mr-2"></i>Linkedin</li>
+                <li><a href="https://www.linkedin.com/company/arehare/" style="text-decoration: none; color: none;  color: rgb(243, 200, 200);
+                    "><i
+                            class="fab fa-linkedin mr-2"></i>Linkedin</a></li>
 
             </ul>
             <a class="scroll-to-top rounded" href="#top">
