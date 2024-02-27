@@ -9,6 +9,15 @@ AreHare
 {% endblock title %}
 {% block css %}
 <style>
+    #stringDisplay {
+      font-size: 22px;
+      font-weight: bold;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      text-align: center;
+      color: rgb(60, 60, 120);
+
+    }
     .sec {
         height: 200px;
         margin-bottom: 30px;
@@ -38,7 +47,7 @@ AreHare
         overflow: hidden;
         top: 0;
         right: 0;
-        background-color: #5e2197;
+        background-color: rgb(60, 60, 120);
         border-radius: 0 4px 0 60px;
     }
 
@@ -69,7 +78,7 @@ AreHare
         z-index: -1;
         top: -16px;
         right: -16px;
-        background: #5e2197;
+        background: rgb(60, 60, 120);
         height: 60px;
         width: 60px;
         border-radius: 60px;
@@ -127,39 +136,7 @@ AreHare
         transition: all .3s ease-out;
     }
 
-    .header_video_play {
-        z-index: 5;
-        width: 5.375rem;
-        height: 5.375rem;
-        background-color: #0099f6;
-        cursor: pointer;
-        border-radius: 50%;
-        justify-content: center;
-        align-items: center;
-        transition: all .3s ease-out;
-        display: flex;
-        /* position: absolute; */
-    }
 
-    .header_video_play:hover {
-        will-change: transform;
-        transform: translate3d(0.000225rem, 0.00015rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
-        transform-style: preserve-3d;
-    }
-
-
-    /* Adjust the video dimensions */
-    .theme-sec video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        background-color: #00000090;
-        background-blend-mode: overlay;
-    }
 
     /* Optional: Add styles for other content in .theme-sec */
     .theme-sec .content {
@@ -186,46 +163,61 @@ AreHare
         line-height: 3.5rem;
     }
 
-    /* .achivments_numbers {
-        grid-row-gap: 1.25rem;
-        flex-direction: column;
-        align-items: flex-start;
-        display: flex;
-    } */
 
 </style>
 
 {% endblock %}
 
 {% block body_block %}
-<div class="">
-    <div class="theme-sec d-flex align-items-center position-relative">
-        <div class="container">
-            <div class="row content">
-                <div class="col-md-7 d-flex flex-center-all">
-                    <div id="th-1" class="card p-5">
-                        <h2 style="text-align: left;">Independent marketplace <br> for digital work.</h2>
-                        {% if not user.is_authenticated %}
-                        <a href="#" class="top-button max-width-mobile mt-4" style="width: 280px;" data-toggle="modal"
-                            data-target="#publicPostModal">Post your job</a>
-                        {% endif %}
-                    </div>
+<div class="theme-sec d-flex align-items-center position-relative">
+    <div class="container">
+        <div class="row content">
+            <div class="col-md-6 d-flex flex-center-all">
+                <div id="th-1" class="card p-5">
+                    <h2 style="text-align: left;">Independent marketplace <br> for digital work.</h2>
+                    {% if not user.is_authenticated %}
+                    <a href="#" class="top-button max-width-mobile mt-4" style="width: 280px;" data-toggle="modal"
+                        data-target="#publicPostModal">Get Started</a>
+                    {% endif %}
                 </div>
-                <div class="col-md-5 d-flex flex-center-all">
-                    <div class="header_video_play" onclick="startVideo()">
-                        <i class="fa-solid fa-pause" style="color: white; font-size: 25px;"></i>
+            </div>
+            <div class="col-md-6 d-flex flex-center-all">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active animated--grow-in">
+                            <img class="d-block w-100" src="{% static 'images/woman-working-desk-with-laptop.png' %}" alt="First slide">
+                        </div>
+                        <div class="carousel-item animated--grow-in">
+                            <img class="d-block w-100" src="{% static 'images/hand-drawn-man-working-from-home.png' %}" alt="Second slide">
+                        </div>
+                        <div class="carousel-item animated--grow-in">
+                            <img class="d-block w-100" src="{% static 'images/man_working.jpg' %}" alt="Third slide">
+                        </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <video id="backgroundVideo" loop muted autoplay class="position-absolute top-0 left-0 w-100 h-100">
-            <source src="{% static 'video/bg_video.mp4' %}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-
+        <div class="row">
+            <div class="col-md-12">
+                <div id="stringDisplay"></div>
+            </div>
+        </div>
     </div>
+</div>
+
 
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -327,7 +319,7 @@ AreHare
             </div>
         </div>
     </div>
-    <section class="bg-dark position-relative overflow-hidden" style="height: auto; position: fixed;">
+    <section class="position-relative overflow-hidden" style="height: auto; position: fixed; background-color: rgb(70, 70, 120);">
         <!-- SVG decoration -->
         <figure class="position-absolute top-0 end-0 me-n9 mt-n7 d-none d-md-block">
             <svg class="fill-white" width="768.8px" height="1386px" viewBox="0 0 768.8 1386"
@@ -675,40 +667,22 @@ AreHare
 </div>
 
 <script>
-
-
-    function startVideo() {
-        var video = document.getElementById("backgroundVideo");
-        var headerPlayIcon = document.querySelector('.theme-sec .header_video_play');
-
-        if (video.paused) {
-            video.play();
-
-            // Remove any existing icons and append the pause icon
-            while (headerPlayIcon.firstChild) {
-                headerPlayIcon.removeChild(headerPlayIcon.firstChild);
-            }
-
-            var pauseIcon = document.createElement("i");
-            pauseIcon.className = "fa-solid fa-pause";
-            pauseIcon.style.color = "white";
-            pauseIcon.style.fontSize = "25px";
-            headerPlayIcon.appendChild(pauseIcon);
-
-        } else {
-            video.pause();
-
-            // Remove any existing icons and append the play icon
-            while (headerPlayIcon.firstChild) {
-                headerPlayIcon.removeChild(headerPlayIcon.firstChild);
-            }
-
-            var playIcon = document.createElement("i");
-            playIcon.className = "fa-solid fa-play";
-            playIcon.style.color = "white";
-            playIcon.style.fontSize = "25px";
-            headerPlayIcon.appendChild(playIcon);
-        }
+    // Function to display a string character by character
+    function displayStringRealtime(inputString, index) {
+      if (index < inputString.length) {
+        // Display one character at a time, including spaces
+        document.getElementById('stringDisplay').innerHTML += inputString[index] === ' ' ? '&nbsp;' : inputString[index];
+        index++;
+  
+        // Update every 100 milliseconds (adjust the time interval as needed)
+        setTimeout(function() {
+          displayStringRealtime(inputString, index);
+        }, 100);
+      }
     }
+  
+
+    displayStringRealtime("AreHare is where talent meets opportunity. Whether you're a freelancer looking to showcase your skills or a business seeking top-notch professionals, we've got you covered.", 0);
 </script>
+
 {% endblock %}

@@ -22,14 +22,6 @@ a:hover {
   width: 200px;
 }
 
-.smart-line {
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(to right, #e6b2e6, #6e226e, #e6b2e6);
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
 .flex-center-all {
   display: flex;
   flex-direction: column;
@@ -39,7 +31,7 @@ a:hover {
 
 .footer {
   padding: 15px;
-  background-color: #481948;
+  background-color: rgb(60, 60, 120);
 }
 
 .footer p {
@@ -98,7 +90,7 @@ a:hover {
 .process-sec .sec {
   padding: 10px;
   width: 100%;
-  background-color: rgb(131, 58, 155);
+  background-color: rgb(60, 60, 120);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,21 +112,21 @@ a:hover {
 .fa-bell,
 .fa-chart-line {
   font-size: 30px;
-  color: white;
+  color: rgb(60, 60, 120);
 }
 
 .theme-sec{
-  height: 100vh;
-  opacity: 100%;
+  height: 90vh;
+  /* opacity: 100%; */
   width: 100%;
-  background-size: cover;
-  background-color: #00000079;
+  /* background-size: cover; */
+  /* background-color: #00000079;
   background-position: center center;
   background-image: url('digital_work.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-blend-mode: overlay ;
-  z-index: 15;
+  z-index: 15; */
 }
 
 
@@ -163,7 +155,7 @@ a:hover {
 }
 
 .service-card:hover {
-  border-bottom: 15px solid #763dda;
+  border-bottom: 15px solid rgb(60,60,120);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: all .3s ease-Out;
 }
@@ -202,7 +194,7 @@ a:hover {
 
 .service-card>ul li:hover,
 i:hover {
-  color: #5e2197;
+  color: rgb(60, 60, 120);
 }
 
 .top-sec h2 {
@@ -211,7 +203,7 @@ i:hover {
 
 .end-sec {
   height: auto;
-  background-color: #6e226e;
+  background-color: rgb(70, 70, 120);
   width: 100% auto;
 }
 
@@ -225,7 +217,7 @@ i:hover {
 
 .end-sec .row .col-md-2 ul {
   list-style: none;
-  color: rgb(243, 200, 200);
+  color: rgb(255, 250, 250);
   margin-top: 20px;
 }
 
