@@ -13,7 +13,8 @@ AreHare
       font-size: 22px;
       font-weight: bold;
       word-wrap: break-word;
-      white-space: pre-wrap;
+      /* white-space: pre-wrap; */
+      /* overflow-wrap: normal; */
       text-align: center;
       color: rgb(60, 60, 120);
 
@@ -209,10 +210,8 @@ AreHare
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="stringDisplay"></div>
+            <div id="stringDisplay">
+                <!-- <span>"</span>AreHare is where talent meets opportunity. Whether you're a freelancer looking to showcase your skills or a business seeking top-notch professionals, we've got you covered. <span class="font-size-10">"</span> -->
             </div>
         </div>
     </div>
@@ -666,7 +665,7 @@ AreHare
     <p>All rights reserved by Arehare.com | © Copyright 2023</p>
 </div>
 
-<script>
+<!-- <script>
     // Function to display a string character by character
     function displayStringRealtime(inputString, index) {
       if (index < inputString.length) {
@@ -683,6 +682,6 @@ AreHare
   
 
     displayStringRealtime("AreHare is where talent meets opportunity. Whether you're a freelancer looking to showcase your skills or a business seeking top-notch professionals, we've got you covered.", 0);
-</script>
+</script> -->
 
 {% endblock %}
