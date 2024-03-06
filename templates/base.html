@@ -218,13 +218,13 @@
                         <a class="nav-link" style="color: rgb(60, 60, 120);" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="#process">Process</a>
+                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="/">Process</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="#business">Business</a>
+                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="/">Business</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="#about">About</a>
+                        <a class="nav-link" style="color: rgb(60, 60, 120);" href="/">About</a>
                     </li>
                 </ul>
                 {% endif %}
@@ -284,7 +284,9 @@
                     </ul>
                     {% else %}
                     <div class="p-2 d-flex flex-row justify-content-center align-items-center">
-                        <a href="{% url 'Account_App:signin' %}" class="btn btn-light btn-md shadow mr-2">Signin</a>
+                        <a href="{% url 'Account_App:signin' %}" class="btn btn-outline-secondary btn-md mr-2" 
+                        onmouseover="this.style.backgroundColor='rgb(60,60,120)'"  
+                        onmouseout="this.style.backgroundColor='white'">Signin</a>
                         <a href="{% url 'Account_App:signup' %}" class="btn btn-primary btn-md ml-2">Signup</a>
                     </div>
                     {% endif%}
