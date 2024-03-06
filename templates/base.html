@@ -65,7 +65,7 @@
 </head>
 
 <body>
-    <nav id="top" class="navbar navbar-expand-lg navbar-light topbar fixed-top" style="background-color:rgb(255, 255, 255); height: auto; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <nav class="navbar navbar-expand-lg navbar-light topbar fixed-top" style="background-color:rgb(255, 255, 255); height: auto; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <div class="container">
             <a style="font-size: 30px; color:rgb(60, 60, 120); font-weight: bold;" class="navbar-brand"
                 href="{% url 'index' %}">AreHare</a>
@@ -326,6 +326,7 @@
             {% endif %}
         </div>
     </div>
+    <div id="top"></div>
 
     {% block body_block %}
 
