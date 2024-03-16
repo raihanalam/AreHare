@@ -85,7 +85,7 @@
           </div>
           <div class="transactions show">
 
-            {% for trans in user.user_wallet.wallet_transaction.all %}
+            {% for trans in user.wallet_transaction.all %}
             {% if trans.type == 'CREDIT' %}
             <div class="transaction-item credit">
               <div class="transaction-item_details">
