@@ -27,17 +27,37 @@ from decimal import Decimal
 # Create your views here.
 @login_required
 def wallet(request):
+     obj = {}
      try:
-          u_w = UserWallet.objects.get(user=request.user, active = True)
-
-          if u_w:
-               wallet = Wallet.objects.get(user=request.user)
-               return render(request, 'wallet.html', context={'wallet': wallet})
-          else:
-               messages.warning(request, 'Your wallet is not active please complete wallet form.')
+          obj = UserWallet.objects.get(user=request.user)
      except:
-          messages.warning(request, 'Something went wrong.')
-     return render(request, 'wallet.html')
+          forms = UserWalletForm()
+
+     if obj:
+
+          return render(request, 'wallet.html', context={'wallet': obj})
+     else:
+          if request.method == 'POST':
+               wallet_data_form = UserWalletForm(request.POST, request.FILES)
+               if wallet_data_form.is_valid():
+                    wallet = wallet_data_form.save(commit=False)
+                    wallet.user = request.user
+                    wallet.active = True
+                    wallet.save()
+
+                    #Getting the saved UserWallet Bluprint
+                    n_W_obj = UserWallet.objects.get(user=request.user)
+                    
+                    #Creating the actual Wallet
+                    wallet_ob = Wallet()
+                    wallet_ob.user= request.user
+                    wallet_ob.u_w= n_W_obj
+                    wallet_ob.currency= 'BDT'
+                    wallet_ob.save()
+                    return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
+
+          messages.warning(request, 'Your wallet is not active please complete wallet form.')
+          return render(request, 'wallet.html', context={'forms':forms})
 
 
 
