@@ -12,10 +12,9 @@
                     {% if  user.payment_sender.all %}
                          {% for payment in user.payment_sender.all %}
                               <div class="card p-2 mb-2">
-                                   <h5>Payment Id: {{payment.id}}</h5>
                                    <h6>Amount: {{payment.amount}}</h6>
                                    <p>Receiver : {{payment.receiver.username}}</p>
-                                   <p>Done: {{payment.success_url}}</p>
+                                   <p>Status: {{payment.success_url}}</p>
                               </div>
                          
                          {% endfor %}

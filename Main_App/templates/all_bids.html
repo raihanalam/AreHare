@@ -1,47 +1,47 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
 
-{% block title%} All Bids | All Bids {% endblock %}
-
+{% block title %} All Bids | All Bids {% endblock %}
 
 {% block body_block %}
 
-<div class="container">
+<div class="container mt-4">
      <div class="card p-5">
-          <h3>Recent Bids</h3>
-          <div class="smart-line mb-5"></div>
+          <h3 class="text-left mb-4">Recent Bids</h3>
+
           {% if all_bids %}
                {% for bid in all_bids %}
-               <div class="card shadow mb-4 p-3">
-                    
+               <div class="card mb-4">
                     <div class="row">
-                         <div class="col-md-4">
-                              <img src="/media/{{bid.user.user_profile.profile_pic}}" class="rounded-circle" alt="" height="60px" width="60px"><br>
-                              <h6 class="mt-2 mb-2"> {{bid.user.username}}</h6>
-                              <a href="{% url 'Main_App:port_details' slug=bid.port.slug %}" class="btn btn-sm btn-info mt-3">See Portfolio</a>
+                         <div class="col-md-4 d-flex flex-col align-items-center justify-content-center">
+                              <img src="/media/{{ bid.user.user_profile.profile_pic }}" class="img-fluid rounded-start" alt="{{ bid.user.username }}">
+                              <a href="{% url 'Message_App:join_chat' f_username=bid.user %}" class="btn btn-sm btn-primary">Contact to Freelancer</a>
+
                          </div>
-                         <div class="col-md-8 ">
-                              <p>Post: <a href="{% url 'Main_App:post_details' slug=bid.post.slug %}">{{bid.post}}</a></p>
-                              <p>Note: {{bid.bid_note}}</p>
-                              <p>Amount: {{bid.bid_amount}}</p>
-                              <!-- <a href="{% url 'Message_App:join_chat' f_username=bid.user %}" class="btn btn-sm btn-success">Contact to Freelancer</a> <a href="" class="btn btn-sm btn-danger">Reject</a> -->
-                              {% if bid.status == 'bidded' %}
-                              <a href="{% url 'Main_App:review_bid' pk=bid.id%}" class="btn btn-sm btn-success">Review</a>
-                              {% elif bid.status == 'reviewed' %}
-                              <a href="{% url 'Main_App:review_bid' pk=bid.id%}" class="btn btn-sm btn-success">Accept</a> 
-                              {% endif%}
-                              <a href="{% url 'Main_App:reject_bid' pk=bid.id%}" class="btn btn-sm btn-danger">Reject</a>
+                         <div class="col-md-8">
+                              <div class="card-body">
+                                   <h3 class="card-text"><i class="fas fa-file-alt"></i> <a href="{% url 'Main_App:post_details' slug=bid.post.slug %}">{{ bid.post }}</a></h3>
+                                   <h5 class="card-title"><i class="fas fa-user"></i>{{ bid.user.username }}</h5>
+                                   <p class="card-text"><i class="fas fa-sticky-note"></i> {{ bid.bid_note }}</p>
+                                   <p class="card-text"><i class="fas fa-dollar-sign"></i> {{ bid.bid_amount }}</p>
+                                   <div class="text-end">
+                                        {% if bid.status == 'bidded' %}
+                                        <a href="{% url 'Main_App:review_bid' pk=bid.id %}" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Review</a>
+                                        {% elif bid.status == 'reviewed' %}
+                                        <a href="{% url 'Main_App:review_bid' pk=bid.id %}" class="btn btn-sm btn-success"><i class="fas fa-check"></i> Accept</a> 
+                                        {% endif %}
+                                        <a href="{% url 'Main_App:reject_bid' pk=bid.id %}" class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Reject</a>
+                                   </div>
+                              </div>
                          </div>
                     </div>
-                    
                </div>
-               {%endfor%}
+               {% endfor %}
           {% else %}
-               <p>No recent bids.</p>
-
+               <p class="text-center">No recent bids.</p>
           {% endif %}
      </div>
-          
-    
 </div>
+
+
 {% endblock %}

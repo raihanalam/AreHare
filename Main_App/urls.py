@@ -35,6 +35,7 @@ urlpatterns = [
     path('deactivate-post/<pk>',views.deactivate_post,name="deactivate_post"),
     path('activate-post/<pk>',views.activate_post,name="activate_post"),
     path('all-bids', views.all_bids, name='all_bids'),
+    path('reject-bid/<pk>/', views.reject_bid, name='reject_bid'),
 
     path('load-more',views.load_more,name='load-more'),
     path('quick-quize', views.quick_quize, name='quick_quize'),

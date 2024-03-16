@@ -74,7 +74,6 @@ class Port(models.Model):
      
 
      def get_absolute_url(self):
-        # Assuming you have a 'port_detail' view for the 'Port' model
           return reverse('Main_App:port_details', kwargs={'slug': self.slug})
 
 

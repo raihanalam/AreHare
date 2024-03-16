@@ -19,7 +19,6 @@ from .forms import DepositForm, PendingPaymentForm, UserWalletForm, WithdrawRequ
 #For canceling CSRF Checking
 from django.views.decorators.csrf import csrf_exempt
 
-
 #Payment
 from sslcommerz_python.payment import SSLCSession
 from decimal import Decimal
@@ -28,37 +27,20 @@ from decimal import Decimal
 # Create your views here.
 @login_required
 def wallet(request):
-     obj = {}
      try:
-          obj = UserWallet.objects.get(user=request.user)
+          u_w = UserWallet.objects.get(user=request.user, active = True)
+
+          if u_w:
+               wallet = Wallet.objects.get(user=request.user)
+               return render(request, 'wallet.html', context={'wallet': wallet})
+          else:
+               messages.warning(request, 'Your wallet is not active please complete wallet form.')
      except:
-          forms = UserWalletForm()
+          messages.warning(request, 'Something went wrong.')
+     return render(request, 'wallet.html')
 
-     if obj:
 
-          return render(request, 'wallet.html', context={'wallet': obj})
-     else:
-          if request.method == 'POST':
-               wallet_data_form = UserWalletForm(request.POST, request.FILES)
-               if wallet_data_form.is_valid():
-                    wallet = wallet_data_form.save(commit=False)
-                    wallet.user = request.user
-                    wallet.active = True
-                    wallet.save()
 
-                    #Getting the saved UserWallet Bluprint
-                    n_W_obj = UserWallet.objects.get(user=request.user)
-                    
-                    #Creating the actual Wallet
-                    wallet_ob = Wallet()
-                    wallet_ob.user= request.user
-                    wallet_ob.u_w= n_W_obj
-                    wallet_ob.currency= 'BDT'
-                    wallet_ob.save()
-                    return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
-
-          messages.warning(request, 'Your wallet is not active please complete wallet form.')
-          return render(request, 'wallet.html', context={'forms':forms})
 
 
 
@@ -129,9 +111,13 @@ def confirm_deposit(request):
 
 @csrf_exempt
 def deposit_complete(request):
+     print(request, '>>>>>>>>')
+     payment_data = request.GET
+     print(payment_data, '<<<<<<<<')
+
      if request.method == 'POST' or request.method == 'post':
           payment_data = request.POST
-          #print(payment_data)
+          print(payment_data, ':::::::::')
 
           status = payment_data['status']
 
@@ -178,7 +164,7 @@ def deposit_transaction(request, val_id, tran_id, payment_type):
      deposit.val_id = val_id
      deposit_amount = deposit.amount
      deposit.payment_type = payment_type
-     deposit.save()
+    
      
      amount = deposit_amount
      type = 'deposit'
@@ -186,6 +172,7 @@ def deposit_transaction(request, val_id, tran_id, payment_type):
 
      success = transaction_process(request, type, amount,'', receiver)
      if success:
+          deposit.save()
           messages.success(request, f'Your wallet balance increased {amount}')
      
      return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
@@ -195,10 +182,10 @@ def transaction_process(request, type, amount, sender, receiver):
      
      if type == 'deposit':
           receiver_wallet = Wallet.objects.get(user = receiver)
-          receiver_wallet.deposit(amount)
+          receiver_wallet.credit(amount)
           receiver_wallet.save()
 
-          transaction = Transaction(wallet=receiver_wallet, type=type, amount = amount, confirms =  True)
+          transaction = Transaction(wallet=receiver_wallet, transaction_type='CREDIT', amount = amount)
           transaction.save()
 
           return True
@@ -206,12 +193,11 @@ def transaction_process(request, type, amount, sender, receiver):
      if type == 'payment':
           sender_wallet = Wallet.objects.get(user = sender)
           
-          status = sender_wallet.pay(amount)
+          status = sender_wallet.debit(amount)
 
           if status == True:
                sender_wallet.save()
-
-               transaction = Transaction(wallet=sender_wallet, type=type, amount = amount, confirms =  True)
+               transaction = Transaction(wallet=sender_wallet, transaction_type='DEBIT', amount = amount)
                transaction.save()
 
                return True

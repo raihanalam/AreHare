@@ -13,13 +13,12 @@
 
                          {% for deposit in all_deposits %}
                               <div class="card p-2 mb-2">
-                                   <h5>Deposit Id: {{deposit.id}}</h5>
                                    <p>Reference: {{deposit.reference}}</p>
                                    <h6>Amount: {{deposit.amount}}</h6>
                                    <p>Method: {{deposit.method}}</p>
                                    <p>Payment Type: {{deposit.payment_type}}</p>
                                    <p>Transaction Id: {{deposit.trans_id}}</p>
-                                   <p>Done: {{deposit.success}}</p>
+                                   <p>Status: {{deposit.success}}</p>
                               </div>
                               
                          {% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView, DetailView, TemplateView, ListView
 
@@ -172,14 +172,18 @@ def unbid(request,pk):
 
 
 @login_required
-def review_bid(request,pk):
+def review_bid(request, pk):
      bid = Bid.objects.get(pk=pk)
      bid.status = 'reviewed'
      bid.save()
-     return HttpResponseRedirect('/')
+    
+     # Get the referer (previous) page from request.META
+     referer = request.META.get('HTTP_REFERER', '/')
+    
+     return redirect(referer)
 
 @login_required
-def review_bid(request,pk):
+def reject_bid(request,pk):
      bid = Bid.objects.get(pk=pk)
      bid.status = 'rejected'
      bid.save()

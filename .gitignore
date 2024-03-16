@@ -1,12 +1,16 @@
-env/
-media/
-.env/
+# Ignore virtual environment files
 .env
+.env.*
 venv/
-venv
-__pycache__
-__pycache__/
+*/venv/
+*.pyc
+
+# Ignore Django-specific files and directories
+*/__pycache__/
+*/migrations/
+*/migrations/__pycache__/
 */templatetags/__pycache__/
-*/migrations/__pycache__
-static
-*/migrations
+
+# Ignore static files and media files (if stored within the project)
+static/
+media/

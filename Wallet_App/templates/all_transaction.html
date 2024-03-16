@@ -13,18 +13,15 @@
                     {% if user.user_wallet.wallet_transaction.all %}
                          {% for trans in user.user_wallet.wallet_transaction.all %}
                               <div class="card p-2 mb-2">
-                                   <h5>Transaction Id: {{trans.id}}</h5>
-                                   <p>Type: {{trans.type}}</p>
+                                   <h5>Transaction Id: {{trans.transaction_id}}</h5>
+                                   <p>Type: {{trans.transaction_type}}</p>
                                    <h6>Amount: {{trans.amount}}</h6>
-                                   <p>Success: {{trans.confirms}}</p>
+                                   <small>Time: {{trans.timestamp}}</small>
                               
                               </div>
                               
                          {% endfor %}
-
-
                     {% else %}
-
                          <p>No succcessfull transaction found. </p>
                     {% endif%}
                     

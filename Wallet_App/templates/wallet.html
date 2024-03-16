@@ -16,26 +16,17 @@
     <div class="wallet d-flex justify-content-between mb-2">
       <h2>Wallet</h2>
       <button class="btn btn-light d-md-none" onclick="toggleWalletColumn()">+<br>-</button>
+
+    </div>
+    <div class="d-flex justify-content-start align-items-center">
+      <h4>Balance </h4>&nbsp;
+      <span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
     </div>
     <d class="p-2">
       {% if not user.user_profile.verified %}
         <div class="alert alert-warning p-4 text-left h-auto">Your profile isn't verified, please verify profile first.</div>
 
-        {% endif %}
-        {% if not wallet %}
-        <div class="alert alert-warning p-4 text-left h-auto">Your wallet isn't active please fill up the form properly and
-          activate your wallet.</div>
-        {%endif%}
-        {% if forms %}
-        <div class="card p-3">
-          <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{forms|crispy}}
-            <br>
-            <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
-          </form>
-        </div>
-        {% else %}
+      {% endif %}
     </d>
     <div class="d-flex flex-wrap">
       <div id="wallet-column"
@@ -44,9 +35,9 @@
         
 
         {% if user.user_profile.role == 'freelancer' %}
-        <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
+          <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
         {% elif user.user_profile.role == 'customer'%}
-        <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
+          <a href="{% url 'Wallet_App:deposit_checkout' %}" class="btn btn-md btn-success mt-5">Deposit Money</a>
         {% endif%}
 
         <div class="options mt-5">
@@ -68,29 +59,22 @@
         <div class="d-flex justify-content-center align-items-center p-5">
           <small><strong>Supported by</strong></small>
           <img src="{% static 'images/ssl_footer_logo.png' %}" class="ml-3" alt="" height="20px" width="20%">
-          <!-- <img src="{% static 'images/paypal_footer_logo.png' %}" class="ml-3" alt="" height="15px" width="15%"> -->
-          <!-- <img src="{% static 'images/visa_footer_logo.png' %}" alt="" height="15px" width="15%">
-          <img src="{% static 'images/mastercard_footer_logo.png' %}" alt="" height="30px" width="10%"> -->
         </div>
 
       </div>
-      <div class="d-none d-md-block p-5 flex-fill" id="transaction-column" style="background-color: #ffffff;">
+      <div class="p-5" id="transaction-column" style="background-color: #ffffff;">
         {% if user.is_authenticated %}
 
 
-        <content class="transactions-wrapper">
-          <div class="d-flex justify-content-between">
-            <h4>Balance </h4>
-            <span class="total-balance">&#2547; {{user.user_wallet.balance}}</span>
-          </div>
+        <!-- <content class="transactions-wrapper"> -->
           <div class="transactions show">
 
             {% for trans in user.user_wallet.wallet_transaction.all %}
-            {% if trans.type == 'deposit' %}
+            {% if trans.transaction_type == 'CREDIT' %}
             <div class="transaction-item credit">
               <div class="transaction-item_details">
-                <h4>Deposit Received- ID{{trans.id}}</h4><span class="details">{{trans.description}} -
-                  {{trans.created_date}}</span>
+                <h4>Deposit Received-</h4><span class="details">#{{trans.transaction_id}} -
+                  {{trans.timestamp}}</span>
               </div>
               <div class="transaction-item_amount"><span>&#2547;</span>
                 <p class="amount">+ {{trans.amount}}</p>
@@ -100,8 +84,8 @@
             {% else %}
             <div class="transaction-item debit">
               <div class="transaction-item_details">
-                <h4>Payment Succcess- ID{{trans.id}}</h4><span class="details">{{trans.description}} -
-                  {{trans.created_date}}</span>
+                <h4>Payment Succcess-</h4><span class="details">#{{trans.transaction_id}} -
+                  {{trans.timestamp}}</span>
               </div>
               <div class="transaction-item_amount"><span>&#2547;</span>
                 <p class="amount">- {{trans.amount}}</p>
@@ -112,8 +96,7 @@
 
 
           </div>
-      </div>
-      {%endif%}
+      <!-- </div> -->
       {% endif %}
 
     </div>

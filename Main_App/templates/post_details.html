@@ -23,7 +23,7 @@
                <hr>
                <div class="row">
                     <div class="col-12">
-                         <h3>Bids:</h3>
+                         <h5>Bids:</h5>
                          {% for bid in post.post_bid.all%}
                               <div class="card p-3 mt-3">
                                    <h4><img src="/media/{{bid.user.user_profile.profile_pic}}" class="rounded-circle" alt="" height="30px" width="30px"></i> <a href="#">{{bid.user.username}}</a>
