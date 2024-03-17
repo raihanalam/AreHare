@@ -17,7 +17,7 @@
       <h2>Wallet</h2>
       <button class="btn btn-light d-md-none" onclick="toggleWalletColumn()">+<br>-</button>
     </div>
-    <d class="p-2">
+    <div class="p-2">
       {% if not user.user_profile.verified %}
         <div class="alert alert-warning p-4 text-left h-auto">Your profile isn't verified, please verify profile first.</div>
 
@@ -36,8 +36,8 @@
           </form>
         </div>
         {% else %}
-    </d>
-    <div class="d-flex flex-wrap">
+    </div>
+    <div class="d-flex">
       <div id="wallet-column"
         class="pr-5 flex-fill {% if not wallet or not user.user_profile.verified %}disabled{%endif%}">
 
@@ -68,9 +68,6 @@
         <div class="d-flex justify-content-center align-items-center p-5">
           <small><strong>Supported by</strong></small>
           <img src="{% static 'images/ssl_footer_logo.png' %}" class="ml-3" alt="" height="20px" width="20%">
-          <!-- <img src="{% static 'images/paypal_footer_logo.png' %}" class="ml-3" alt="" height="15px" width="15%"> -->
-          <!-- <img src="{% static 'images/visa_footer_logo.png' %}" alt="" height="15px" width="15%">
-          <img src="{% static 'images/mastercard_footer_logo.png' %}" alt="" height="30px" width="10%"> -->
         </div>
 
       </div>
@@ -89,8 +86,8 @@
             {% if trans.type == 'CREDIT' %}
             <div class="transaction-item credit">
               <div class="transaction-item_details">
-                <h4>Deposit Received-</h4><span class="details">#{{trans.transaction_id}} -
-                  {{trans.timestamp}}</span>
+                <h4>Deposit Received-</h4><span class="details">#{{trans.transaction_id}}</span><br>
+                <span class="details">Time: {{trans.timestamp}}</span>
               </div>
               <div class="transaction-item_amount"><span>&#2547;</span>
                 <p class="amount">+ {{trans.amount}}</p>
@@ -100,8 +97,8 @@
             {% else %}
             <div class="transaction-item debit">
               <div class="transaction-item_details">
-                <h4>Payment Succcess-</h4><span class="details">#{{trans.transaction_id}} -
-                  {{trans.timestamp}}</span>
+                <h4>Payment Succcess-</h4><span class="details">#{{trans.transaction_id}}</span><br>
+                <span class="details">Time: {{trans.timestamp}}</span>
               </div>
               <div class="transaction-item_amount"><span>&#2547;</span>
                 <p class="amount">- {{trans.amount}}</p>
