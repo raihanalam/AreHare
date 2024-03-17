@@ -83,7 +83,7 @@
           <div class="transactions show">
 
             {% for trans in user.user_wallet.wallet_transaction.all %}
-            {% if trans.type == 'CREDIT' %}
+            {% if trans.transaction_type == 'CREDIT' %}
             <div class="transaction-item credit">
               <div class="transaction-item_details">
                 <h4>Deposit Received-</h4><span class="details">#{{trans.transaction_id}}</span><br>

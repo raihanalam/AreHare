@@ -131,14 +131,10 @@ def confirm_deposit(request):
 
 @csrf_exempt
 def deposit_complete(request):
-     print(request, '>>>>>>>>')
      payment_data = request.GET
-     print(payment_data, '<<<<<<<<')
 
      if request.method == 'POST' or request.method == 'post':
           payment_data = request.POST
-          print(payment_data, ':::::::::')
-
           status = payment_data['status']
 
           if status == 'VALID':
