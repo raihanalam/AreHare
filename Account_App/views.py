@@ -55,10 +55,6 @@ def sign_up(request):
                 activateEmaill(request, user, form.cleaned_data.get('email'))
                 registerd = True
                 return redirect('Account_App:signin')    
-            
-        # else:
-        #      for error in list(form.errors.values()):
-        #           messages.error(request, error)
 
     dict = {'form': form, 'form1': form1, 'registerd': registerd}
     return render(request, 'signup.html', context=dict)

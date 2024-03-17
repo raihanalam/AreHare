@@ -321,7 +321,7 @@ def port_bulk_image_upload(request, port_id):
                gallery.port = port
                gallery.image = file
                gallery.save()
-               return HttpResponseRedirect('')
+               # return HttpResponseRedirect('')
 
      return HttpResponseRedirect(reverse('Main_App:edit_port', kwargs={'pk':port.id}))
      
