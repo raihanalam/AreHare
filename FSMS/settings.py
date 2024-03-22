@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     
     'Account_App',
+    'Website_App',
     'Main_App',
     'Dashboard_App',
     'Message_App',
@@ -60,6 +61,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'captcha',
+    'phonenumber_field',
+    'django_countries',
+
 
     #Social Auth
     #'django.contrib.sites',

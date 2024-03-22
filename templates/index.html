@@ -166,6 +166,11 @@ AreHare
 
 
 </style>
+<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 {% endblock %}
 
@@ -254,12 +259,14 @@ AreHare
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="id_phone" class="requiredField">Phone<span
-                                            class="asteriskField">*</span></label>
-                                    <input type="tel" name="phone" maxlength="20" class="form-control" required
+                                            class="asteriskField">*</span></label><br>
+                                    <input type="tel" name="phone" maxlength="20" class="form-control" style="width: 100%;" required
                                         id="id_phone">
                                     <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                    <input type="hidden" id="id_country_code" required name="country_code">
                                 </div>
                             </div>
+                            
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -592,65 +599,27 @@ AreHare
     </div>
 
 </div>
-<div class="container-fluid end-sec mt-5" id="about">
-    <div class="row pt-5">
-        <div class="col-md-2">
-            <h4>Services</h4>
-            <ul>
-                <li>Marketplace</li>
-                <li>Inhouse Solution</li>
-                <li>Partnership</li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h4>Partners</h4>
-            <ul>
-                <li>Service Partners</li>
-                <li>Integration Partner</li>
-                <li>Money Withdrawals</li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h4>About Us</h4>
-            <ul>
-                <li>AreHare</li>
-                <li>Fees</li>
-                <li>Careers</li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h4>Help</h4>
-            <ul>
-                <li>Contact Us</li>
-                <li>Customar Care</li>
-                <li>Mail Us</li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h4>Follow Us</h4>
-            <ul>
-                <li><a href="https://facebook.com/arehare.inc" style="text-decoration: none;  color: rgb(243, 200, 200);
-                    "><i
-                            class="fab fa-facebook mr-2"></i>Facebook</a></li>
-                <li><a href="https://www.linkedin.com/company/arehare/" style="text-decoration: none; color: none;  color: rgb(243, 200, 200);
-                    "><i
-                            class="fab fa-linkedin mr-2"></i>Linkedin</a></li>
+{% include 'footer.html' %}
+  <script>
+    $(document).ready(function() {
+        // Initialize intl-tel-input
+        var input = document.querySelector("#id_phone");
+        input.style.width = "100%";
+        var iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            initialCountry: "bd" 
+        });
+        var countryCode = iti.getSelectedCountryData().dialCode;
+        $('#id_country_code').val('+' + '880');
 
-            </ul>
-            <a class="scroll-to-top rounded" href="#top">
-                <i class="fas fa-angle-up"></i>
-            </a>
-        </div>
-    </div>
-    <hr>
-    <div>
-        <img src="{% static 'images/SSLCommerz-Pay.png'%}" alt="" width="100%">
-    </div>
-</div>
-
-<div class="footer">
-    <p>All rights reserved by Arehare.com | © Copyright 2023</p>
-</div>
+        // Listen for "countrychange" event to update the hidden input with the selected country code
+        input.addEventListener("countrychange", function() {
+            var countryCode = iti.getSelectedCountryData().dialCode;
+            $('#id_country_code').val('+' + countryCode);
+        });
+    });
+</script>
 
 <!-- <script>
     // Function to display a string character by character

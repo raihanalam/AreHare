@@ -5,6 +5,8 @@ from .models import Bid, Hire, Port, ReviewRating, Category, Post, PublicPost
 from ckeditor.widgets import CKEditorWidget
 # from datetime import datetime
 from django.utils.timezone import datetime
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 from django.utils.timezone import now
 
@@ -175,7 +177,7 @@ class PublicPostForm(forms.ModelForm):
 
     class Meta:
         model = PublicPost
-        fields = ('full_name', 'email', 'phone' , 'category','title', 'description', 'files')
+        fields = ('full_name', 'email','country_code', 'phone' , 'category','title', 'description', 'files')
 
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5, 'cols': 25}),

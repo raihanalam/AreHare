@@ -19,9 +19,7 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     path('arehare-super-admin/', admin.site.urls),
-    path('',views.index,name='index'),
-    # path('account/',include('account.urls')),
-    #path('home/',include('home.urls')),
+    path('', include('Website_App.urls')),
     path('account/',include('Account_App.urls')),
     path('home/',include('Main_App.urls')),
     path('dashboard/',include('Dashboard_App.urls')),

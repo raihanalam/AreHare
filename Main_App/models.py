@@ -8,11 +8,20 @@ from datetime import datetime
 from django.urls import reverse
 from django.utils.text import slugify
 
+
 #Getting custom base User model
 # from django.contrib.auth import get_user_model
 # User = get_user_model()
 
 # Create your models here.
+class BaseModel(models.Model):
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+        
 class Category(models.Model):
      title = models.CharField(max_length=50,verbose_name="Category title...")
      created= models.DateTimeField(auto_now_add=True)
@@ -176,7 +185,9 @@ class PublicPost(models.Model):
      full_name = models.CharField(verbose_name='Full Name', max_length=30)
 
      email = models.CharField(verbose_name='Email', max_length=64)
+     country_code = models.CharField(max_length=10, null=True)
      phone = models.CharField(verbose_name='Phone', max_length=20)
+     
 
      title = models.CharField(verbose_name='Title', max_length=164)
      description = models.TextField(verbose_name='Description', max_length=500)
@@ -186,6 +197,14 @@ class PublicPost(models.Model):
 
           null=True, blank= True
      )
+     
+     STATUS_CHOICES = (
+          ('POSTED', 'Posted'),
+          ('PROCESSED', 'Processed'),
+          ('SUCCEED', 'Succeed'),
+          ('CANCELED', 'Canceled')
+     )
+     status = models.CharField(choices=STATUS_CHOICES, max_length=10, default='POSTED')
 
 class Partners(models.Model):
      name = models.CharField(max_length=255, verbose_name = 'Name')

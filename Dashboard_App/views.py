@@ -1,6 +1,6 @@
 from binascii import Incomplete
 from django.shortcuts import render
-from Main_App.models import Post,Bid, Hire
+from Main_App.models import Post,Bid, Hire, PublicPost
 from django.contrib.auth.decorators import login_required
 
 from Work_App.models import Order, RunningWork, Port, Offer
@@ -59,8 +59,9 @@ def dashboard(request):
           return render(request,'customer_dash.html',context)
      
      elif request.user.user_profile.role =='admin':
-          count = Verification.objects.filter(status='Pending').count()
-          return render(request,'admin_dash.html',context={'verification_rq_count':  count})
+          verification_count = Verification.objects.filter(status='Pending').count()
+          public_posts_count = PublicPost.objects.filter(status='POSTED').count()
+          return render(request,'admin_dash.html',context={'verification_rq_count':  verification_count, 'public_posts_count': public_posts_count })
 
 
 
