@@ -185,7 +185,6 @@ class PublicPost(models.Model):
      full_name = models.CharField(verbose_name='Full Name', max_length=30)
 
      email = models.CharField(verbose_name='Email', max_length=64)
-     country_code = models.CharField(max_length=10, null=True)
      phone = models.CharField(verbose_name='Phone', max_length=20)
      
 
