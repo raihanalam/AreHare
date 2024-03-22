@@ -61,8 +61,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'captcha',
-    'phonenumber_field',
-    'django_countries',
 
 
     #Social Auth
