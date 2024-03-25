@@ -629,7 +629,7 @@ AreHare
 </script>
 <script>
     function validateForm() {
-        var captchaValue = document.getElementById("id_captcha").value;
+        var captchaValue = document.getElementById("recaptcha-anchor").value;
         if (captchaValue === "") {
             alert("Please fill in the captcha.");
             return false; // Prevent form submission
