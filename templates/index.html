@@ -230,7 +230,7 @@ AreHare
                         <button type="submit" class="btn btn-success btn-sm">Submit Project</button>
                     </form> -->
                     <form action="{% url 'Main_App:public_post' %}" method="POST" enctype="multipart/form-data"
-                        class="needs-validation">
+                        class="needs-validation" onsubmit="return validateForm()">
 
 
                         <div class="row">
@@ -624,7 +624,21 @@ AreHare
             $('#id_country_code').val('+' + countryCode);
         });
     });
+
+    
 </script>
+<script>
+    function validateForm() {
+        var captchaValue = document.getElementById("id_captcha").value;
+        if (captchaValue === "") {
+            alert("Please fill in the captcha.");
+            return false; // Prevent form submission
+        }
+        // If captcha is filled, allow form submission
+        return true;
+    }
+</script>
+
 
 <!-- <script>
     // Function to display a string character by character
