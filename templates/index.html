@@ -230,7 +230,7 @@ AreHare
                         <button type="submit" class="btn btn-success btn-sm">Submit Project</button>
                     </form> -->
                     <form action="{% url 'Main_App:public_post' %}" method="POST" enctype="multipart/form-data"
-                        class="needs-validation" novalidate>
+                        class="needs-validation">
 
 
                         <div class="row">
@@ -298,6 +298,9 @@ AreHare
                                 class="form-control-file bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                 id="id_files">
 
+                        </div>
+                        <div class="form-group">
+                            {{public_post_form.captcha}}
                         </div>
                         <br>
                         {% csrf_token %}

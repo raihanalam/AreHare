@@ -5,6 +5,8 @@ from .models import Bid, Hire, Port, ReviewRating, Category, Post, PublicPost
 from ckeditor.widgets import CKEditorWidget
 # from datetime import datetime
 from django.utils.timezone import datetime
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 from django.utils.timezone import now
@@ -173,10 +175,11 @@ class PostEditForm(forms.ModelForm):
 
 
 class PublicPostForm(forms.ModelForm):
+    captcha = ReCaptchaField(required=True, label="", widget=ReCaptchaV2Checkbox())
 
     class Meta:
         model = PublicPost
-        fields = ('full_name', 'email', 'phone' , 'category','title', 'description', 'files')
+        fields = ('full_name', 'email','country_code', 'phone' , 'category','title', 'description', 'files', 'captcha')
 
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5, 'cols': 25}),

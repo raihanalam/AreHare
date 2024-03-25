@@ -186,6 +186,7 @@ class PublicPost(models.Model):
 
      email = models.CharField(verbose_name='Email', max_length=64)
      phone = models.CharField(verbose_name='Phone', max_length=20)
+     country_code = models.CharField(verbose_name='Country Code', max_length=8)
      
 
      title = models.CharField(verbose_name='Title', max_length=164)
@@ -204,6 +205,10 @@ class PublicPost(models.Model):
           ('CANCELED', 'Canceled')
      )
      status = models.CharField(choices=STATUS_CHOICES, max_length=10, default='POSTED')
+
+
+     def __str__(self):
+          return str(self.full_name+' - '+self.email+' - '+self.country_code+self.phone+' - '+ self.status)
 
 class Partners(models.Model):
      name = models.CharField(max_length=255, verbose_name = 'Name')
