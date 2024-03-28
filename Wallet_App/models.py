@@ -34,8 +34,9 @@ class Wallet(models.Model):
      user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,  related_name="user_wallet")
      u_w = models.OneToOneField(UserWallet,on_delete=models.CASCADE, related_name='user_fixed_wallet')
 
+     currency = models.ForeignKey(Currency, on_delete=models.CASCADE, related_name='wallet_currency')
      balance = models.DecimalField(default=0, max_digits=10, decimal_places=2)
-     currency = models.CharField(max_length=3)
+     created_date = models.DateTimeField(auto_now_add=True)
 
      def credit(self, amount):
           self.balance = self.balance + amount

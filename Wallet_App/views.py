@@ -52,7 +52,7 @@ def wallet(request):
                     wallet_ob = Wallet()
                     wallet_ob.user= request.user
                     wallet_ob.u_w= n_W_obj
-                    wallet_ob.currency= 'BDT'
+                    wallet_ob.currency= n_W_obj.currency
                     wallet_ob.save()
                     return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
 
