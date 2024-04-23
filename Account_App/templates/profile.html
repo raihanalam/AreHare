@@ -65,7 +65,7 @@
                {% if user.user_profile.is_fully_filled %}
                <div class="alert alert-success h-auto p-4">
                     Alright your profile is ready! &nbsp;
-                    {% if user.user_main_wallet.is_fully_filled %}
+                    {% if user.user_main_wallet %}
                     <a href="{% url 'Account_App:profile_verification' %}"> Verify Profile Here</a>
                     <!-- <a href="{% url 'Main_App:quick_quize'%}">Verify Profile Here</a> -->
                     {% else %}

@@ -116,7 +116,7 @@ a:hover {
 }
 
 .theme-sec{
-  min-height: 100vh;
+  min-height: 90vh;
   /* opacity: 100%; */
   width: 100%;
   /* background-size: cover; */
@@ -304,7 +304,6 @@ i:hover {
   background: #fff;
   margin: 0;
   overflow: hidden;
-  /* border-radius: 10px; */
   position: relative;
   padding-top: 30px;
   padding-bottom: 65px;
@@ -313,7 +312,6 @@ i:hover {
 }
 .chat .head {
   line-height: 45px;
-  background: rgb(87, 33, 138);
   padding: 0 15px;
   position: absolute;
   top: 0;
@@ -322,14 +320,7 @@ i:hover {
   letter-spacing: 1px;
   color: rgb(255, 255, 255);
   font-weight: bold;
-  /* border-radius: 10px 10px 0 0; */
 }
-
-.chat .head i {
-  margin-right: 10px;
-}
-
-
 
 /* Data Table CSS */
 .table-wrapper {
@@ -342,7 +333,7 @@ i:hover {
 
 .table-title {
   padding-bottom: 15px;
-  background: rgba(87, 33, 138, 0.692);
+  background: rgba(60, 60, 120);
   color: #fff;
   padding: 16px 30px;
   margin: -20px -25px 10px;

@@ -56,7 +56,7 @@ def wallet(request):
                     wallet_ob.save()
                     return HttpResponseRedirect(reverse('Wallet_App:wallet_page'))
 
-          messages.warning(request, 'Your wallet is not active please complete wallet form.')
+          # messages.warning(request, 'Your wallet is not active please complete wallet form.')
           return render(request, 'wallet.html', context={'forms':forms})
 
 

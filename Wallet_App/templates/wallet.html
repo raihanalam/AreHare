@@ -11,21 +11,17 @@
 {% block body_block %}
 
 <div class="container card">
-  <div class="p-5" style="background-color: #f2f2f2;">
+  <div class="p-5">
     <!-- <a class="btn btn- d-md-none mb-2" onclick="toggleWalletColumn()"><div class="modal-control mt-5">+-</div></a> -->
     <div class="wallet d-flex justify-content-between mb-2">
       <h2>Wallet</h2>
       <button class="btn btn-light d-md-none" onclick="toggleWalletColumn()">+<br>-</button>
     </div>
+    {% if not wallet %}
     <div class="p-2">
-      {% if not user.user_profile.verified %}
-        <div class="alert alert-warning p-4 text-left h-auto">Your profile isn't verified, please verify profile first.</div>
 
-        {% endif %}
-        {% if not wallet %}
-        <div class="alert alert-warning p-4 text-left h-auto">Your wallet isn't active please fill up the form properly and
-          activate your wallet.</div>
-        {%endif%}
+      <div class="alert alert-warning p-4 text-left h-auto">Your wallet isn't active please fill up the form properly
+        and activate your wallet.</div>
         {% if forms %}
         <div class="card p-3">
           <form action="" method="POST" enctype="multipart/form-data">
@@ -35,13 +31,14 @@
             <button class="btn btn-success btn-sm" type="submit">Activate Wallet</button>
           </form>
         </div>
-        {% else %}
+        {%endif%}
     </div>
+    {% else %}
     <div class="d-flex">
       <div id="wallet-column"
         class="pr-5 flex-fill {% if not wallet or not user.user_profile.verified %}disabled{%endif%}">
 
-        
+
 
         {% if user.user_profile.role == 'freelancer' %}
         <a href="{% url 'Wallet_App:withdraw_request' %}" class="btn btn-md btn-success mt-5">Withdraw Money</a>
@@ -110,10 +107,10 @@
 
           </div>
       </div>
-      {%endif%}
       {% endif %}
 
     </div>
+    {% endif %}
   </div>
   <script>
     function toggleWalletColumn() {

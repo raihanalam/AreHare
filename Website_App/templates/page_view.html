@@ -12,10 +12,15 @@
 
 {% block body_block %}
 <div class="main-content">
-    <div class="header-image" style="background-image: url({{ page_data.feature_image.url }});  background-position: center center; background-size: cover; background-repeat: no-repeat;">
+    <div class="header-image"
+        style="background-image: url({{ page_data.feature_image.url }}); 
+        background-color: #000000bd; background-blend-mode:overlay;  
+        background-position: center center; background-size: cover; 
+        background-repeat: no-repeat; height:500px;
+        ">
         <!-- <img src="{{ page_data.feature_image.url }}" alt="Header Image"> -->
-        <div class="d-flex justify-content-center align-items-center " style="height: 400px;">
-            <h1 style="color: white;">{{ page_data.title }}</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <h1 style="color: #ffffff;">{{ page_data.title }}</h1>
         </div>
     </div>
     <div class="container mt-5 mb-5">

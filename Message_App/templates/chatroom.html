@@ -45,14 +45,14 @@
 
 {% block body_block %}
 <center>
-<div class="container chat">
-      <div class="">
+<div class="container">
+      <div class="chat">
         <div class="head">
 
           <div class="settings d-flex justify-content-between">
-            <a style="color: white; font-size:20px;" href="{% url 'Message_App:inbox' %}"><i
+            <a style="color: rgb(60, 60, 120); font-size:20px;" href="{% url 'Message_App:inbox' %}"><i
                 class="fa-solid fa-circle-xmark"></i></a>
-            <div class="chat-name">
+            <div style="color: rgb(60, 60, 120); font-size:20px;" class="chat-name">
               <i class="fa fa-comment"></i>
               Message:
               {% for u in current_room.users.all %}
@@ -63,7 +63,7 @@
               <!-- {{current_room.name}} -->
             </div>
             <div class="btn-group dropleft">
-              <a href="" style="color: white; font-size:20px;" data-toggle="dropdown" ria-haspopup="true"
+              <a href="" style="color: rgb(60, 60, 120); font-size:20px;" data-toggle="dropdown" ria-haspopup="true"
                 aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></a>
               <div class="dropdown-menu ">
                 <p class="dropdown-item">Report</p>

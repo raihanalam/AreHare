@@ -20,10 +20,10 @@ class Currency(models.Model):
      
 class UserWallet(models.Model):
      user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='user_main_wallet')
-     identity_type = models.CharField(max_length=100, null=True)
-     identity_number = models.CharField(max_length=100, null=True)
-     identity_image = models.ImageField(upload_to='identity_image', null=True)
-     currency = models.ForeignKey(Currency, on_delete=models.CASCADE, related_name='currency_user', null=True, blank=True)
+     identity_type = models.CharField(max_length=100, null=True, blank=True)
+     identity_number = models.CharField(max_length=100, null=True, blank=True)
+     identity_image = models.ImageField(upload_to='identity_image', null=True, blank=True)
+     currency = models.ForeignKey(Currency, on_delete=models.CASCADE, related_name='currency_user')
      active = models.BooleanField(default=False)
      created_date = models.DateTimeField(auto_now_add=True)
 

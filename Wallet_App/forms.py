@@ -11,8 +11,8 @@ class UserWalletForm(forms.ModelForm):
 
      )
      identity_type = forms.ChoiceField(choices=identiy_choices)
-     identity_number = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder':'Identity Number', 'style':'margin:15px 0; width: 100%;', 'class': 'form-control'}))
-     identity_image = forms.ImageField(required=True, label="Upload Image File", widget= forms.FileInput(attrs={'placeholder':'Upload Image', 'style':'width:100%; margin-bottom:15px;', 'class': 'form-control'}))
+     identity_number = forms.CharField(label="Identity Number",widget=forms.TextInput(attrs={'placeholder':'Identity Number', 'style':'margin:15px 0; width: 100%;', 'class': 'form-control'}))
+     identity_image = forms.ImageField(label="Upload Image File", widget= forms.FileInput(attrs={'placeholder':'Upload Image', 'style':'width:100%; margin-bottom:15px;', 'class': 'form-control'}))
 
      class Meta:
           
